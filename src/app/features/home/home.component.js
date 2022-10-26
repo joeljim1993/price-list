@@ -19,12 +19,10 @@ export class Home extends LitElement {
 		return html`
       <h1>SALUDOS DESDE HOME</h1>
 
-
-      <a href="">BOTON A BROWSE</a>
-      <card-component></card-component>
+      <a href="/browse">BOTON A BROWSE</a>
 		`;
 	}
 }
-
+customElements.define('home-features', Home);
 
 

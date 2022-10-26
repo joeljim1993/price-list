@@ -19,8 +19,11 @@ export class AppComponent extends LitElement {
 
   render() {
     return html`
+    <slot></slot>
+    <navbar-component></navbar-component>
      <div id="outlet"></div>
     `;
   }
 }
 
+customElements.define("app-root", AppComponent);
