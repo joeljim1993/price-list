@@ -1,4 +1,4 @@
-import { timer } from "rxjs";
+import { timer, map, of } from "rxjs";
 
 class ShoppingListSandboxService {
   //SET ESTATICO DE PRUEBA PARA RECREAR LAS CARDS
@@ -42,8 +42,8 @@ class ShoppingListSandboxService {
 
   getListProduct$() {
     const listProduct = this._listProduct;
-    return timer(500).pipe(map(() => listProduct));
+    return of(listProduct)
   }
 }
 
-export const ShoppingListService = ShoppingListSandboxService();
+export const ShoppingListService = new ShoppingListSandboxService();

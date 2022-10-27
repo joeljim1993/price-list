@@ -6,7 +6,11 @@ import {
 
 
 export class ProductCard extends LitElement {
-	
+    static properties = {
+      listProductDetail: {type: Object}
+    }
+
+
     static styles = css`
     .card{
     background: #ffff;
@@ -24,19 +28,21 @@ export class ProductCard extends LitElement {
 
 	constructor() {
 		super();
+    this.listProductDetail = {};
 		
 	}
 
 	render() {
-		return html`
-      <div class="card">
-        <div class="card-content">
-            <h3>aqui va la imagen</h3>
-            <h2>Galleta Oreo</h2>
-            <p>Bs. 10.70</p>
-        </div>
-      </div>
-		
+		return html` 
+  
+             <div class="card">
+                <div class="card-content">
+                  <p>${this.listProductDetail.id}</p>
+                  <p>${this.listProductDetail.name}</p>
+                  <p>${this.listProductDetail.images}</p>
+                  <button>AGREGAR</button>
+                </div>
+             </div>   
 		`;
 	}
 }
