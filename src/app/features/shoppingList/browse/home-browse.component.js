@@ -17,7 +17,6 @@ export class HomeBrowse extends LitElement {
 		super();
 		this.sandboxShoppingList = ShoppingListService;
 		this.listproduct = [];
-		console.log("funciona")
 	}
 
 	render() {
@@ -30,13 +29,14 @@ export class HomeBrowse extends LitElement {
 							`
 						})
 					}
+					<listdata-component></listdata-component>
 		`;
 	}
 	firstUpdated(){
 		const result$ = this.sandboxShoppingList.getListProduct$()
 		.pipe(
 			tap(info => this.listproduct = info),
-			tap(()=> this.requestUpdate())
+			tap(()=> this.requestUpdate()),
 		)
 		result$.subscribe();
 		console.log("ESTOS SON LOS DATOS",this.listproduct);

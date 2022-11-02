@@ -1,13 +1,14 @@
 import { html, css, LitElement } from "lit";
-import {Router} from '@vaadin/router';
-
 
 export class NavbarComponent extends LitElement {
 
     static styles = css `
     
     .container {
-        background: #6F1BF2
+      top: 0;
+      width: 100%;
+      background: #23B48B;
+      height: 150px;
     }
     
     `;
@@ -22,7 +23,6 @@ export class NavbarComponent extends LitElement {
     
     <div class="container">
     <searchbox-component></searchbox-component>
-         <h1>AQUI ESTARA EL NAVBAR</h1>
     </div>
     `;
   }

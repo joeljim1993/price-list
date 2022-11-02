@@ -5,7 +5,13 @@ import {Router} from '@vaadin/router';
 export class SearchboxComponent extends LitElement {
 
     static styles = css `
-    
+  .search{
+    margin-top: 90px;
+    width: 260px;
+    margin-left: 5%;
+    padding:10px;
+    border-radius: 10px;
+    }
     
     `;
 
@@ -16,8 +22,8 @@ export class SearchboxComponent extends LitElement {
 
   render() {
     return html`
-    <div class="container">
-        <input id="searchBox">
+    <div class="Boxcontainer">
+          <input type="text" placeholder="Buscar Producto" class="search">
     </div>
     `;
   }

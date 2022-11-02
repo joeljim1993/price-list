@@ -47,5 +47,5 @@ export class ProductCard extends LitElement {
 	}
 }
 
-
+customElements.define('card-component', ProductCard);
 
