@@ -4,8 +4,9 @@ import {
     LitElement
 } from 'lit';
 import { service } from "../../core/services/service";
-import { tap } from 'rxjs';
+import { pipe, tap } from 'rxjs';
 import {Router} from '@vaadin/router';
+import { ShoppingList } from '../../shared/models/shopping-list.model';
 
 export class Home extends LitElement {
 
@@ -22,7 +23,6 @@ export class Home extends LitElement {
     `;
 	
 	static properties = {
-
 	}
 
 	constructor() {
@@ -38,7 +38,7 @@ export class Home extends LitElement {
 			<input id="listname" type="text" placeholder="" value="ListaNueva">
 			<label>Cantidad disponible para su lista</label>
 			<input id="amountavailable" type="text" value="0" >
-			<button @click=${this.data}><a href="#">GUARDAR</a></button>
+			<button @click=${this.createShoppingList}><a href="#">AGREGAR</a></button>
 		</div>
 	
 		`;
@@ -51,11 +51,17 @@ export class Home extends LitElement {
 		return this.renderRoot?.querySelector("#amountavailable") ?? null;
 	  }
 
-	  data(){
-		const nombre = this.listName.value;
+	  createShoppingList(){
+		const name = this.listName.value;
 		const amount = this.amountAvailable.value;
-		console.log("NOMBRE INGRESADO:", nombre, "MONTO DISPONIBLE:", amount);
+		const result$ = this.serviceCore.createShoppingList$(name, amount)
+		.pipe(
+			tap(shopping => Router.go("/browse/"+shopping.id))
+		)
+		result$.subscribe();
 	  }
+
+
 	
 	
 }

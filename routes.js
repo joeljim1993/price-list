@@ -3,5 +3,5 @@ import { routes as routes_browse } from "./src/app/features/shoppingList/shoppin
 
 export const routes = [
     { path: '/', component: 'home-features' },
-    { path: '/browse',  children: routes_browse, component: 'home-browse' },
+    { path: '/browse/:shoppingId',  children: routes_browse, component: 'home-browse' },
   ]

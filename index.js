@@ -6,3 +6,4 @@ import { NavbarComponent } from "./src/app/core/components/navbar/navbar.compone
 import { SearchboxComponent } from "./src/app/core/components/searchbox/searchbox.component"
 import { ListDataCardComponent } from "./src/app/shared/components/list-data-card.component"
 import { QuantityProducts } from "./src/app/shared/components/quantity-products.component";
+import { ShoppingList } from "./src/app/shared/models/shopping-list.model";
