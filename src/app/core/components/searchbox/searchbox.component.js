@@ -24,7 +24,10 @@ export class SearchboxComponent extends LitElement {
     return html`
     <div class="Boxcontainer">
           <input type="text" placeholder="Buscar Producto" class="search">
+          <quantityproducts-component></quantityproducts-component>
     </div>
+    
+
     `;
   }
 }

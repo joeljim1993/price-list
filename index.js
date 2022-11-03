@@ -5,3 +5,4 @@ import { HomeBrowse } from "./src/app/features/shoppingList/browse/home-browse.c
 import { NavbarComponent } from "./src/app/core/components/navbar/navbar.component"
 import { SearchboxComponent } from "./src/app/core/components/searchbox/searchbox.component"
 import { ListDataCardComponent } from "./src/app/shared/components/list-data-card.component"
+import { QuantityProducts } from "./src/app/shared/components/quantity-products.component";
