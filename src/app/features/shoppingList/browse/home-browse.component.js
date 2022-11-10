@@ -17,14 +17,16 @@ export class HomeBrowse extends LitElement {
 		super();
 		this.sandboxShoppingList = ShoppingListService;
 		this.listproduct = [];
+		this.listShopping = null;
 	}
 
 	render() {
 		return html`
+		<quantityproducts-component></quantityproducts-component>
 					${
 						this.listproduct.map((element) => {
 							return html`
-							<card-component .listProductDetail="${element}">
+							<card-component .counter=${this.getCounter(element)} @counterChange=${this.productCounterChange} .listProductDetail="${element}">
 							</card-component>
 							`
 						})
@@ -33,6 +35,16 @@ export class HomeBrowse extends LitElement {
 		`;
 	}
 	firstUpdated(){
+		const location = this.location.params;
+		const shoppingId= parseInt(location.shoppingId);
+		const shopping$ = this.sandboxShoppingList.getShoppingById$(shoppingId)
+		.pipe(
+			tap(info => this.listShopping = info),
+			tap(()=> this.requestUpdate()),
+			tap(info => console.log("NOS TRAEMOS EL SHOPPING", info))
+		)
+		shopping$.subscribe()
+		console.log("ID",shoppingId);
 		const result$ = this.sandboxShoppingList.getListProduct$()
 		.pipe(
 			tap(info => this.listproduct = info),
@@ -40,6 +52,31 @@ export class HomeBrowse extends LitElement {
 		)
 		result$.subscribe();
 		console.log("ESTOS SON LOS DATOS",this.listproduct);
+	}
+
+	productCounterChange(e){
+		const quantity = e.detail.counterChange;
+		const productId = e.detail.productId;
+		const shoppingId = this.listShopping.id;
+		const result$ = this.sandboxShoppingList.productCountChange$(shoppingId, productId, quantity)
+		.pipe(
+			tap( shopping => this.listShopping = shopping),
+			tap(()=> this.requestUpdate()),
+			tap((shopping )=> console.log(shopping))
+		)
+		result$.subscribe();
+		console.log("EVENTO DESDE PRODUCT CARD",e.detail);
+	}
+
+	getCounter(element){
+		const id = element.id;
+		console.log("BUSCANDO CONTADOR PARA:", id);
+		const products = this.listShopping? this.listShopping.products: [];
+		const product = products.find((item)=> item.id == id)
+		if(product){
+			return product.quantity;
+		}
+		return 0;
 	}
 
 }

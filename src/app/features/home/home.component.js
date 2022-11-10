@@ -8,6 +8,7 @@ import { pipe, tap } from 'rxjs';
 import {Router} from '@vaadin/router';
 import { ShoppingList } from '../../shared/models/shopping-list.model';
 
+
 export class Home extends LitElement {
 
 	static styles = css `
@@ -40,7 +41,6 @@ export class Home extends LitElement {
 			<input id="amountavailable" type="text" value="0" >
 			<button @click=${this.createShoppingList}><a href="#">AGREGAR</a></button>
 		</div>
-	
 		`;
 	}
 
@@ -61,7 +61,7 @@ export class Home extends LitElement {
 		result$.subscribe();
 	  }
 
-
+	  
 	
 	
 }

@@ -58,16 +58,43 @@ import {
         data$.subscribe();
       }
 
+
+
+
+
+
       createShoppingList$(name, amount){
         const id = this.shoppingAvailables.length;
         const shopping =   new ShoppingList(id, name, amount); 
         this.shoppingAvailables= this.shoppingAvailables.concat([shopping]);
+        console.log("ESTO TIENE",this.shoppingAvailables);
         return of(shopping)
       }
 
       getShoppingListAvailable(){
         const availables$ = this.shoppingAvailables;
         return of(availables$)
+        }
+
+        getShoppingById$(id){
+          console.log(id);
+          const list = this.shoppingAvailables;
+          const result = list.find((shopping)=> shopping.id === id)
+          return of(result);
+        }
+        productCountChange$(shoppingId,productId, quantity){
+          const list = this.shoppingAvailables;
+          const shopping = list.find((shopping)=> shopping.id === shoppingId)
+          const products = [...shopping.products]
+          const target = products.find((product)=> product.id === productId);
+          if(target ){
+            target.quantity = quantity;
+          }else{
+            const newProduct = {id: productId, quantity: quantity};
+            products.push(newProduct)
+          }
+          shopping.products = products;
+          return of(shopping)
         }
       
 }
