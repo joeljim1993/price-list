@@ -30,7 +30,7 @@ export class HomeBrowse extends LitElement {
 							`
 						})
 					}
-					<listdata-component></listdata-component>
+					<shopping-list-info-component></shopping-list-info-component>
 		`;
 	}
 	firstUpdated(){

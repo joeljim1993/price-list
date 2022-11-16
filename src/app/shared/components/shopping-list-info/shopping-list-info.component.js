@@ -1,5 +1,6 @@
 import { html, css, LitElement } from "lit";
-export class ListDataCardComponent extends LitElement {
+
+export class ShoppingListInfoComponent extends LitElement {
   static properties = {};
   static styles = css`
     .container {
@@ -27,4 +28,4 @@ export class ListDataCardComponent extends LitElement {
   }
 }
 
-customElements.define("listdata-component", ListDataCardComponent);
+customElements.define("shopping-list-info-component", ShoppingListInfoComponent);
