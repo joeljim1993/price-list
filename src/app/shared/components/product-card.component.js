@@ -32,8 +32,7 @@ export class ProductCard extends LitElement {
     return html`
       <div class="card">
         <div class="card-content">
-          <p>${this.counter}</p>
-          <p>${this.listProductDetail.id}</p>
+          <p>ID:${this.listProductDetail.id}</p>
           <p>${this.listProductDetail.name}</p>
           <p>${this.listProductDetail.images}</p>
           <p>Bs. ${this.listProductDetail.price}</p>
@@ -55,16 +54,26 @@ export class ProductCard extends LitElement {
 
   increment() {
     const productId = this.listProductDetail.id;
+    const price = this.listProductDetail.price;
     const counterChange = this.counter +1;
     const options = {
       detail: {counterChange, 
-      productId}
+      productId,
+      price}
     }
-     this.dispatchEvent(new CustomEvent("counterChange", options));
+     this.dispatchEvent(new CustomEvent("counterIncrement", options));
   }
   
     decrement() {
-    this.counter--;
+      const productId = this.listProductDetail.id;
+      const price = this.listProductDetail.price;
+      const counterChange = this.counter -1;
+      const options = {
+        detail: {counterChange, 
+        productId,
+        price}
+      }
+       this.dispatchEvent(new CustomEvent("counterDecrement", options));
   }
 
 }

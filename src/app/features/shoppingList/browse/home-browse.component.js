@@ -26,7 +26,7 @@ export class HomeBrowse extends LitElement {
 					${
 						this.listproduct.map((element) => {
 							return html`
-							<card-component .counter=${this.getCounter(element)} @counterChange=${this.productCounterChange} .listProductDetail="${element}">
+							<card-component .counter=${this.getCounter(element)} @counterIncrement=${this.productCounterChange} @counterDecrement=${this.productCounterChange} .listProductDetail="${element}">
 							</card-component>
 							`
 						})
@@ -56,9 +56,10 @@ export class HomeBrowse extends LitElement {
 
 	productCounterChange(e){
 		const quantity = e.detail.counterChange;
+		const priceProduct = e.detail.price;
 		const productId = e.detail.productId;
 		const shoppingId = this.listShopping.id;
-		const result$ = this.sandboxShoppingList.productCountChange$(shoppingId, productId, quantity)
+		const result$ = this.sandboxShoppingList.productCountChange$(shoppingId, productId, quantity, priceProduct)
 		.pipe(
 			tap( shopping => this.listShopping = shopping),
 			tap(()=> this.requestUpdate()),
@@ -70,7 +71,6 @@ export class HomeBrowse extends LitElement {
 
 	getCounter(element){
 		const id = element.id;
-		console.log("BUSCANDO CONTADOR PARA:", id);
 		const products = this.listShopping? this.listShopping.products: [];
 		const product = products.find((item)=> item.id == id)
 		if(product){

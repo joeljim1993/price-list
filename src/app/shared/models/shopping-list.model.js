@@ -1,8 +1,6 @@
 
 
 export class ShoppingList{
-    
-    
     constructor(id, name, limit){
        this.id = id;
        this.name = name;
@@ -11,6 +9,4 @@ export class ShoppingList{
        this.products = [];
        this.total = 0;
     }
-   
-
 }
