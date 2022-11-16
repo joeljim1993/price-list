@@ -1,9 +1,9 @@
 import { AppComponent } from "./src/app.component";
 import { Home } from "./src/app/features/home/home.component";
-import { ProductCard } from "./src/app/shared/components/product-card.component"
-import { HomeBrowse } from "./src/app/features/shoppingList/browse/home-browse.component"
-import { NavbarComponent } from "./src/app/core/components/navbar/navbar.component"
-import { SearchboxComponent } from "./src/app/core/components/searchbox/searchbox.component"
-import { ListDataCardComponent } from "./src/app/shared/components/list-data-card.component"
-import { QuantityProducts } from "./src/app/shared/components/quantity-products.component";
+import { ProductCard } from "./src/app/shared/components/product-cart/product-card.component";
+import { HomeBrowse } from "./src/app/features/shopping-list/browse/home-browse.component";
+import { NavbarComponent } from "./src/app/shared/components/navbar/navbar.component";
+import { ListDataCardComponent } from "./src/app/shared/components/list-data-card.component";
+import { IconShoppingCart } from "./src/app/shared/components/icon-shopping-cart/icon-shopping-cart.component";
 import { ShoppingList } from "./src/app/shared/models/shopping-list.model";
+import { SearchBoxComponent } from "./src/app/shared/components/searchbox/searchbox.component.js";

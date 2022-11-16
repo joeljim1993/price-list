@@ -18,6 +18,8 @@ export class NavbarComponent extends LitElement {
     return html`
       <div class="container">
         <searchbox-component></searchbox-component>
+        <shoppingcart-component></shoppingcart-component>
+
       </div>
     `;
   }

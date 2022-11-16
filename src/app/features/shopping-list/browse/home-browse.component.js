@@ -5,7 +5,7 @@ import {
 } from 'lit';
 import { tap } from 'rxjs';
 
-import { ShoppingListService } from '../shoppinglist-Sandbox.service';
+import { ShoppingListService } from '../shopping-list-sandbox.service';
 
 export class HomeBrowse extends LitElement {
 	
@@ -22,7 +22,6 @@ export class HomeBrowse extends LitElement {
 
 	render() {
 		return html`
-		<quantityproducts-component></quantityproducts-component>
 					${
 						this.listproduct.map((element) => {
 							return html`

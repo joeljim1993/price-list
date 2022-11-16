@@ -3,7 +3,7 @@ export class ListDataCardComponent extends LitElement {
   static properties = {};
   static styles = css`
     .container {
-      width: 250px;
+      width: 100%;
       background: #f28a61;
       height: 130px;
     }

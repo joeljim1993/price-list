@@ -99,11 +99,13 @@ class CoreService {
   //     data$.subscribe();
   //   }
 
+  // este método trae el set estatico desde el servicio.
   getShoppingListFromKana$() {
     const listProducForKana = this._listProduct;
     return of(listProducForKana);
   }
 
+  //crea la lista de mercado
   createShoppingList$(name, amount) {
     const id = this.shoppingAvailables.length;
     const shopping = new ShoppingList(id, name, amount);
@@ -112,30 +114,33 @@ class CoreService {
     return of(shopping);
   }
 
+  //busca las listas de mercado creadas
   getShoppingListAvailable$() {
-    const availables$ = this.shoppingAvailables;
-    return of(availables$);
+    return of(this.shoppingAvailables);
   }
 
+  //
   getShoppingById$(id) {
-    console.log(id);
-    const list = this.shoppingAvailables;
-    const result = list.find((shopping) => shopping.id === id);
+    const result = this.shoppingAvailables.find(
+      (shopping) => shopping.id === id
+    );
     return of(result);
   }
+
   productCountChange$(shoppingId, productId, quantity, priceProduct) {
-    const list = this.shoppingAvailables;
-    const shopping = list.find((shopping) => shopping.id === shoppingId);
-    const products = [...shopping.products];
+    const shoppingList = this.shoppingAvailables.find(
+      (shopping) => shopping.id === shoppingId
+    );
+    const products = [...shoppingList.products];
     const target = products.find((product) => product.id === productId);
     if (target) {
       target.quantity = quantity;
       const rowTotal = this.calculateRowTotal(quantity, priceProduct);
       target.total = rowTotal;
-      const total = this.calculateShoppingListTotal(products)
-      shopping.total = total;
-      if (target.quantity === 0){
-        this.removeItem(products, productId)
+      const total = this.calculateShoppingListTotal(products);
+      shoppingList.total = total;
+      if (target.quantity === 0) {
+        this.removeItem(products, productId);
       }
     } else {
       const newProduct = {
@@ -144,19 +149,20 @@ class CoreService {
         price: priceProduct,
         total: 0,
       };
-      const rowTotal = this.calculateRowTotal(quantity, priceProduct)
+      const rowTotal = this.calculateRowTotal(quantity, priceProduct);
+      shoppingList.total = rowTotal;
       newProduct.total = rowTotal;
       products.push(newProduct);
     }
 
-    shopping.products = products;
-    return of(shopping);
+    shoppingList.products = products;
+    return of(shoppingList);
   }
 
-  removeItem(list, productId){
+  removeItem(list, productId) {
     const target = list.find((product) => product.id === productId);
-    const index = list.indexOf(target)
-    list.splice(index, 1)
+    const index = list.indexOf(target);
+    list.splice(index, 1);
   }
 
   calculateRowTotal(quantity, price) {
@@ -167,8 +173,8 @@ class CoreService {
 
   calculateShoppingListTotal(productList) {
     const result = productList.reduce((counter, item) => {
-      return (counter + item.total)
-    }, 0 );
+      return counter + item.total;
+    }, 0);
     return result;
   }
 }

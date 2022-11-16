@@ -2,7 +2,7 @@ import { html, css, LitElement } from "lit";
 import {Router} from '@vaadin/router';
 
 
-export class SearchboxComponent extends LitElement {
+export class SearchBoxComponent extends LitElement {
 
     static styles = css `
   .search{
@@ -29,4 +29,4 @@ export class SearchboxComponent extends LitElement {
   }
 }
 
-customElements.define("searchbox-component", SearchboxComponent);
+customElements.define("searchbox-component", SearchBoxComponent);

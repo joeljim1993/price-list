@@ -1,6 +1,6 @@
 import { html, css, LitElement } from "lit";
 
-export class QuantityProducts extends LitElement {
+export class IconShoppingCart extends LitElement {
   static properties = {
 
   };
@@ -13,7 +13,6 @@ export class QuantityProducts extends LitElement {
   render() {
     return html`
       <div>
-        
         <h3>Productos: ${this.counter}</h3>
         <h3></h3>
       </div>
@@ -22,4 +21,4 @@ export class QuantityProducts extends LitElement {
  
 
 }
-customElements.define("quantityproducts-component", QuantityProducts);
+customElements.define("shoppingcart-component", IconShoppingCart);

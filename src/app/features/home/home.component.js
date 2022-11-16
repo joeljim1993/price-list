@@ -26,6 +26,12 @@ export class Home extends LitElement {
 	static properties = {
 	}
 
+	static styles = css`
+    .container {
+      margin-top: 900px;
+    }
+  `;
+
 	constructor() {
 		super();
 		this.serviceCore = service;
@@ -33,8 +39,7 @@ export class Home extends LitElement {
 
 	render() {
 		return html`
-      <button class="btn-modal"><a href="/browse">Nueva Lista</a></button>
-		<div>
+		<div id="container">
 			<label>Nombre de la Lista</label>
 			<input id="listname" type="text" placeholder="" value="ListaNueva">
 			<label>Cantidad disponible para su lista</label>

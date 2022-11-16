@@ -1,6 +1,6 @@
 import { html, css, LitElement } from "lit";
 import {Router} from '@vaadin/router';
-import { routes } from '../routes.js'
+import { routes } from '../app.routes'
 
 export class AppComponent extends LitElement {
 

@@ -1,5 +1,5 @@
 
-import { routes as routes_browse } from "./src/app/features/shoppingList/shoppinglist.routes"
+import { routes as routes_browse } from "./src/app/features/shopping-list/shopping-list.routes.js"
 
 export const routes = [
     { path: '/', component: 'home-features' },
