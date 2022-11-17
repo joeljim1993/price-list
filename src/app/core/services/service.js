@@ -188,7 +188,6 @@ class CoreService {
     const quantityProducts = list.reduce((counter, item) => {
       return counter + item.quantity;
     }, 0);
-
     this.shoppingCartLength$.next(quantityProducts);
   }
 }

@@ -20,6 +20,7 @@ export class IconShoppingCart extends LitElement {
   }
 
   firstUpdated() {
+    
     const result$ = service.shoppingCartLength$.pipe(
       tap((info) => (this.counter = info)),
       tap(() => this.requestUpdate())
