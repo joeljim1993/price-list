@@ -7,3 +7,4 @@ import { ShoppingListInfoComponent } from "./src/app/shared/components/shopping-
 import { IconShoppingCart } from "./src/app/shared/components/icon-shopping-cart/icon-shopping-cart.component";
 import { ShoppingList } from "./src/app/shared/models/shopping-list.model";
 import { SearchBoxComponent } from "./src/app/shared/components/searchbox/searchbox.component.js";
+import { ProductCardButton } from "./src/app/shared/components/product-cart/product-card-button.component";
