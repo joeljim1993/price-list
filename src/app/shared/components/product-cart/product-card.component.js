@@ -43,7 +43,7 @@ export class ProductCard extends LitElement {
       </div>
     `;
   }
-  
+
   increment(e) {
     const productId = this.listProductDetail.id;
     const counterChange = e.detail.counterChangeB;
