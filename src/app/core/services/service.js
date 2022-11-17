@@ -6,12 +6,15 @@ import {
   tap,
   mergeMap,
   takeUntil,
+  Subject,
 } from "rxjs";
 import { fromFetch } from "rxjs/fetch";
 import { ShoppingList } from "../../shared/models/shopping-list.model";
 
 class CoreService {
   shoppingAvailables = [];
+
+  shoppingCartLength$ = new Subject();
   //SET ESTATICO DE PRUEBA PARA RECREAR LAS CARDS
   _listProduct = [
     {
@@ -110,7 +113,7 @@ class CoreService {
     const id = this.shoppingAvailables.length;
     const shopping = new ShoppingList(id, name, amount);
     this.shoppingAvailables = this.shoppingAvailables.concat([shopping]);
-    console.log("ESTO TIENE", this.shoppingAvailables);
+    // console.log("ESTO TIENE", this.shoppingAvailables);
     return of(shopping);
   }
 
@@ -156,6 +159,8 @@ class CoreService {
     }
 
     shoppingList.products = products;
+    this.calculateTheQuantityOfProducts(products);
+
     return of(shoppingList);
   }
 
@@ -167,7 +172,7 @@ class CoreService {
 
   calculateRowTotal(quantity, price) {
     const rowTotal = quantity * price;
-    console.log("TOTAL RENGLON", rowTotal);
+    // console.log("TOTAL RENGLON", rowTotal);
     return rowTotal;
   }
 
@@ -176,6 +181,14 @@ class CoreService {
       return counter + item.total;
     }, 0);
     return result;
+  }
+
+  // metodo que calcula la cantidad de productos en el carrito
+  calculateTheQuantityOfProducts(list) {
+    const quantityProducts = list.reduce((counter, item) => {
+      return counter + item.quantity;
+    }, 0);
+    this.shoppingCartLength$.next(quantityProducts);
   }
 }
 export const service = new CoreService();

@@ -43,14 +43,14 @@ export class HomeBrowse extends LitElement {
 			tap(info => console.log("NOS TRAEMOS EL SHOPPING", info))
 		)
 		shopping$.subscribe()
-		console.log("ID",shoppingId);
+		// console.log("ID",shoppingId);
 		const result$ = this.sandboxShoppingList.getListProduct$()
 		.pipe(
 			tap(info => this.listproduct = info),
 			tap(()=> this.requestUpdate()),
 		)
 		result$.subscribe();
-		console.log("ESTOS SON LOS DATOS",this.listproduct);
+		// console.log("ESTOS SON LOS DATOS",this.listproduct);
 	}
 
 	productCounterChange(e){
@@ -65,7 +65,7 @@ export class HomeBrowse extends LitElement {
 			tap((shopping )=> console.log(shopping))
 		)
 		result$.subscribe();
-		console.log("EVENTO DESDE PRODUCT CARD",e.detail);
+		// console.log("EVENTO DESDE PRODUCT CARD",e.detail);
 	}
 
 	getCounter(element){
