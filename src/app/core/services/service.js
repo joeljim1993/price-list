@@ -151,6 +151,7 @@ class CoreService {
       shoppingList.total = rowTotal;
       newProduct.total = rowTotal;
       products.push(newProduct);
+      console.log(products);
     }
 
     shoppingList.products = products;

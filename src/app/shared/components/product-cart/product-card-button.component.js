@@ -20,12 +20,7 @@ export class ProductCardButton extends LitElement {
         ${validateCounter
           ? html` <button @click=${this.incrementButton}>AGREGAR</button> `
           : html`<button @click=${this.decrementButton}>-</button>
-              <input
-                id="quantity"
-                type="number"
-                value="${this.counter}"
-                @input="${this.quantity}"
-              />
+              <input id="quantity" type="number" value="${this.counter}" />
               <button @click=${this.incrementButton}>+</button>`}
       </div>
     `;
@@ -34,8 +29,6 @@ export class ProductCardButton extends LitElement {
   incrementButton() {
     const counterChangeB = this.counter + 1;
     this.counter = counterChangeB;
-    this.requestUpdate();
-    console.log("EVENTO DESDE EL NIETO", counterChangeB);
     const options = {
       detail: { counterChangeB },
     };
@@ -45,7 +38,6 @@ export class ProductCardButton extends LitElement {
   decrementButton() {
     const counterChangeB = this.counter - 1;
     this.counter = counterChangeB;
-    console.log("EVENTO DESDE EL NIETO", counterChangeB);
     const options = {
       detail: { counterChangeB },
     };
