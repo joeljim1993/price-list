@@ -3,11 +3,25 @@ import { html, css, LitElement } from "lit";
 export class NavbarComponent extends LitElement {
   static styles = css`
     .container {
-      top: 0;
       width: 100%;
-      background: #23b48b;
-      height: 150px;
+      height: 137px;
+    
+      background: #5ccda7;
     }
+.container .nav li{
+  list-style:none;
+  
+}
+ ul {
+    display: inline-flex;
+    position: absolute;
+    top: 50px;
+    left: 30%;
+} 
+ .container .nav .shopping-cart-icon{
+  margin-left:100px;
+ }   
+
   `;
 
   constructor() {
@@ -16,11 +30,15 @@ export class NavbarComponent extends LitElement {
 
   render() {
     return html`
-      <div class="container">
-        <searchbox-component></searchbox-component>
-        <shoppingcart-component></shoppingcart-component>
-
+    
+    <div class="container">
+        <ul class="nav">
+          <li><searchbox-component></searchbox-component></li>
+          <li class="shopping-cart-icon"><shoppingcart-component></shoppingcart-component></li>
+        </ul>
       </div>
+    
+  
     `;
   }
 }
