@@ -17,12 +17,14 @@ export class IconShoppingCart extends LitElement {
 
   static styles = css`
     /* .shopping-cart-counter{
-      width:300px;
+      width:300px
       height:300px;
+
     } */
     #img-car {
       width: auto;
       height: auto;
+      margin-left: 0.3px;
     }
   `;
 
@@ -42,7 +44,7 @@ export class IconShoppingCart extends LitElement {
     return html`
       <div class="shopping-cart-counter">
         <button id="btn-shopping-cart" @click=${this.goToShoppingCart}>
-          <img id="img-car"  src="../../../assets/shoppingcart.png " >
+          <img id="img-car"  src="../../../assets/carrito.png" >
         </button>
 
         <span>${this.counter}</span>

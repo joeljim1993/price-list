@@ -31,9 +31,9 @@ export class ProductCard extends LitElement {
     return html`
       <div class="card">
         <div class="card-content">
-          <p>ID:${this.listProductDetail.id}</p>
-          <p>${this.listProductDetail.name}</p>
-          <p>${this.listProductDetail.images}</p>
+        <product-card-favorites-button @favorites=${this.listenerEvent}></product-card-favorites-button>
+        <p>${this.listProductDetail.images}</p>
+          <p>${this.listProductDetail.name}</p>     
           <p>Bs. ${this.listProductDetail.price}</p>
           <product-card-button-component
             @counterChangeFromButton=${this.increment}
@@ -42,6 +42,10 @@ export class ProductCard extends LitElement {
         </div>
       </div>
     `;
+  }
+
+  listenerEvent(e){
+      console.log("esto llega al padre",e);
   }
 
   increment(e) {
