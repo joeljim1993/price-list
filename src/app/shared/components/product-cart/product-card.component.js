@@ -28,7 +28,6 @@ export class ProductCard extends LitElement {
   }
 
   render() {
-    const validateCounter = this.counter === 0;
     return html`
       <div class="card">
         <div class="card-content">
@@ -36,46 +35,42 @@ export class ProductCard extends LitElement {
           <p>${this.listProductDetail.name}</p>
           <p>${this.listProductDetail.images}</p>
           <p>Bs. ${this.listProductDetail.price}</p>
-          ${validateCounter
-            ? html` <button @click=${this.increment}>AGREGAR</button> `
-            : html`<button @click=${this.decrement}>-</button>
-                <input id="enteredAmount" type="number" value="${this.counter}">
-                <button @click=${this.increment}>+</button>`}
+          <product-card-button-component
+            @counterChangeFromButton=${this.increment}
+            @counterChangeFromButton=${this.decrement}
+          ></product-card-button-component>
         </div>
       </div>
     `;
   }
 
-  get enteredAmount() {
-    return this.renderRoot?.querySelector("#enteredAmount") ?? null;
-  }
-
-
-
-  increment() {
+  increment(e) {
     const productId = this.listProductDetail.id;
+    const counterChange = e.detail.counterChangeB;
     const price = this.listProductDetail.price;
-    const counterChange = this.counter +1;
     const options = {
-      detail: {counterChange, 
-      productId,
-      price}
-    }
-     this.dispatchEvent(new CustomEvent("counterIncrement", options));
-  }
-  
-    decrement() {
-      const productId = this.listProductDetail.id;
-      const price = this.listProductDetail.price;
-      const counterChange = this.counter -1;
-      const options = {
-        detail: {counterChange, 
+      detail: {
+        counterChange,
         productId,
-        price}
-      }
-       this.dispatchEvent(new CustomEvent("counterDecrement", options));
+        price,
+      },
+    };
+    this.dispatchEvent(new CustomEvent("counterChangeFromButton", options));
   }
 
+  decrement(e) {
+    const productId = this.listProductDetail.id;
+    const counterChange = e.detail.counterChangeB;
+    const price = this.listProductDetail.price;
+    const options = {
+      detail: {
+        counterChange,
+        productId,
+        price,
+      },
+    };
+    this.dispatchEvent(new CustomEvent("counterChangeFromButton", options));
+  }
 }
 
 customElements.define("card-component", ProductCard);
