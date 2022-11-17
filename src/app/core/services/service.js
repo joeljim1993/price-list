@@ -146,12 +146,7 @@ class CoreService {
         this.removeItem(products, productId);
       }
     } else {
-      const newProduct = {
-        id: productId,
-        quantity: quantity,
-        price: priceProduct,
-        total: 0,
-      };
+      const newProduct = this.createNewProduct(productId,quantity,priceProduct)
       const rowTotal = this.calculateRowTotal(quantity, priceProduct);
       shoppingList.total = rowTotal;
       newProduct.total = rowTotal;
@@ -162,6 +157,16 @@ class CoreService {
     this.calculateTheQuantityOfProducts(products);
 
     return of(shoppingList);
+  }
+
+  createNewProduct(productId,quantity,priceProduct){
+    const newProduct = {
+      id: productId,
+      quantity: quantity,
+      price: priceProduct,
+      total: 0,
+    }
+    return newProduct
   }
 
   removeItem(list, productId) {
