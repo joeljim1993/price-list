@@ -1,30 +1,33 @@
 import { html, css, LitElement } from "lit";
-import {Router} from '@vaadin/router';
-
+import { Router } from "@vaadin/router";
 
 export class SearchBoxComponent extends LitElement {
+  static styles = css`
+    /* .box-container {
+      
+    } */
+    .search-button{
+      width:300px;
+      height:25px;
+      border-radius:5px;
+      background: #FAF9F9;
 
-    static styles = css `
-  .search{
-    margin-top: 90px;
-    width: 260px;
-    margin-left: 5%;
-    padding:10px;
-    border-radius: 10px;
     }
-    
-    `;
+  `;
 
   constructor() {
     super();
   }
-  
 
   render() {
     return html`
-    <div class="Boxcontainer">
-          <input type="text" placeholder="Buscar Producto" class="search">
-    </div>
+      <div class="box-container">
+        <input
+          type="text"
+          placeholder="Buscar Producto"
+          class="search-button"
+        />
+      </div>
     `;
   }
 }
