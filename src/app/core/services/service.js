@@ -148,7 +148,7 @@ class CoreService {
     } else {
       const newProduct = this.createNewProduct(productId,quantity,priceProduct)
       const rowTotal = this.calculateRowTotal(quantity, priceProduct);
-      shoppingList.total = rowTotal;
+      shoppingList.total += rowTotal;
       newProduct.total = rowTotal;
       products.push(newProduct);
       console.log(products);
