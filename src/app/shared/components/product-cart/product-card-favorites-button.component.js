@@ -1,16 +1,20 @@
 import { html, css, LitElement } from "lit";
 
 export class ProductCardFavoritesButton extends LitElement {
-  static properties = {};
+  static properties = {
+
+  };
 
   static styles = css`
     a {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      left: 323px;
+      top: 10px;
       text-decoration: none;
     }
-    .enableOn {
-      background: lightblue;
-      opacity: 0.2;
-    }
+    
   `;
 
   constructor() {
@@ -20,7 +24,7 @@ export class ProductCardFavoritesButton extends LitElement {
 
   render() {
     return html`<buton class="enable" @click=${this.event} type="checkbox"
-      ><a href="#">❤️</a></buton
+      ><img src=""></buton
     >`;
   }
 

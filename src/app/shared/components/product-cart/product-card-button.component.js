@@ -6,7 +6,18 @@ export class ProductCardButton extends LitElement {
     counter: { type: Number, Reflect: true },
   };
 
-  static styles = css``;
+  static styles = css`
+  #addButton{
+    background-color: #F4A534;
+    width: 300px;
+    height: 40.73px;
+    top: 220px;
+    left: 35px;
+    border-radius: 15px
+  }
+
+
+  `;
 
   constructor() {
     super();
@@ -18,7 +29,7 @@ export class ProductCardButton extends LitElement {
     return html`
       <div>
         ${validateCounter
-          ? html` <button @click=${this.incrementButton}>AGREGAR</button> `
+          ? html` <button id="addButton" @click=${this.incrementButton}>AGREGAR</button> `
           : html`<button @click=${this.decrementButton}>-</button>
               <input id="quantity" type="number" value="${this.counter}" />
               <button @click=${this.incrementButton}>+</button>`}
