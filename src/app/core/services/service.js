@@ -27,9 +27,9 @@ class CoreService {
     },
     {
       id: 2,
-      name: "PASTA ESPECIAL CORTA PLUMA 1 KG",
+      name: "PASTA CORTA CAPRI CODITO",
       images: [
-        "https://bodegonline.net/wp-content/uploads/2021/01/IMG_20210127_103812.jpg",
+        "https://www.pastascapri.com/img/productos/imagenes/codito.png",
       ],
       price: 11.5,
     },
@@ -43,9 +43,9 @@ class CoreService {
     },
     {
       id: 4,
-      name: "CAFE CORDILLERA 250G",
+      name: "CAFÉ FLOR DE ARAUCA",
       images: [
-        "https://labatata.com.ve/1085-large_default/mayonesa-mavesa-910g.jpg",
+        "https://compraenavi.com/web/image/product.template/4800/image/300x300?unique=3fd0aaa",
       ],
       price: 20.0,
     },
@@ -53,7 +53,7 @@ class CoreService {
       id: 5,
       name: "MARGARINA MAVESA 500G",
       images: [
-        "https://labatata.com.ve/1085-large_default/mayonesa-mavesa-910g.jpg",
+        "https://cdn.shopify.com/s/files/1/0571/3788/9442/products/mantequilla-mavesa-500g-1.png?v=1660312385",
       ],
       price: 19.0,
     },

@@ -11,13 +11,18 @@ export class ProductCard extends LitElement {
       background: #ffff;
       border-radius: 2px;
       display: inline-block;
-      height: 280px;
+      padding: 20px;
+      height: auto;
       width: 360px;
       margin: 1rem;
       position: relative;
       text-align: center;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       transition: all 0.3s cubic-bezier(0.25 0.8 0.25, 1);
+    }
+
+    .image{
+      width: 70%
     }
   `;
 
@@ -32,7 +37,7 @@ export class ProductCard extends LitElement {
       <div class="card">
         <div class="card-content">
         <product-card-favorites-button @favorites=${this.listenerEvent}></product-card-favorites-button>
-        <p>${this.listProductDetail.images}</p>
+        <img class="image" src="${this.listProductDetail.images}">
           <p>${this.listProductDetail.name}</p>     
           <p>Bs. ${this.listProductDetail.price}</p>
           <product-card-button-component
