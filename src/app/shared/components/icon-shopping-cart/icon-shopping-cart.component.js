@@ -44,7 +44,7 @@ export class IconShoppingCart extends LitElement {
     return html`
       <div class="shopping-cart-counter">
         <button id="btn-shopping-cart" @click=${this.goToShoppingCart}>
-          <img id="img-car"  src="../../../assets/carrito.png" >
+          <img id="img-car"  src="#" >
         </button>
 
         <span>${this.counter}</span>

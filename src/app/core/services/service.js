@@ -12,6 +12,7 @@ import { fromFetch } from "rxjs/fetch";
 import { ShoppingList } from "../../shared/models/shopping-list.model";
 
 class CoreService {
+  //CONTIENE LAS LISTAS DE MERCADO GUARDADAS PREVIAMENTE
   shoppingAvailables = [];
 
   shoppingCartLength$ = new Subject();
@@ -28,9 +29,7 @@ class CoreService {
     {
       id: 2,
       name: "PASTA CORTA CAPRI CODITO",
-      images: [
-        "https://www.pastascapri.com/img/productos/imagenes/codito.png",
-      ],
+      images: ["https://www.pastascapri.com/img/productos/imagenes/codito.png"],
       price: 11.5,
     },
     {
@@ -58,71 +57,26 @@ class CoreService {
       price: 19.0,
     },
   ];
-  // getData() {
-  //     const data = {
-  //       operationName: null,
-  //       variables: {},
-  //       query: `
-  //       query {
-  //           currentPriceList{
-  //               products{
-  //               edges{
-  //                 node{
-  //                        product{
-  //                     id
-  //                     name
-  //                     images
-  //                   }
-  //                 }
-  //               }
-  //               }
-  //             }
-  //     }
-  //     `,
-  //     };
 
-  //     const options = {
-  //       method: "POST",
-  //       body: JSON.stringify(data),
-  //       headers: new Headers({ "content-type": "application/json" }),
-  //     };
-  //     const url = "https://kana.develop.cecosesola.imolko.net/graphql";
-  //     const data$ = fromFetch(url, options).pipe(
-  //       tap((info) => console.log("data", info)),
-  //       mergeMap((response) => {
-  //         return response.json();
-  //       }),
-  //       map((info) => info.data.currentPriceList.products.edges),
-  //       tap((info) => console.log("info despues del map", info)),
-  //       map((info) =>
-  //         info.map((item) => this._listProduct.push(item.node.product))
-  //       ),
-  //       tap(() => console.log("ESTA es _listProduct", this._listProduct))
-  //     );
-  //     data$.subscribe();
-  //   }
-
-  // este método trae el set estatico desde el servicio.
+  // SIMULA LA TRAIDA DE LA LISTA DESDE KANA
   getShoppingListFromKana$() {
     const listProducForKana = this._listProduct;
     return of(listProducForKana);
   }
 
-  //crea la lista de mercado
-  createShoppingList$(name, amount) {
-    const id = this.shoppingAvailables.length;
-    const shopping = new ShoppingList(id, name, amount);
+  //CREA UNA LISTA DE MERCADO TEMPORAL
+  createShoppingList$() {
+    const shopping = new ShoppingList();
     this.shoppingAvailables = this.shoppingAvailables.concat([shopping]);
-    // console.log("ESTO TIENE", this.shoppingAvailables);
     return of(shopping);
   }
 
-  //busca las listas de mercado creadas
+  //BUSCA LAS LISTAS DE MERCADO CREADAS
   getShoppingListAvailable$() {
     return of(this.shoppingAvailables);
   }
 
-  //
+  //BUSCA LA LISTA DE MERCADO CREADA POR ID
   getShoppingById$(id) {
     const result = this.shoppingAvailables.find(
       (shopping) => shopping.id === id
@@ -130,6 +84,7 @@ class CoreService {
     return of(result);
   }
 
+  //AGREGA PRODUCTOS A LA LISTA DE MERCADO CREADA
   productCountChange$(shoppingId, productId, quantity, priceProduct) {
     const shoppingList = this.shoppingAvailables.find(
       (shopping) => shopping.id === shoppingId
@@ -146,7 +101,11 @@ class CoreService {
         this.removeItem(products, productId);
       }
     } else {
-      const newProduct = this.createNewProduct(productId,quantity,priceProduct)
+      const newProduct = this.createNewProduct(
+        productId,
+        quantity,
+        priceProduct
+      );
       const rowTotal = this.calculateRowTotal(quantity, priceProduct);
       shoppingList.total += rowTotal;
       newProduct.total = rowTotal;
@@ -160,14 +119,15 @@ class CoreService {
     return of(shoppingList);
   }
 
-  createNewProduct(productId,quantity,priceProduct){
+  //CREA UN OBJETO NUEVO SI, EL PRODUCTO NO HA SIDO CREADO
+  createNewProduct(productId, quantity, priceProduct) {
     const newProduct = {
       id: productId,
       quantity: quantity,
       price: priceProduct,
       total: 0,
-    }
-    return newProduct
+    };
+    return newProduct;
   }
 
   removeItem(list, productId) {
@@ -176,12 +136,13 @@ class CoreService {
     list.splice(index, 1);
   }
 
+  //CALCULA EL TOTAL DE CADA PRODUCTO POR RENGLON
   calculateRowTotal(quantity, price) {
     const rowTotal = quantity * price;
-    // console.log("TOTAL RENGLON", rowTotal);
     return rowTotal;
   }
 
+  //CALCULA EL TOTAL DE LA LISTA DE MERCADO EN CURSO
   calculateShoppingListTotal(productList) {
     const result = productList.reduce((counter, item) => {
       return counter + item.total;
@@ -189,7 +150,7 @@ class CoreService {
     return result;
   }
 
-  // metodo que calcula la cantidad de productos en el carrito
+  //CALCULA EL TOTAL DE PRODUCTOS EN LOS CARRITOS
   calculateTheQuantityOfProducts(list) {
     const quantityProducts = list.reduce((counter, item) => {
       return counter + item.quantity;
