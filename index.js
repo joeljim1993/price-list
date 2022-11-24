@@ -1,6 +1,6 @@
 import { AppComponent } from "./src/app.component";
 import { ProductCard } from "./src/app/shared/components/product-cart/product-card.component";
-import { HomeBrowse } from "./src/app/features/shopping-list/browse/home-browse.component";
+import { HomeBrowse } from "./src/app/features/shopping-list/home/home-browse.component";
 import { NavbarComponent } from "./src/app/shared/components/navbar/navbar.component";
 import { ShoppingListInfoComponent } from "./src/app/shared/components/shopping-list-info/shopping-list-info.component";
 import { IconShoppingCart } from "./src/app/shared/components/icon-shopping-cart/icon-shopping-cart.component";

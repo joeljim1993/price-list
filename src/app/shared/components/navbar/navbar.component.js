@@ -5,7 +5,6 @@ export class NavbarComponent extends LitElement {
     .container {
       width: 100%;
       height: 137px;
-    
       background: #5ccda7;
     }
 .container .nav li{
@@ -41,6 +40,8 @@ export class NavbarComponent extends LitElement {
   
     `;
   }
+
+
 }
 
 customElements.define("navbar-component", NavbarComponent);

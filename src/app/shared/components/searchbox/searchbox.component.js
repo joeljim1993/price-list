@@ -1,11 +1,6 @@
 import { html, css, LitElement } from "lit";
-import { Router } from "@vaadin/router";
-
 export class SearchBoxComponent extends LitElement {
   static styles = css`
-    /* .box-container {
-      
-    } */
     .search-button{
       width:300px;
       height:25px;
@@ -30,6 +25,7 @@ export class SearchBoxComponent extends LitElement {
       </div>
     `;
   }
+
 }
 
 customElements.define("searchbox-component", SearchBoxComponent);

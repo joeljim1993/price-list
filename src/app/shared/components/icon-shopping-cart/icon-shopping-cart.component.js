@@ -16,11 +16,7 @@ export class IconShoppingCart extends LitElement {
   static properties = {};
 
   static styles = css`
-    /* .shopping-cart-counter{
-      width:300px
-      height:300px;
-
-    } */
+  
     #img-car {
       width: auto;
       height: auto;

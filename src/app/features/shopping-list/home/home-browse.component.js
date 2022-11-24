@@ -22,8 +22,7 @@ export class HomeBrowse extends LitElement {
           <card-component
             .counter=${this.getCounter(element)}
             @counterChangeFromButton=${this.productCounterChange}
-            .listProductDetail="${element}"
-          >
+            .listProductDetail="${element}">
           </card-component>
         `;
       })}
@@ -52,7 +51,6 @@ export class HomeBrowse extends LitElement {
       tap(() => this.requestUpdate())
     );
     result$.subscribe();
-    console.log("ESTOS SON LOS DATOS", this.listproduct);
   }
 
   productCounterChange(e) {

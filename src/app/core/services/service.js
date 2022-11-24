@@ -15,6 +15,8 @@ class CoreService {
   //CONTIENE LAS LISTAS DE MERCADO GUARDADAS PREVIAMENTE
   shoppingAvailables = [];
 
+  shoppingListTotal$ = new Subject();
+
   shoppingCartLength$ = new Subject();
   //SET ESTATICO DE PRUEBA PARA RECREAR LAS CARDS
   _listProduct = [
@@ -110,12 +112,10 @@ class CoreService {
       shoppingList.total += rowTotal;
       newProduct.total = rowTotal;
       products.push(newProduct);
-      console.log(products);
     }
-
+    this.shoppingListTotal$.next(shoppingList.total)
     shoppingList.products = products;
     this.calculateTheQuantityOfProducts(products);
-
     return of(shoppingList);
   }
 
