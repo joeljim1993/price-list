@@ -16,6 +16,10 @@ class ShoppingListSandboxService {
     return service.productCountChange$(shoppingId,productId, quantity, priceProduct);
   }
 
+  createShoppingList$(){
+    return service.createShoppingList$();
+  }
+
 }
 
 export const ShoppingListService = new ShoppingListSandboxService();

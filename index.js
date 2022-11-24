@@ -1,5 +1,4 @@
 import { AppComponent } from "./src/app.component";
-import { Home } from "./src/app/features/home/home.component";
 import { ProductCard } from "./src/app/shared/components/product-cart/product-card.component";
 import { HomeBrowse } from "./src/app/features/shopping-list/browse/home-browse.component";
 import { NavbarComponent } from "./src/app/shared/components/navbar/navbar.component";

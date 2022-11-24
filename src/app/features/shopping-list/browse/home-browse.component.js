@@ -31,16 +31,22 @@ export class HomeBrowse extends LitElement {
     `;
   }
   firstUpdated() {
-    const location = this.location.params;
-    const shoppingId = parseInt(location.shoppingId);
-    const shopping$ = this.sandboxShoppingList
-      .getShoppingById$(shoppingId)
-      .pipe(
-        tap((info) => (this.listShopping = info)),
-        tap(() => this.requestUpdate()),
-        tap((info) => console.log("NOS TRAEMOS EL SHOPPING", info))
-      );
-    shopping$.subscribe();
+    const createShopping$ = this.sandboxShoppingList.createShoppingList$().pipe(
+      tap(shopping => this.listShopping = shopping),
+      tap(()=> this.requestUpdate()),
+      tap((info)=> console.log("SHOPPING CREADO", info))
+    )
+      createShopping$.subscribe();
+    // const location = this.location.params;
+    // const shoppingId = parseInt(location.shoppingId);
+    // const shopping$ = this.sandboxShoppingList
+    //   .getShoppingById$(shoppingId)
+    //   .pipe(
+    //     tap((info) => (this.listShopping = info)),
+    //     tap(() => this.requestUpdate()),
+    //     tap((info) => console.log("NOS TRAEMOS EL SHOPPING", info))
+    //   );
+    // shopping$.subscribe();
     const result$ = this.sandboxShoppingList.getListProduct$().pipe(
       tap((info) => (this.listproduct = info)),
       tap(() => this.requestUpdate())
