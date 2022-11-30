@@ -78,6 +78,14 @@ class CoreService {
     return of(this.shoppingAvailables);
   }
 
+  //FILTRA EL PRODUCTO INGRESADO DESDE LA BARRA DE BUSQUEDA
+  FilterProduct$(name){
+    const list = this._listProduct;
+    const foundProduct = list.filter((product) => product.name === name);
+    console.log(foundProduct);
+    return of(foundProduct)
+  }
+
   //BUSCA LA LISTA DE MERCADO CREADA POR ID
   getShoppingById$(id) {
     const result = this.shoppingAvailables.find(

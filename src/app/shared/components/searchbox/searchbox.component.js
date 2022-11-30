@@ -1,4 +1,12 @@
 import { html, css, LitElement } from "lit";
+import { fromEvent } from "rxjs";
+import { debounceTime } from "rxjs/internal/operators/debounceTime";
+import { map } from "rxjs/internal/operators/map";
+import { tap } from "rxjs/internal/operators/tap";
+import { filter } from "rxjs/internal/operators/filter";
+
+import { switchMap } from "rxjs/internal/operators/switchMap";
+import { service } from "../../../core/services/service";
 export class SearchBoxComponent extends LitElement {
   static styles = css`
     .search-button{
@@ -25,6 +33,8 @@ export class SearchBoxComponent extends LitElement {
       </div>
     `;
   }
+
+ 
 
 }
 
