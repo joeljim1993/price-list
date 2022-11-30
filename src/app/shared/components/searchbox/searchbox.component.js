@@ -14,10 +14,11 @@ import {
   take,
   last,
 } from "rxjs";
+import { service } from "../../../core/services/service";
 
 export class SearchBoxComponent extends LitElement {
 
-  click$ = fromEvent(document, "keyup");
+  input$ = fromEvent(document, "keyup");
 
   static styles = css`
     .search-button {
@@ -35,31 +36,29 @@ export class SearchBoxComponent extends LitElement {
   render() {
     return html`
       <div class="input">
-        <input placeholder="introduce el producto " class="search-button" />
+        <input placeholder="Busca tú producto" onfocus="this.value=''" class="search-button" />
       </div>
     `;
   }
 
   firstUpdated() {
     let query = "";
-    const result = this.click$.pipe(
-      map((info) => info.key),
-      distinctUntilChanged(),
+    const result = this.input$.pipe(
+      map((info) => info.key.toUpperCase()),
+      tap(info => console.log("ESTO CON MAYUSCULA", info)),
+      // distinctUntilChanged(),
       filter(
         (pressedKey) => pressedKey.match(/[a-z]/i) && pressedKey.length == 1
       ),
       tap((data) => (query = query + data)),
       tap(() => console.log("query desde la consola ", query)),
-      tap(() => this.filterData(query)),
-      debounceTime(2000),
+      tap(() => service.FilterProduct$(query)),
+      debounceTime(3000),
       tap(() => (query = ""))
     );
     result.subscribe();
   }
- // funcion que debe ser creada en el servicio 
-  filterData(data) {
-    console.log("estos son los datos introducidos en el filter ", data);
-  }
+
 }
 
 customElements.define("searchbox-component", SearchBoxComponent);

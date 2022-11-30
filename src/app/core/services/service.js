@@ -79,9 +79,9 @@ class CoreService {
   }
 
   //FILTRA EL PRODUCTO INGRESADO DESDE LA BARRA DE BUSQUEDA
-  FilterProduct$(name){
+  FilterProduct$(productName){
     const list = this._listProduct;
-    const foundProduct = list.filter((product) => product.name === name);
+    const foundProduct = list.filter((product) => product.name.includes(productName));
     console.log(foundProduct);
     return of(foundProduct)
   }
