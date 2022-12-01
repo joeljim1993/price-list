@@ -4,6 +4,7 @@ import { service } from "../../core/services/service"
 class ShoppingListSandboxService {
   
   getListProduct$() {
+    //AQUI IRA UN CONDICIONAL DE FILTRADO
     return service.getShoppingListFromKana$();
   }
 
@@ -14,6 +15,10 @@ class ShoppingListSandboxService {
 
   productCountChange$(shoppingId,productId, quantity, priceProduct){
     return service.productCountChange$(shoppingId,productId, quantity, priceProduct);
+  }
+
+  lastSearch$(){
+    return service.LastSearch$;
   }
 
   createShoppingList$(){

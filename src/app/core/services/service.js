@@ -7,6 +7,7 @@ import {
   mergeMap,
   takeUntil,
   Subject,
+  throwError,
 } from "rxjs";
 import { fromFetch } from "rxjs/fetch";
 import { ShoppingList } from "../../shared/models/shopping-list.model";
@@ -16,7 +17,7 @@ class CoreService {
   shoppingAvailables = [];
 
   shoppingListTotal$ = new Subject();
-
+  LastSearch$ = new Subject();
   shoppingCartLength$ = new Subject();
   //SET ESTATICO DE PRUEBA PARA RECREAR LAS CARDS
   _listProduct = [
@@ -58,6 +59,30 @@ class CoreService {
       ],
       price: 19.0,
     },
+    {
+      id: 6,
+      name: "ARROZ PRIMOR 1KG",
+      images: [
+        "https://d2j6dbq0eux0bg.cloudfront.net/images/28254021/2715085634.jpg",
+      ],
+      price: 13.10,
+    },
+    {
+      id: 7,
+      name: "HARINA PAN NORMAL",
+      images: [
+        "https://i1.wp.com/www.vimas.store/wp-content/uploads/2021/11/Harina-pan-P.jpg?fit=1200%2C1200&ssl=1",
+      ],
+      price: 14.45,
+    },
+    {
+      id: 8,
+      name: "JABON EN POLVO LAS LLAVES",
+      images: [
+        "https://labatata.com.ve/2901-large_default/jabon-las-llaves-polvo-400k.jpg",
+      ],
+      price: 16.20,
+    },
   ];
 
   // SIMULA LA TRAIDA DE LA LISTA DESDE KANA
@@ -82,6 +107,9 @@ class CoreService {
   FilterProduct$(productName){
     const list = this._listProduct;
     const foundProduct = list.filter((product) => product.name.includes(productName));
+    if(foundProduct){
+      this.LastSearch$.next(foundProduct)
+    }
     console.log(foundProduct);
     return of(foundProduct)
   }
