@@ -8,6 +8,9 @@ import {
   takeUntil,
   Subject,
   throwError,
+  concatMap,
+  filter,
+  switchMap,
 } from "rxjs";
 import { fromFetch } from "rxjs/fetch";
 import { ShoppingList } from "../../shared/models/shopping-list.model";
@@ -83,6 +86,18 @@ class CoreService {
       ],
       price: 16.20,
     },
+    {
+      id: 9,
+      name: "GALLETA TIP-TOP MANI",
+      images: ["https://gsi-food.com/wp-content/uploads/2017/01/gsi-tip-top-vainilla.jpg"],
+      price: 8.50,
+    },
+    {
+      id: 10,
+      name: "GALLETA CLUB SOCIAL",
+      images: ["https://lh3.googleusercontent.com/3S-IQKdJvPtnTXPL0crHXH_pcpjm7H5hdubpN2skm2gGF1yt83bpCDKmpfmPcrQ4zawBpqo-gbSmjaKt9O2gCvPIBb4xgpOxdsqoYuVnqQrcrMU"],
+      price: 16.50,
+    },
   ];
 
   // SIMULA LA TRAIDA DE LA LISTA DESDE KANA
@@ -104,14 +119,13 @@ class CoreService {
   }
 
   //FILTRA EL PRODUCTO INGRESADO DESDE LA BARRA DE BUSQUEDA
-  FilterProduct$(productName){
-    const list = this._listProduct;
-    const foundProduct = list.filter((product) => product.name.includes(productName));
-    if(foundProduct){
-      this.LastSearch$.next(foundProduct)
-    }
-    console.log(foundProduct);
-    return of(foundProduct)
+  FilterProduct$(productName) {
+    const result$ = this.getShoppingListFromKana$().pipe(
+        map(products => products.filter(product => product.name.includes(productName))),
+    );
+     result$.subscribe((response) => {
+      this.LastSearch$.next(response)
+     });
   }
 
   //BUSCA LA LISTA DE MERCADO CREADA POR ID
@@ -149,7 +163,7 @@ class CoreService {
       newProduct.total = rowTotal;
       products.push(newProduct);
     }
-    this.shoppingListTotal$.next(shoppingList.total)
+    this.shoppingListTotal$.next(shoppingList.total);
     shoppingList.products = products;
     this.calculateTheQuantityOfProducts(products);
     return of(shoppingList);

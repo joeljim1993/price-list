@@ -25,6 +25,11 @@ class ShoppingListSandboxService {
     return service.createShoppingList$();
   }
 
+  //DE PRUEBA
+  FilterProduct$(){
+    return service.FilterProduct$();
+  }
+
 }
 
 export const ShoppingListService = new ShoppingListSandboxService();
