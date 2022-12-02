@@ -98,6 +98,48 @@ class CoreService {
       images: ["https://lh3.googleusercontent.com/3S-IQKdJvPtnTXPL0crHXH_pcpjm7H5hdubpN2skm2gGF1yt83bpCDKmpfmPcrQ4zawBpqo-gbSmjaKt9O2gCvPIBb4xgpOxdsqoYuVnqQrcrMU"],
       price: 16.50,
     },
+    {
+      id: 11,
+      name: "HARINA DOÑA EMILIA",
+      images: ["https://inverloan.com/wp-content/uploads/2022/01/7592591000154-Harina-de-Maiz-Blanco-Dona-Emilia-1Kg.jpg"],
+      price: 12.50,
+    },
+    {
+      id: 12,
+      name: "PASTA ESPECIAL LARGA",
+      images: ["https://inversiones-valeria.quosmarket.com/wp-content/uploads/2021/08/10167.jpg"],
+      price: 13.50,
+    },
+    {
+      id: 13,
+      name: "VINAGRE TIQUIRE",
+      images: ["https://sambil.sigo.com.ve/images/thumbs/0004259_vinagre-tiquire-flores-1000-cc_450.jpeg"],
+      price: 9.80,
+    },
+    {
+      id: 14,
+      name: "MEGA ARO",
+      images: ["https://tucentralonline.com/Bello-Campo-43/wp-content/uploads/sites/19/2021/12/100743899.jpg"],
+      price: 19.50,
+    },
+    {
+      id: 15,
+      name: "FORORO VALLE HONDO",
+      images: ["https://cerevenca.com/wp-content/uploads/2020/07/empaque-1024x1024.png"],
+      price: 6.50,
+    },
+    {
+      id: 16,
+      name: "HUEVOS 1/2 CARTON",
+      images: ["https://andreasmarket.com/wp-content/uploads/2021/02/carton-huevos.png"],
+      price: 25.30,
+    },
+    {
+      id: 17,
+      name: "CARAOTAS PESADAS 1/2",
+      images: ["https://labatata.com.ve/983-large_default/caraotas-arauquita-1k.jpg"],
+      price: 8.90,
+    },
   ];
 
   // SIMULA LA TRAIDA DE LA LISTA DESDE KANA
