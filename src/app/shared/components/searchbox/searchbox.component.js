@@ -13,13 +13,14 @@ import {
   fromEvent,
   take,
   last,
+  catchError,
 } from "rxjs";
 import { service } from "../../../core/services/service";
 
 export class SearchBoxComponent extends LitElement {
 
   input$ = fromEvent(document, "keyup");
-
+  
   static styles = css`
     .search-button {
       width: 300px;
@@ -36,7 +37,7 @@ export class SearchBoxComponent extends LitElement {
   render() {
     return html`
       <div class="input">
-        <input placeholder="Busca tú producto" onfocus="this.value=''" class="search-button" />
+        <input placeholder="Busca tú producto"  class="search-button" />
       </div>
     `;
   }
@@ -46,19 +47,18 @@ export class SearchBoxComponent extends LitElement {
     const result = this.input$.pipe(
       map((info) => info.key.toUpperCase()),
       tap(info => console.log("ESTO CON MAYUSCULA", info)),
-      // distinctUntilChanged(),
       filter(
         (pressedKey) => pressedKey.match(/[a-z]/i) && pressedKey.length == 1
       ),
       tap((data) => (query = query + data)),
       tap(() => console.log("query desde la consola ", query)),
-      tap(() => service.FilterProduct$(query)),
+      //ESTO DEBERIA HACERSE DESDE EL SERVICIO Y TRAERSE DIRECTAMENTE DESDE HOME
+      tap(() => this.search = service.FilterProduct$(query)),
       debounceTime(3000),
       tap(() => (query = ""))
     );
     result.subscribe();
   }
-
 }
 
 customElements.define("searchbox-component", SearchBoxComponent);

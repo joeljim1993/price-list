@@ -7,6 +7,10 @@ import {
   mergeMap,
   takeUntil,
   Subject,
+  throwError,
+  concatMap,
+  filter,
+  switchMap,
 } from "rxjs";
 import { fromFetch } from "rxjs/fetch";
 import { ShoppingList } from "../../shared/models/shopping-list.model";
@@ -16,7 +20,7 @@ class CoreService {
   shoppingAvailables = [];
 
   shoppingListTotal$ = new Subject();
-
+  LastSearch$ = new Subject();
   shoppingCartLength$ = new Subject();
   //SET ESTATICO DE PRUEBA PARA RECREAR LAS CARDS
   _listProduct = [
@@ -58,6 +62,42 @@ class CoreService {
       ],
       price: 19.0,
     },
+    {
+      id: 6,
+      name: "ARROZ PRIMOR 1KG",
+      images: [
+        "https://d2j6dbq0eux0bg.cloudfront.net/images/28254021/2715085634.jpg",
+      ],
+      price: 13.10,
+    },
+    {
+      id: 7,
+      name: "HARINA PAN NORMAL",
+      images: [
+        "https://i1.wp.com/www.vimas.store/wp-content/uploads/2021/11/Harina-pan-P.jpg?fit=1200%2C1200&ssl=1",
+      ],
+      price: 14.45,
+    },
+    {
+      id: 8,
+      name: "JABON EN POLVO LAS LLAVES",
+      images: [
+        "https://labatata.com.ve/2901-large_default/jabon-las-llaves-polvo-400k.jpg",
+      ],
+      price: 16.20,
+    },
+    {
+      id: 9,
+      name: "GALLETA TIP-TOP MANI",
+      images: ["https://gsi-food.com/wp-content/uploads/2017/01/gsi-tip-top-vainilla.jpg"],
+      price: 8.50,
+    },
+    {
+      id: 10,
+      name: "GALLETA CLUB SOCIAL",
+      images: ["https://lh3.googleusercontent.com/3S-IQKdJvPtnTXPL0crHXH_pcpjm7H5hdubpN2skm2gGF1yt83bpCDKmpfmPcrQ4zawBpqo-gbSmjaKt9O2gCvPIBb4xgpOxdsqoYuVnqQrcrMU"],
+      price: 16.50,
+    },
   ];
 
   // SIMULA LA TRAIDA DE LA LISTA DESDE KANA
@@ -79,11 +119,13 @@ class CoreService {
   }
 
   //FILTRA EL PRODUCTO INGRESADO DESDE LA BARRA DE BUSQUEDA
-  FilterProduct$(productName){
-    const list = this._listProduct;
-    const foundProduct = list.filter((product) => product.name.includes(productName));
-    console.log(foundProduct);
-    return of(foundProduct)
+  FilterProduct$(productName) {
+    const result$ = this.getShoppingListFromKana$().pipe(
+        map(products => products.filter(product => product.name.includes(productName))),
+    );
+     result$.subscribe((response) => {
+      this.LastSearch$.next(response)
+     });
   }
 
   //BUSCA LA LISTA DE MERCADO CREADA POR ID
@@ -121,7 +163,7 @@ class CoreService {
       newProduct.total = rowTotal;
       products.push(newProduct);
     }
-    this.shoppingListTotal$.next(shoppingList.total)
+    this.shoppingListTotal$.next(shoppingList.total);
     shoppingList.products = products;
     this.calculateTheQuantityOfProducts(products);
     return of(shoppingList);

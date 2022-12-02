@@ -1,5 +1,5 @@
 import { html, css, LitElement } from "lit";
-import { tap } from "rxjs";
+import { switchMap, tap } from "rxjs";
 
 import { ShoppingListService } from "../shopping-list-sandbox.service";
 
@@ -13,11 +13,27 @@ export class HomeBrowse extends LitElement {
     this.sandboxShoppingList = ShoppingListService;
     this.listproduct = [];
     this.listShopping = null;
+    this.lastSearch = [];
   }
 
   render() {
+    const validate = this.lastSearch.length !=  0;
     return html`
-      ${this.listproduct.map((element) => {
+     <slot></slot>
+     <navbar-component></navbar-component>
+    <searchbox-component></searchbox-component>
+    ${validate
+    ? html`${this.lastSearch.map((element) => {
+        return html`
+          <card-component
+            .counter=${this.getCounter(element)}
+            @counterChangeFromButton=${this.productCounterChange}
+            .listProductDetail="${element}">
+          </card-component>
+        `;
+      })}`
+    : html`
+    ${this.listproduct.map((element) => {
         return html`
           <card-component
             .counter=${this.getCounter(element)}
@@ -26,6 +42,9 @@ export class HomeBrowse extends LitElement {
           </card-component>
         `;
       })}
+    `}
+    
+
       <shopping-list-info-component></shopping-list-info-component>
     `;
   }
@@ -33,9 +52,19 @@ export class HomeBrowse extends LitElement {
     const createShopping$ = this.sandboxShoppingList.createShoppingList$().pipe(
       tap(shopping => this.listShopping = shopping),
       tap(()=> this.requestUpdate()),
-      tap((info)=> console.log("SHOPPING CREADO", info))
+      tap((info)=> console.log("SHOPPING CREADO", info)),
     )
       createShopping$.subscribe();
+
+    
+      const foundProduct$ = this.sandboxShoppingList.lastSearch$().pipe(
+        tap(info => this.lastSearch = info),
+        tap(info=> console.log("ESTO ESTOY RECIBIENDO",info)),
+      tap(()=> this.requestUpdate()),
+
+      )
+      foundProduct$.subscribe();
+
     // const location = this.location.params;
     // const shoppingId = parseInt(location.shoppingId);
     // const shopping$ = this.sandboxShoppingList
@@ -46,9 +75,10 @@ export class HomeBrowse extends LitElement {
     //     tap((info) => console.log("NOS TRAEMOS EL SHOPPING", info))
     //   );
     // shopping$.subscribe();
-    const result$ = this.sandboxShoppingList.getListProduct$().pipe(
+    const result$ = this.sandboxShoppingList.getListProduct$()
+    .pipe(
       tap((info) => (this.listproduct = info)),
-      tap(() => this.requestUpdate())
+      tap(() => this.requestUpdate()),
     );
     result$.subscribe();
   }

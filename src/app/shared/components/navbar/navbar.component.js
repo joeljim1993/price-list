@@ -32,16 +32,11 @@ export class NavbarComponent extends LitElement {
     
     <div class="container">
         <ul class="nav">
-          <li><searchbox-component></searchbox-component></li>
           <li class="shopping-cart-icon"><shoppingcart-component></shoppingcart-component></li>
         </ul>
       </div>
-    
-  
     `;
   }
-
-
 }
 
 customElements.define("navbar-component", NavbarComponent);
