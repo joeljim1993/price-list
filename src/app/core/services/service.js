@@ -131,7 +131,7 @@ class CoreService {
     {
       id: 16,
       name: "HUEVOS 1/2 CARTON",
-      images: ["https://andreasmarket.com/wp-content/uploads/2021/02/carton-huevos.png"],
+      images: ["https://superfreshmarket.com.ve/wp-content/uploads/2021/02/medio-carton-Fresh.jpg"],
       price: 25.30,
     },
     {
@@ -143,9 +143,9 @@ class CoreService {
   ];
 
   // SIMULA LA TRAIDA DE LA LISTA DESDE KANA
-  getShoppingListFromKana$() {
-    const listProducForKana = this._listProduct;
-    return of(listProducForKana);
+  getListProductOfKana$() {
+    const listProducOfKana = this._listProduct;
+    return of(listProducOfKana);
   }
 
   //CREA UNA LISTA DE MERCADO TEMPORAL
@@ -162,11 +162,15 @@ class CoreService {
 
   //FILTRA EL PRODUCTO INGRESADO DESDE LA BARRA DE BUSQUEDA
   FilterProduct$(productName) {
-    const result$ = this.getShoppingListFromKana$().pipe(
+    const result$ = this.getListProductOfKana$().pipe(
         map(products => products.filter(product => product.name.includes(productName))),
     );
      result$.subscribe((response) => {
-      this.LastSearch$.next(response)
+      if(response.length != 0){
+        this.LastSearch$.next(response)
+      }else{
+        this.LastSearch$.next(this._listProduct)
+      }
      });
   }
 

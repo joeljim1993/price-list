@@ -5,7 +5,7 @@ class ShoppingListSandboxService {
   
   getListProduct$() {
     //AQUI IRA UN CONDICIONAL DE FILTRADO
-    return service.getShoppingListFromKana$();
+    return service.getListProductOfKana$();
   }
 
   getShoppingById$(id){

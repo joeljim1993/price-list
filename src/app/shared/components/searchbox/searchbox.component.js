@@ -37,16 +37,15 @@ export class SearchBoxComponent extends LitElement {
   render() {
     return html`
       <div class="input">
-        <input placeholder="Busca tú producto"  class="search-button" />
+        <input  placeholder="Busca tú producto"  class="search-button" />
       </div>
     `;
   }
 
   firstUpdated() {
     let query = "";
-    const result = this.input$.pipe(
+    const result$ = this.input$.pipe(
       map((info) => info.key.toUpperCase()),
-      tap(info => console.log("ESTO CON MAYUSCULA", info)),
       filter(
         (pressedKey) => pressedKey.match(/[a-z]/i) && pressedKey.length == 1
       ),
@@ -57,8 +56,10 @@ export class SearchBoxComponent extends LitElement {
       debounceTime(3000),
       tap(() => (query = ""))
     );
-    result.subscribe();
+    result$.subscribe();
   }
+
+
 }
 
 customElements.define("searchbox-component", SearchBoxComponent);

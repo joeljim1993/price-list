@@ -56,14 +56,25 @@ export class HomeBrowse extends LitElement {
     )
       createShopping$.subscribe();
 
-    
+      //OBTIENE INICIALMENTE TODOS LOS PRODUCTOS
+      const result$ = this.sandboxShoppingList.getListProduct$()
+      .pipe(
+        tap((info) => (this.listproduct = info)),
+        tap(() => this.requestUpdate()),
+      );
+      result$.subscribe();
+
+      //FILTRA EL O LOS PRODUCTOS TRAIDOS DESDE EL SERVICIO
       const foundProduct$ = this.sandboxShoppingList.lastSearch$().pipe(
         tap(info => this.lastSearch = info),
         tap(info=> console.log("ESTO ESTOY RECIBIENDO",info)),
-      tap(()=> this.requestUpdate()),
+        tap(()=> this.requestUpdate()),
 
       )
       foundProduct$.subscribe();
+    }
+
+      
 
     // const location = this.location.params;
     // const shoppingId = parseInt(location.shoppingId);
@@ -75,13 +86,7 @@ export class HomeBrowse extends LitElement {
     //     tap((info) => console.log("NOS TRAEMOS EL SHOPPING", info))
     //   );
     // shopping$.subscribe();
-    const result$ = this.sandboxShoppingList.getListProduct$()
-    .pipe(
-      tap((info) => (this.listproduct = info)),
-      tap(() => this.requestUpdate()),
-    );
-    result$.subscribe();
-  }
+   
 
   productCounterChange(e) {
     const quantity = e.detail.counterChange;
