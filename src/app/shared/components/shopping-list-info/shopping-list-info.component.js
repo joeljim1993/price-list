@@ -52,10 +52,10 @@ export class ShoppingListInfoComponent extends LitElement {
     return html`
       ${validate
         ? html`<div class="container">
-            <label>MERCADO VACIO<img src="#" /></label>
+            <label>MERCADO VACIO<img id="first" src="/src/assets/images/question.png" /></label>
           </div>`
         : html`<div class="container">
-            <label>Mi mercado<img src="#" /></label>
+            <label>Mi mercado<img src="/src/assets/images/edit-icon.png" /></label>
             <label>Total: ${this.total.toFixed(2)}</label>
             <label>Sin Tope</label>
           </div>`}

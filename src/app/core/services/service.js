@@ -177,8 +177,25 @@ class CoreService {
     return of(result);
   }
 
+  //AGREGAR LOS PRODUCTOS FAVORITOS A LA LISTA DE MERCADO
+  addProductToFavorites$(shoppingId, productId, priceProduct, productName){
+    //TODO: FALTA METER VALIDACIONES
+    const shoppingList = this.shoppingAvailables.find(
+      (shopping) => shopping.id === shoppingId
+    );
+    const productsFavorites = shoppingList.favoriteProducts;
+    const newProductFavorite ={
+      id: productId,
+      name: productName,
+      price: priceProduct
+    } 
+    productsFavorites.push(newProductFavorite)
+    return of(shoppingList)
+  }
+
   //AGREGA PRODUCTOS A LA LISTA DE MERCADO CREADA
   productCountChange$(shoppingId, productId, quantity, priceProduct) {
+    //TODO: FALTA PULIR ESTE METODO
     const shoppingList = this.shoppingAvailables.find(
       (shopping) => shopping.id === shoppingId
     );

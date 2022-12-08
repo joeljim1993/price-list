@@ -15,77 +15,78 @@ export class HomeBrowse extends LitElement {
     this.listShopping = null;
     this.lastSearch = [];
   }
-
+   //un solo componente que se llama lista de la linea 25 a la 35
   render() {
-    const validate = this.lastSearch.length !=  0;
+    const validate = this.lastSearch.length != 0;
     return html`
-     <slot></slot>
-     <navbar-component></navbar-component>
-    <searchbox-component></searchbox-component>
-    ${validate
-    ? html`${this.lastSearch.map((element) => {
-        return html`
-          <card-component
-            .counter=${this.getCounter(element)}
-            @counterChangeFromButton=${this.productCounterChange}
-            .listProductDetail="${element}">
-          </card-component>
-        `;
-      })}`
-    : html`
-    ${this.listproduct.map((element) => {
-        return html`
-          <card-component
-            .counter=${this.getCounter(element)}
-            @counterChangeFromButton=${this.productCounterChange}
-            .listProductDetail="${element}">
-          </card-component>
-        `;
-      })}
-    `}
-    
-
+      <slot></slot>
+      <navbar-component></navbar-component> 
+      <searchbox-component></searchbox-component>
+            ${this.listproduct.map((element) => {
+              return html`
+                <card-component
+                  .counter=${this.getCounter(element)}
+                  @counterChangeFromButton=${this.productCounterChange}
+                  .listProductDetail="${element}"
+                  @addProductToFavorites="${this.addProductToFavorites}"
+                >
+                </card-component>
+              `;
+            })}
       <shopping-list-info-component></shopping-list-info-component>
     `;
   }
   firstUpdated() {
-    //METODO QUE ME CREA LA LISTA DE MERCADO AL ENTRAR A LA APLICACION 
+    //METODO QUE ME CREA LA LISTA DE MERCADO AL ENTRAR A LA APLICACION
     const createShopping$ = this.sandboxShoppingList.createShoppingList$().pipe(
-      tap(shopping => this.listShopping = shopping),
-      tap(()=> this.requestUpdate()),
-      tap((info)=> console.log("SHOPPING CREADO", info)),
-    )
-      createShopping$.subscribe();
+      tap((shopping) => (this.listShopping = shopping)),
+      tap(() => this.requestUpdate()),
+      tap((info) => console.log("SHOPPING CREADO", info))
+    );
+    createShopping$.subscribe();
 
-      //OBTIENE INICIALMENTE TODOS LOS PRODUCTOS
-      const result$ = this.sandboxShoppingList.getListProduct$()
-      .pipe(
-        tap((info) => (this.listproduct = info)),
-        tap(() => this.requestUpdate()),
-      );
-      result$.subscribe();
+    //OBTIENE INICIALMENTE TODOS LOS PRODUCTOS
+    const result$ = this.sandboxShoppingList.filtered$.pipe(
+      tap((info) => (this.listproduct = info)),
+      tap(() => this.requestUpdate())
+    );
+    result$.subscribe();
+    this.sandboxShoppingList.changeList$("").subscribe();
+    //FILTRA EL O LOS PRODUCTOS TRAIDOS DESDE EL SERVICIO
+    const foundProduct$ = this.sandboxShoppingList.lastSearch$().pipe(
+      tap((info) => (this.lastSearch = info)),
+      tap((info) => console.log("ESTO ESTOY RECIBIENDO", info)),
+      tap(() => this.requestUpdate())
+    );
+    foundProduct$.subscribe();
+  }
 
-      //FILTRA EL O LOS PRODUCTOS TRAIDOS DESDE EL SERVICIO
-      const foundProduct$ = this.sandboxShoppingList.lastSearch$().pipe(
-        tap(info => this.lastSearch = info),
-        tap(info=> console.log("ESTO ESTOY RECIBIENDO",info)),
-        tap(()=> this.requestUpdate()),
-      )
-      foundProduct$.subscribe();
-    }
- 
 
-    // const location = this.location.params;
-    // const shoppingId = parseInt(location.shoppingId);
-    // const shopping$ = this.sandboxShoppingList
-    //   .getShoppingById$(shoppingId)
-    //   .pipe(
-    //     tap((info) => (this.listShopping = info)),
-    //     tap(() => this.requestUpdate()),
-    //     tap((info) => console.log("NOS TRAEMOS EL SHOPPING", info))
-    //   );
-    // shopping$.subscribe();
-   
+  addProductToFavorites(e){
+    // console.log("EVENTO RECIBIDO EN EL ABUELO", e.detail);
+    const productId = e.detail.productId;
+    const priceProduct = e.detail.priceProduct;
+    const productName = e.detail.productName;
+    const shoppingId = this.listShopping.id;
+    const addProduct$ = this.sandboxShoppingList.sandBoxaddProductToFavorites$(shoppingId, productId, priceProduct, productName)
+          .pipe(
+              tap(info => console.log("RETORNA EL PRODUCTO FAVORITO",info)),
+              tap(() => this.requestUpdate()),
+          )
+          addProduct$.subscribe();
+  }
+
+
+  // const location = this.location.params;
+  // const shoppingId = parseInt(location.shoppingId);
+  // const shopping$ = this.sandboxShoppingList
+  //   .getShoppingById$(shoppingId)
+  //   .pipe(
+  //     tap((info) => (this.listShopping = info)),
+  //     tap(() => this.requestUpdate()),
+  //     tap((info) => console.log("NOS TRAEMOS EL SHOPPING", info))
+  //   );
+  // shopping$.subscribe();
 
   productCounterChange(e) {
     const quantity = e.detail.counterChange;

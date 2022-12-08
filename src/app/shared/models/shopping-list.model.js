@@ -7,6 +7,7 @@ export class ShoppingList{
        this.createdAt = new Date();
        this.limit = limit;
        this.products = [];
+       this.favoriteProducts = [];
        this.total = 0;
     }
 }

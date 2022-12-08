@@ -21,8 +21,8 @@ export class ProductCard extends LitElement {
       transition: all 0.3s cubic-bezier(0.25 0.8 0.25, 1);
     }
 
-    .image{
-      width: 70%
+    .image {
+      width: 70%;
     }
   `;
 
@@ -36,9 +36,11 @@ export class ProductCard extends LitElement {
     return html`
       <div class="card">
         <div class="card-content">
-        <product-card-favorites-button @favorites=${this.listenerEvent}></product-card-favorites-button>
-        <img class="image" src="${this.listProductDetail.images}">
-          <p>${this.listProductDetail.name}</p>     
+          <product-card-favorites-button
+            @addProductToFavorites=${this.addProductToFavorites}
+          ></product-card-favorites-button>
+          <img class="image" src="${this.listProductDetail.images}" />
+          <p>${this.listProductDetail.name}</p>
           <p>Bs. ${this.listProductDetail.price}</p>
           <product-card-button-component
             @counterChangeFromButton=${this.increment}
@@ -49,8 +51,16 @@ export class ProductCard extends LitElement {
     `;
   }
 
-  listenerEvent(e){
-      console.log("esto llega al padre",e);
+  addProductToFavorites(e) {
+    console.log("ESTO LLEGA AL PADRE", e);
+    const eventoB = e.detail;
+    const productId = this.listProductDetail.id;
+    const priceProduct = this.listProductDetail.price;
+    const productName = this.listProductDetail.name;
+    const options = {
+      detail: { eventoB, productId, priceProduct, productName },
+    };
+    this.dispatchEvent(new CustomEvent("addProductToFavorites", options));
   }
 
   increment(e) {
