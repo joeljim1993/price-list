@@ -30,6 +30,10 @@ class ShoppingListSandboxService {
     return service.FilterProduct$();
   }
 
+  //TRAE LA LISTA DE MERCADO EN CURSO
+  getShoppingListAvailables$(){
+    return service.getShoppingListAvailable$();
+  }
 }
 
 export const ShoppingListService = new ShoppingListSandboxService();

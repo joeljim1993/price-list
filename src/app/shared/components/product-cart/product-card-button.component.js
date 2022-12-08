@@ -7,15 +7,15 @@ export class ProductCardButton extends LitElement {
   };
 
   static styles = css`
-  #addButton{
-    background-color: #F4A534;
-    width: 300px;
-    height: 40.73px;
-    top: 220px;
-    left: 35px;
-    border-radius: 15px
-  }
-
+    .addButton {
+      background-color: #f4a534;
+      width: 300px;
+      height: 40.73px;
+      top: 220px;
+      left: 35px;
+      border-radius: 10px;
+      border: none;
+    }
 
   `;
 
@@ -29,10 +29,16 @@ export class ProductCardButton extends LitElement {
     return html`
       <div>
         ${validateCounter
-          ? html` <button id="addButton" @click=${this.incrementButton}>AGREGAR</button> `
-          : html`<button @click=${this.decrementButton}>-</button>
+          ? html`
+              <button class="addButton" @click=${this.incrementButton}>
+                Agregar
+              </button>
+            `
+          : html`
+              <button @click=${this.decrementButton}>-</button>
               <input id="quantity" type="number" value="${this.counter}" />
-              <button @click=${this.incrementButton}>+</button>`}
+              <button @click=${this.incrementButton}>+</button>
+            `}
       </div>
     `;
   }

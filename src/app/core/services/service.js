@@ -164,14 +164,9 @@ class CoreService {
   FilterProduct$(productName) {
     const result$ = this.getListProductOfKana$().pipe(
         map(products => products.filter(product => product.name.includes(productName))),
+        tap(response => this.LastSearch$.next(response)),
     );
-     result$.subscribe((response) => {
-      if(response.length != 0){
-        this.LastSearch$.next(response)
-      }else{
-        this.LastSearch$.next(this._listProduct)
-      }
-     });
+    result$.subscribe();
   }
 
   //BUSCA LA LISTA DE MERCADO CREADA POR ID

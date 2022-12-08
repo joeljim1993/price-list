@@ -49,6 +49,7 @@ export class HomeBrowse extends LitElement {
     `;
   }
   firstUpdated() {
+    //METODO QUE ME CREA LA LISTA DE MERCADO AL ENTRAR A LA APLICACION 
     const createShopping$ = this.sandboxShoppingList.createShoppingList$().pipe(
       tap(shopping => this.listShopping = shopping),
       tap(()=> this.requestUpdate()),
@@ -69,12 +70,10 @@ export class HomeBrowse extends LitElement {
         tap(info => this.lastSearch = info),
         tap(info=> console.log("ESTO ESTOY RECIBIENDO",info)),
         tap(()=> this.requestUpdate()),
-
       )
       foundProduct$.subscribe();
     }
-
-      
+ 
 
     // const location = this.location.params;
     // const shoppingId = parseInt(location.shoppingId);

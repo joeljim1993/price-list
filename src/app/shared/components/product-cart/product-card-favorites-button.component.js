@@ -23,9 +23,7 @@ export class ProductCardFavoritesButton extends LitElement {
   }
 
   render() {
-    return html`<buton class="enable" @click=${this.event} type="checkbox"
-      ><img src=""></buton
-    >`;
+    return html`<a class="enable" @click=${this.event} href="#">❤️</a>`;
   }
 
   event(e) {
