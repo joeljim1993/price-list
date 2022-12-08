@@ -1,38 +1,38 @@
 import { html, css, LitElement } from "lit";
 
 export class ProductCardFavoritesButton extends LitElement {
-  static properties = {
-
-  };
+  static properties = {};
 
   static styles = css`
-    a {
+    img {
       position: absolute;
-      width: 24px;
-      height: 24px;
+      width: 30px;
+      height: 30px;
       left: 323px;
       top: 10px;
       text-decoration: none;
     }
-    
   `;
 
   constructor() {
     super();
-    this.enable = false;
+    this.enable = true;
   }
 
   render() {
-    return html`<a class="enable" @click=${this.event} href="#">❤️</a>`;
+    return html`
+      <a class="enable" @click=${this.addProductToFavorites} href="#">
+        <img src="/src/assets/images/favorite.png"/>
+      </a>
+    `;
   }
 
-  event(e) {
+  addProductToFavorites(e) {
     const evento = "clickeando..";
-    this.enable = true;
     const options = {
       detail: evento,
     };
-    this.dispatchEvent(new CustomEvent("favorites", options));
+    this.dispatchEvent(new CustomEvent("addProductToFavorites", options));
   }
 }
 

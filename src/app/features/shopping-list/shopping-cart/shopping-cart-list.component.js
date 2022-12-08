@@ -17,7 +17,5 @@ export class ShoppingCartList extends LitElement {
         return html`
         <h1>Churrada</h1>`;
     }
-
-
 }
 customElements.define('shopping-cart-list', ShoppingCartList);
