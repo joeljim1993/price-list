@@ -54,7 +54,7 @@ export class SearchBoxComponent extends LitElement {
     const result$ = this.input$.pipe(
       debounceTime(300),
       map(() => this.input.value),
-      tap((query) => console.log("query desde la consola ", query)),
+      // tap((query) => console.log("query desde la consola ", query)),
       switchMap((query) => this.sandboxShoppingList.changeList$(query))
     );
     result$.subscribe();

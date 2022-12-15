@@ -2,6 +2,7 @@ import { timer, map, of, Subject, take, tap } from "rxjs";
 import { service } from "../../core/services/service"
 
 class ShoppingListSandboxService {
+
 // los subject son observables pero permiten emitir valores - Roberto Matute
 // con el asObservable el solo lo transforma en observable - Roberto Matute
   _filtered$ = new Subject();
@@ -15,7 +16,7 @@ class ShoppingListSandboxService {
     //2 - Si no la tengo pedirla
     //3 - filtramos esa lista con el query 
     //4 - emito un valor para filtered$ y query$
-    console.log("ESTAMOS LLAMANDO A CHANGELIST");
+    // console.log("ESTAMOS LLAMANDO A CHANGELIST");
     return this.getListProduct$().pipe(
       tap(info => console.log("DENTRO DEL CHANGE LIST",info)),
       map(original=> 
@@ -23,7 +24,10 @@ class ShoppingListSandboxService {
       ),
       tap(filtered => {
         this._query$.next(query);
+        console.log("query desde getListProduct=>",query);
         this._filtered$.next(filtered);
+        // console.log("filtered desde getListProduct=>",filtered);
+
       })
     )
 
@@ -36,8 +40,9 @@ class ShoppingListSandboxService {
 
   getListProduct$() {
     //AQUI IRA UN CONDICIONAL DE FILTRADO
-    console.log("ESTAMOS LLAMANDO A GETLISTPRODUCT");
+    // console.log("ESTAMOS LLAMANDO A GETLISTPRODUCT");
     if(this.kanaList){
+      console.log("kanalist", this.kanaList);
       return of(this.kanaList)
     }
     return service.getListProductOfKana$()
@@ -51,8 +56,8 @@ class ShoppingListSandboxService {
       return service.getShoppingById$(id);
   }
 
-  productCountChange$(shoppingId,productId, quantity, priceProduct){
-    return service.productCountChange$(shoppingId,productId, quantity, priceProduct);
+  productCountChange$(shoppingId,productId, quantity, priceProduct,productImage,productName){
+    return service.productCountChange$(shoppingId,productId, quantity, priceProduct,productImage,productName);
   }
 
   lastSearch$(){

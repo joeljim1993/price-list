@@ -142,15 +142,30 @@ class CoreService {
     },
   ];
 
+  // esta funcion debera traer la lista(shopping) actual, param : idList
+  getShoppingAvailables(){
+    let shoppingAvailables = this.shoppingAvailables;
+    let shopping = shoppingAvailables.find(item => item.id=="01");
+    let products = shopping.products;
+    return products
+
+  }
+
   // SIMULA LA TRAIDA DE LA LISTA DESDE KANA
   getListProductOfKana$() {
+    console.log("trayendo kana desde el servicio");
     const listProducOfKana = this._listProduct;
     return of(listProducOfKana);
   }
 
   //CREA UNA LISTA DE MERCADO TEMPORAL
   createShoppingList$() {
-    const shopping = new ShoppingList();
+    // esto va a ser introducido por el usuario o se genera automaticamente. 
+    let id= "01";
+    let name= "pepito";
+    let limit ="";
+    const shopping = new ShoppingList(id,name,limit);
+    console.log("shopping=>",shopping);
     this.shoppingAvailables = this.shoppingAvailables.concat([shopping]);
     return of(shopping);
   }
@@ -194,7 +209,7 @@ class CoreService {
   }
 
   //AGREGA PRODUCTOS A LA LISTA DE MERCADO CREADA
-  productCountChange$(shoppingId, productId, quantity, priceProduct) {
+  productCountChange$(shoppingId, productId, quantity, priceProduct,productImage,productName) {
     //TODO: FALTA PULIR ESTE METODO
     const shoppingList = this.shoppingAvailables.find(
       (shopping) => shopping.id === shoppingId
@@ -214,7 +229,9 @@ class CoreService {
       const newProduct = this.createNewProduct(
         productId,
         quantity,
-        priceProduct
+        priceProduct,
+        productImage,
+        productName
       );
       const rowTotal = this.calculateRowTotal(quantity, priceProduct);
       shoppingList.total += rowTotal;
@@ -228,9 +245,11 @@ class CoreService {
   }
 
   //CREA UN OBJETO NUEVO SI, EL PRODUCTO NO HA SIDO CREADO
-  createNewProduct(productId, quantity, priceProduct) {
+  createNewProduct(productId, quantity, priceProduct,productImage,productName) {
     const newProduct = {
       id: productId,
+      name:productName,
+      img:productImage,
       quantity: quantity,
       price: priceProduct,
       total: 0,
