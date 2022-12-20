@@ -55,8 +55,8 @@ class ShoppingListSandboxService {
     return service.productCountChange$(shoppingId,productId, quantity, priceProduct);
   }
 
-  lastSearch$(){
-    return service.LastSearch$;
+  filterSearch$(){
+    return service.filteredSearch$;
   }
 
   createShoppingList$(){
@@ -68,8 +68,8 @@ class ShoppingListSandboxService {
     return service.FilterProduct$();
   }
 
-  sandBoxaddProductToFavorites$(shoppingId,productId, priceProduct, productName){
-    return service.addProductToFavorites$(shoppingId,productId, priceProduct, productName);
+  sandBoxaddProductToFavorites$(productId, priceProduct, productName){
+    return service.addProductToFavorites$(productId, priceProduct, productName);
   }
 
   //TRAE LA LISTA DE MERCADO EN CURSO

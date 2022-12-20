@@ -17,10 +17,9 @@ export class HomeBrowse extends LitElement {
   }
    //un solo componente que se llama lista de la linea 25 a la 35
   render() {
-    const validate = this.lastSearch.length != 0;
     return html`
       <slot></slot>
-      <navbar-component></navbar-component> 
+      <navbar-component></navbar-component>
       <searchbox-component></searchbox-component>
             ${this.listproduct.map((element) => {
               return html`
@@ -53,7 +52,7 @@ export class HomeBrowse extends LitElement {
     result$.subscribe();
     this.sandboxShoppingList.changeList$("").subscribe();
     //FILTRA EL O LOS PRODUCTOS TRAIDOS DESDE EL SERVICIO
-    const foundProduct$ = this.sandboxShoppingList.lastSearch$().pipe(
+    const foundProduct$ = this.sandboxShoppingList.filterSearch$().pipe(
       tap((info) => (this.lastSearch = info)),
       tap((info) => console.log("ESTO ESTOY RECIBIENDO", info)),
       tap(() => this.requestUpdate())
@@ -68,7 +67,7 @@ export class HomeBrowse extends LitElement {
     const priceProduct = e.detail.priceProduct;
     const productName = e.detail.productName;
     const shoppingId = this.listShopping.id;
-    const addProduct$ = this.sandboxShoppingList.sandBoxaddProductToFavorites$(shoppingId, productId, priceProduct, productName)
+    const addProduct$ = this.sandboxShoppingList.sandBoxaddProductToFavorites$( productId, priceProduct, productName)
           .pipe(
               tap(info => console.log("RETORNA EL PRODUCTO FAVORITO",info)),
               tap(() => this.requestUpdate()),

@@ -18,9 +18,9 @@ import { ShoppingList } from "../../shared/models/shopping-list.model";
 class CoreService {
   //CONTIENE LAS LISTAS DE MERCADO GUARDADAS PREVIAMENTE
   shoppingAvailables = [];
-
+  //CONTIENE LA LISTA DE PRODUCTOS FAVORITOS
   shoppingListTotal$ = new Subject();
-  LastSearch$ = new Subject();
+  filteredSearch$ = new Subject();
   shoppingCartLength$ = new Subject();
   //SET ESTATICO DE PRUEBA PARA RECREAR LAS CARDS
   _listProduct = [
@@ -74,7 +74,7 @@ class CoreService {
       id: 7,
       name: "HARINA PAN NORMAL",
       images: [
-        "https://i1.wp.com/www.vimas.store/wp-content/uploads/2021/11/Harina-pan-P.jpg?fit=1200%2C1200&ssl=1",
+        "https://lh3.googleusercontent.com/p-K-FfFnpv0kgdVT1kNxI_lludARFkD-VpAFOimS0gbiIA9JxOP78PkQlhOnD6Q8W2cU-vvRkdLG0vdfvni86ChSo0UlXImPVYPJ2uUfAX78WSSd",
       ],
       price: 14.45,
     },
@@ -164,7 +164,7 @@ class CoreService {
   FilterProduct$(productName) {
     const result$ = this.getListProductOfKana$().pipe(
         map(products => products.filter(product => product.name.includes(productName))),
-        tap(response => this.LastSearch$.next(response)),
+        tap(response => this.filteredSearch$.next(response)),
     );
     result$.subscribe();
   }
@@ -178,21 +178,32 @@ class CoreService {
   }
 
   //AGREGAR LOS PRODUCTOS FAVORITOS A LA LISTA DE MERCADO
-  addProductToFavorites$(shoppingId, productId, priceProduct, productName){
+  addProductToFavorites$( productId, priceProduct, productName){
     //TODO: FALTA METER VALIDACIONES
-    const shoppingList = this.shoppingAvailables.find(
-      (shopping) => shopping.id === shoppingId
-    );
-    const productsFavorites = shoppingList.favoriteProducts;
+    const productFavorites = this.getProductListFavorites();
     const newProductFavorite ={
       id: productId,
       name: productName,
       price: priceProduct
     } 
-    productsFavorites.push(newProductFavorite)
-    return of(shoppingList)
+    if(newProductFavorite.id != productFavorites.id){
+      productFavorites.push(newProductFavorite)
+      localStorage.setItem("Favorites", JSON.stringify(productFavorites))
+    }
+    
+    console.log("ESTO AGREGO",productFavorites);
+    return of(productFavorites)
   }
 
+  //OBTENER PRODUCTOS FAVORITOS DEL LOCAL STORAGE
+  getProductListFavorites(){
+      if(localStorage == null){
+        throw new Error("NO EXISTE NADA AGREGADO EN LOCALSTORAGE")
+      }
+      const productList = localStorage.getItem("Favorites");
+      const favorites = productList === null ? [] : JSON.parse(productList)
+      return favorites;
+  }
   //AGREGA PRODUCTOS A LA LISTA DE MERCADO CREADA
   productCountChange$(shoppingId, productId, quantity, priceProduct) {
     //TODO: FALTA PULIR ESTE METODO

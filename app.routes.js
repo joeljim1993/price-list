@@ -5,6 +5,7 @@ export const routes = [
     { path: '/', component: 'home-browse' },
     { path: '/browse/',  children: routes_browse, component: 'home-browse' },
     { path: '/features/shoppinglist/',  children: routes_browse, component: 'shopping-cart-list' },
+    { path: '/features/favorites/',  children: routes_browse, component: 'favorites-browse' },
     { path: '/page-not-found/', component: 'page-not-found' },
     { path: '(.*)', redirect: '/page-not-found/' },
   ]

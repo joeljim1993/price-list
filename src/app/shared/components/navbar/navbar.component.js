@@ -33,7 +33,10 @@ export class NavbarComponent extends LitElement {
     <div class="container">
         <ul class="nav">
           <li class="shopping-cart-icon"><shoppingcart-component></shoppingcart-component></li>
+         
         </ul>
+      <a href="#">Favorites</a>
+       
       </div>
     `;
   }
