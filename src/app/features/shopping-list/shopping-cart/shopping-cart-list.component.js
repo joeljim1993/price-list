@@ -49,20 +49,40 @@ export class ShoppingCartList extends LitElement {
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border-radius: 10px;
     }
+    .btn-continue-search {
+      background: #1ce09a;
+      border-radius: 15px;
+    }
+    .btn-clean-list{
+        background: #EA794C;
+        border-radius: 5px;
+    }
+    .btn-clean-list img {
+      width:20px;
+      height:20.5px;
+    }
   `;
+  
   constructor() {
     super();
-    this.list = service.getShoppingAvailables();
+    this.list = service.getProductsShoppingAvailables();
     console.log(" this.list", this.list);
+    this.currentShopping = service.getShoppingAvailables();
+    console.log("shoopping actual",  this.currentShopping);
   }
 
   render() {
     return html`
       <section>
-        <button @click=${this.goBack}>continuar Buscando</button>
+        <button @click=${this.goBack} class="btn-continue-search">
+          <img src="/src/assets/images/icons8-add-list-30.png" />
+          Continuar Buscando
+        </button>
       </section>
       <section>
-        <button>Limpiar Lista</button>
+        <button class="btn-clean-list" @click=${this.cleanList}>
+        <img src="/src/assets/images/biggarbagebin_121980.png">    
+        Limpiar Lista</button>
         <hr />
 
         <div>
@@ -85,13 +105,19 @@ export class ShoppingCartList extends LitElement {
             src="/src/assets/images/compra_carrito_icon_209798.png"
           />
         </div>
-        <h3>total</h3>
-        <h3>disponible</h3>
+        <h3>Total : ${this.currentShopping.total} </h3>
+        <h3>disponible :</h3>
 
         <button class="btn-save">Guardar</button>
         <button class="btn-share">Compartir</button>
       </section>
     `;
+  }
+  cleanList(){
+    service.cleanShopping();
+    this.requestUpdate;
+    this.list = service.getProductsShoppingAvailables();
+    this.requestUpdate();
   }
   goBack() {
     Router.go("/browse/");

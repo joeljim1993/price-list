@@ -35,6 +35,7 @@ export class ShoppingCartDetail extends LitElement {
         </section>
       
         `;
+        
     }
 }
 customElements.define('shopping-cart-detail', ShoppingCartDetail);

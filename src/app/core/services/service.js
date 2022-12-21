@@ -143,12 +143,28 @@ class CoreService {
   ];
 
   // esta funcion debera traer la lista(shopping) actual, param : idList
-  getShoppingAvailables(){
+  getProductsShoppingAvailables(){
     let shoppingAvailables = this.shoppingAvailables;
     let shopping = shoppingAvailables.find(item => item.id=="01");
     let products = shopping.products;
+   
     return products
 
+  }
+  // trae el shopping actual param: idshopping
+  getShoppingAvailables(){
+    let shoppingAvailables = this.shoppingAvailables;
+    let shopping = shoppingAvailables.find(item => item.id=="01");
+    return shopping;
+  }
+  // funcion que limpia el carrito 
+  cleanShopping(){
+    let shoppingAvailables = this.shoppingAvailables;
+    let shopping = shoppingAvailables.find(item => item.id=="01");
+    let products = shopping.products;
+    products.length = shopping.total =  0;
+    console.log("carrito despues de vaciado",products);
+    
   }
 
   // SIMULA LA TRAIDA DE LA LISTA DESDE KANA
