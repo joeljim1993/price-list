@@ -55,7 +55,7 @@ export class HomeBrowse extends LitElement {
     //FILTRA EL O LOS PRODUCTOS TRAIDOS DESDE EL SERVICIO
     const foundProduct$ = this.sandboxShoppingList.lastSearch$().pipe(
       tap((info) => (this.lastSearch = info)),
-      tap((info) => console.log("ESTO ESTOY RECIBIENDO", info)),
+      // tap((info) => console.log("ESTO ESTOY RECIBIENDO", info)),
       tap(() => this.requestUpdate())
     );
     foundProduct$.subscribe();
@@ -70,7 +70,7 @@ export class HomeBrowse extends LitElement {
     const shoppingId = this.listShopping.id;
     const addProduct$ = this.sandboxShoppingList.sandBoxaddProductToFavorites$(shoppingId, productId, priceProduct, productName)
           .pipe(
-              tap(info => console.log("RETORNA EL PRODUCTO FAVORITO",info)),
+              // tap(info => console.log("RETORNA EL PRODUCTO FAVORITO",info)),
               tap(() => this.requestUpdate()),
           )
           addProduct$.subscribe();
@@ -93,8 +93,12 @@ export class HomeBrowse extends LitElement {
     const priceProduct = e.detail.price;
     const productId = e.detail.productId;
     const shoppingId = this.listShopping.id;
+    const productName=e.detail.productName;
+    const productImage=e.detail.productImage;
+    console.log("img",productImage);
+
     const result$ = this.sandboxShoppingList
-      .productCountChange$(shoppingId, productId, quantity, priceProduct)
+      .productCountChange$(shoppingId, productId, quantity, priceProduct,productImage,productName)
       .pipe(
         tap((shopping) => (this.listShopping = shopping)),
         tap(() => this.requestUpdate()),

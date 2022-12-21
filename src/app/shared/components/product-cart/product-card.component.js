@@ -52,11 +52,12 @@ export class ProductCard extends LitElement {
   }
 
   addProductToFavorites(e) {
-    console.log("ESTO LLEGA AL PADRE", e);
+    // console.log("ESTO LLEGA AL PADRE", e);
     const eventoB = e.detail;
     const productId = this.listProductDetail.id;
     const priceProduct = this.listProductDetail.price;
     const productName = this.listProductDetail.name;
+
     const options = {
       detail: { eventoB, productId, priceProduct, productName },
     };
@@ -66,12 +67,18 @@ export class ProductCard extends LitElement {
   increment(e) {
     const productId = this.listProductDetail.id;
     const counterChange = e.detail.counterChangeB;
+    const productName = this.listProductDetail.name;
     const price = this.listProductDetail.price;
+    const productImage= this.listProductDetail.images;
+    console.log("en decrement,img:",productImage);
+
     const options = {
       detail: {
         counterChange,
         productId,
         price,
+        productImage,
+        productName
       },
     };
     this.dispatchEvent(new CustomEvent("counterChangeFromButton", options));
@@ -81,11 +88,17 @@ export class ProductCard extends LitElement {
     const productId = this.listProductDetail.id;
     const counterChange = e.detail.counterChangeB;
     const price = this.listProductDetail.price;
+    const productImage= this.listProductDetail.images;
+    const productName = this.listProductDetail.name;
+
+
     const options = {
       detail: {
         counterChange,
         productId,
         price,
+        productImage,
+        productName
       },
     };
     this.dispatchEvent(new CustomEvent("counterChangeFromButton", options));
