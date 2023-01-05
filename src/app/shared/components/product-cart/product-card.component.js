@@ -52,15 +52,6 @@ export class ProductCard extends LitElement {
   }
 
   addProductToFavorites(e) {
-<<<<<<< src/app/shared/components/product-cart/product-card.component.js
-=======
-    // console.log("ESTO LLEGA AL PADRE", e);
-    const eventoB = e.detail;
-    const productId = this.listProductDetail.id;
-    const priceProduct = this.listProductDetail.price;
-    const productName = this.listProductDetail.name;
-
->>>>>>> src/app/shared/components/product-cart/product-card.component.js
     const options = {
       detail: {  product: this.listProductDetail },
     };

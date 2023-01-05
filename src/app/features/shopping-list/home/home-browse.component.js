@@ -61,26 +61,11 @@ export class HomeBrowse extends LitElement {
     foundProduct$.subscribe();
   }
 
-<<<<<<< src/app/features/shopping-list/home/home-browse.component.js
+
 //METODO PARA AGREGAR A FAVORITOS 
   addProductToFavorites(event) {
     const product = event.detail.product;
     this.favoriteSrv.newFavorite$.next(product);
-=======
-
-  addProductToFavorites(e){
-    // console.log("EVENTO RECIBIDO EN EL ABUELO", e.detail);
-    const productId = e.detail.productId;
-    const priceProduct = e.detail.priceProduct;
-    const productName = e.detail.productName;
-    const shoppingId = this.listShopping.id;
-    const addProduct$ = this.sandboxShoppingList.sandBoxaddProductToFavorites$(shoppingId, productId, priceProduct, productName)
-          .pipe(
-              // tap(info => console.log("RETORNA EL PRODUCTO FAVORITO",info)),
-              tap(() => this.requestUpdate()),
-          )
-          addProduct$.subscribe();
->>>>>>> src/app/features/shopping-list/home/home-browse.component.js
   }
 
 
