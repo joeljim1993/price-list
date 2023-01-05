@@ -10,4 +10,8 @@ import { SearchBoxComponent } from "./src/app/shared/components/searchbox/search
 import { ShoppingCartList } from './src/app/features/shopping-list/shopping-cart/shopping-cart-list.component';
 import { ProductCardButton } from "./src/app/shared/components/product-cart/product-card-button.component";
 import { ProductCardFavoritesButton } from "./src/app/shared/components/product-cart/product-card-favorites-button.component";
+<<<<<<< index.js
 import { FavoritesBrowse } from "./src/app/features/favorites/favorites-browse.component";
+=======
+import './src/app/features/shopping-list/shopping-cart/shopping-cart-detail.component'
+>>>>>>> index.js

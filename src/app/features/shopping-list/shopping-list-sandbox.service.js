@@ -2,6 +2,7 @@ import { timer, map, of, Subject, take, tap } from "rxjs";
 import { service } from "../../core/services/service"
 
 class ShoppingListSandboxService {
+
 // los subject son observables pero permiten emitir valores - Roberto Matute
 // con el asObservable el solo lo transforma en observable - Roberto Matute
   _filtered$ = new Subject();
@@ -15,13 +16,20 @@ class ShoppingListSandboxService {
     //2 - Si no la tengo pedirla
     //3 - filtramos esa lista con el query 
     //4 - emito un valor para filtered$ y query$
+<<<<<<< src/app/features/shopping-list/shopping-list-sandbox.service.js
+=======
+    // console.log("ESTAMOS LLAMANDO A CHANGELIST");
+>>>>>>> src/app/features/shopping-list/shopping-list-sandbox.service.js
     return this.getListProduct$().pipe(
       map(original=> 
           this.filterList(query,original)
       ),
       tap(filtered => {
         this._query$.next(query);
+        console.log("query desde getListProduct=>",query);
         this._filtered$.next(filtered);
+        // console.log("filtered desde getListProduct=>",filtered);
+
       })
     )
 
@@ -33,7 +41,13 @@ class ShoppingListSandboxService {
   }
 
   getListProduct$() {
+<<<<<<< src/app/features/shopping-list/shopping-list-sandbox.service.js
+=======
+    //AQUI IRA UN CONDICIONAL DE FILTRADO
+    // console.log("ESTAMOS LLAMANDO A GETLISTPRODUCT");
+>>>>>>> src/app/features/shopping-list/shopping-list-sandbox.service.js
     if(this.kanaList){
+      console.log("kanalist", this.kanaList);
       return of(this.kanaList)
     }
     return service.getListProductOfKana$()
@@ -47,8 +61,8 @@ class ShoppingListSandboxService {
       return service.getShoppingById$(id);
   }
 
-  productCountChange$(shoppingId,productId, quantity, priceProduct){
-    return service.productCountChange$(shoppingId,productId, quantity, priceProduct);
+  productCountChange$(shoppingId,productId, quantity, priceProduct,productImage,productName){
+    return service.productCountChange$(shoppingId,productId, quantity, priceProduct,productImage,productName);
   }
 
   filterSearch$(){
