@@ -1,5 +1,5 @@
+import { Router } from "@vaadin/router";
 import { html, css, LitElement } from "lit";
-
 export class NavbarComponent extends LitElement {
   static styles = css`
     .container {
@@ -33,10 +33,18 @@ export class NavbarComponent extends LitElement {
     <div class="container">
         <ul class="nav">
           <li class="shopping-cart-icon"><shoppingcart-component></shoppingcart-component></li>
+         
         </ul>
+      <button @click=${this.goToFavorites}>Favorites</button>
+       
       </div>
     `;
   }
+
+  goToFavorites(){
+    Router.go('/favorites/')
+  }
+
 }
 
 customElements.define("navbar-component", NavbarComponent);

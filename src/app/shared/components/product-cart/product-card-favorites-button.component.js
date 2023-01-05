@@ -16,7 +16,7 @@ export class ProductCardFavoritesButton extends LitElement {
 
   constructor() {
     super();
-    this.enable = true;
+    this.favoriteEnable = true;
   }
 
   render() {
@@ -28,7 +28,7 @@ export class ProductCardFavoritesButton extends LitElement {
   }
 
   addProductToFavorites(e) {
-    const evento = "clickeando..";
+    const evento = this.favoriteEnable;
     const options = {
       detail: evento,
     };

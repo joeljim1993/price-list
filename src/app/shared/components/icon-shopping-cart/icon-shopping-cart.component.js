@@ -48,7 +48,7 @@ export class IconShoppingCart extends LitElement {
     `;
   }
   goToShoppingCart() {
-    Router.go('/features/shoppinglist/')
+    Router.go('/shoppinglist/')
   }
 }
 customElements.define("shoppingcart-component", IconShoppingCart);

@@ -16,9 +16,11 @@ class ShoppingListSandboxService {
     //2 - Si no la tengo pedirla
     //3 - filtramos esa lista con el query 
     //4 - emito un valor para filtered$ y query$
+<<<<<<< src/app/features/shopping-list/shopping-list-sandbox.service.js
+=======
     // console.log("ESTAMOS LLAMANDO A CHANGELIST");
+>>>>>>> src/app/features/shopping-list/shopping-list-sandbox.service.js
     return this.getListProduct$().pipe(
-      tap(info => console.log("DENTRO DEL CHANGE LIST",info)),
       map(original=> 
           this.filterList(query,original)
       ),
@@ -39,8 +41,11 @@ class ShoppingListSandboxService {
   }
 
   getListProduct$() {
+<<<<<<< src/app/features/shopping-list/shopping-list-sandbox.service.js
+=======
     //AQUI IRA UN CONDICIONAL DE FILTRADO
     // console.log("ESTAMOS LLAMANDO A GETLISTPRODUCT");
+>>>>>>> src/app/features/shopping-list/shopping-list-sandbox.service.js
     if(this.kanaList){
       console.log("kanalist", this.kanaList);
       return of(this.kanaList)
@@ -60,8 +65,8 @@ class ShoppingListSandboxService {
     return service.productCountChange$(shoppingId,productId, quantity, priceProduct,productImage,productName);
   }
 
-  lastSearch$(){
-    return service.LastSearch$;
+  filterSearch$(){
+    return service.filteredSearch$;
   }
 
   createShoppingList$(){
@@ -71,10 +76,6 @@ class ShoppingListSandboxService {
   //DE PRUEBA
   FilterProduct$(){
     return service.FilterProduct$();
-  }
-
-  sandBoxaddProductToFavorites$(shoppingId,productId, priceProduct, productName){
-    return service.addProductToFavorites$(shoppingId,productId, priceProduct, productName);
   }
 
   //TRAE LA LISTA DE MERCADO EN CURSO

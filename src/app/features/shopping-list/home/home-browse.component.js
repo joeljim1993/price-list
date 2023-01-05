@@ -2,6 +2,7 @@ import { html, css, LitElement } from "lit";
 import { switchMap, tap } from "rxjs";
 
 import { ShoppingListService } from "../shopping-list-sandbox.service";
+import { favoriteService } from '../../../core/services/favorite.service';
 
 export class HomeBrowse extends LitElement {
   static properties = {
@@ -11,16 +12,16 @@ export class HomeBrowse extends LitElement {
   constructor() {
     super();
     this.sandboxShoppingList = ShoppingListService;
+    this.favoriteSrv = favoriteService;
     this.listproduct = [];
     this.listShopping = null;
     this.lastSearch = [];
   }
    //un solo componente que se llama lista de la linea 25 a la 35
   render() {
-    const validate = this.lastSearch.length != 0;
     return html`
       <slot></slot>
-      <navbar-component></navbar-component> 
+      <navbar-component></navbar-component>
       <searchbox-component></searchbox-component>
             ${this.listproduct.map((element) => {
               return html`
@@ -28,7 +29,7 @@ export class HomeBrowse extends LitElement {
                   .counter=${this.getCounter(element)}
                   @counterChangeFromButton=${this.productCounterChange}
                   .listProductDetail="${element}"
-                  @addProductToFavorites="${this.addProductToFavorites}"
+                  @productFavorite="${this.addProductToFavorites}"
                 >
                 </card-component>
               `;
@@ -41,7 +42,6 @@ export class HomeBrowse extends LitElement {
     const createShopping$ = this.sandboxShoppingList.createShoppingList$().pipe(
       tap((shopping) => (this.listShopping = shopping)),
       tap(() => this.requestUpdate()),
-      tap((info) => console.log("SHOPPING CREADO", info))
     );
     createShopping$.subscribe();
 
@@ -53,7 +53,7 @@ export class HomeBrowse extends LitElement {
     result$.subscribe();
     this.sandboxShoppingList.changeList$("").subscribe();
     //FILTRA EL O LOS PRODUCTOS TRAIDOS DESDE EL SERVICIO
-    const foundProduct$ = this.sandboxShoppingList.lastSearch$().pipe(
+    const foundProduct$ = this.sandboxShoppingList.filterSearch$().pipe(
       tap((info) => (this.lastSearch = info)),
       // tap((info) => console.log("ESTO ESTOY RECIBIENDO", info)),
       tap(() => this.requestUpdate())
@@ -61,6 +61,12 @@ export class HomeBrowse extends LitElement {
     foundProduct$.subscribe();
   }
 
+<<<<<<< src/app/features/shopping-list/home/home-browse.component.js
+//METODO PARA AGREGAR A FAVORITOS 
+  addProductToFavorites(event) {
+    const product = event.detail.product;
+    this.favoriteSrv.newFavorite$.next(product);
+=======
 
   addProductToFavorites(e){
     // console.log("EVENTO RECIBIDO EN EL ABUELO", e.detail);
@@ -74,6 +80,7 @@ export class HomeBrowse extends LitElement {
               tap(() => this.requestUpdate()),
           )
           addProduct$.subscribe();
+>>>>>>> src/app/features/shopping-list/home/home-browse.component.js
   }
 
 
