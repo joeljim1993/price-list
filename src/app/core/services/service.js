@@ -177,33 +177,6 @@ class CoreService {
     return of(result);
   }
 
-  //AGREGAR LOS PRODUCTOS FAVORITOS A LA LISTA DE MERCADO
-  addProductToFavorites$( productId, priceProduct, productName){
-    //TODO: FALTA METER VALIDACIONES
-    const productFavorites = this.getProductListFavorites();
-    const newProductFavorite ={
-      id: productId,
-      name: productName,
-      price: priceProduct
-    } 
-    if(newProductFavorite.id != productFavorites.id){
-      productFavorites.push(newProductFavorite)
-      localStorage.setItem("Favorites", JSON.stringify(productFavorites))
-    }
-    
-    console.log("ESTO AGREGO",productFavorites);
-    return of(productFavorites)
-  }
-
-  //OBTENER PRODUCTOS FAVORITOS DEL LOCAL STORAGE
-  getProductListFavorites(){
-      if(localStorage == null){
-        throw new Error("NO EXISTE NADA AGREGADO EN LOCALSTORAGE")
-      }
-      const productList = localStorage.getItem("Favorites");
-      const favorites = productList === null ? [] : JSON.parse(productList)
-      return favorites;
-  }
   //AGREGA PRODUCTOS A LA LISTA DE MERCADO CREADA
   productCountChange$(shoppingId, productId, quantity, priceProduct) {
     //TODO: FALTA PULIR ESTE METODO

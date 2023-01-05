@@ -2,6 +2,7 @@ import { html, css, LitElement } from "lit";
 import { switchMap, tap } from "rxjs";
 
 import { ShoppingListService } from "../shopping-list-sandbox.service";
+import { favoriteService } from '../../../core/services/favorite.service';
 
 export class HomeBrowse extends LitElement {
   static properties = {
@@ -11,6 +12,7 @@ export class HomeBrowse extends LitElement {
   constructor() {
     super();
     this.sandboxShoppingList = ShoppingListService;
+    this.favoriteSrv = favoriteService;
     this.listproduct = [];
     this.listShopping = null;
     this.lastSearch = [];
@@ -27,7 +29,7 @@ export class HomeBrowse extends LitElement {
                   .counter=${this.getCounter(element)}
                   @counterChangeFromButton=${this.productCounterChange}
                   .listProductDetail="${element}"
-                  @addProductToFavorites="${this.addProductToFavorites}"
+                  @productFavorite="${this.addProductToFavorites}"
                 >
                 </card-component>
               `;
@@ -40,7 +42,6 @@ export class HomeBrowse extends LitElement {
     const createShopping$ = this.sandboxShoppingList.createShoppingList$().pipe(
       tap((shopping) => (this.listShopping = shopping)),
       tap(() => this.requestUpdate()),
-      tap((info) => console.log("SHOPPING CREADO", info))
     );
     createShopping$.subscribe();
 
@@ -60,19 +61,10 @@ export class HomeBrowse extends LitElement {
     foundProduct$.subscribe();
   }
 
-
-  addProductToFavorites(e){
-    // console.log("EVENTO RECIBIDO EN EL ABUELO", e.detail);
-    const productId = e.detail.productId;
-    const priceProduct = e.detail.priceProduct;
-    const productName = e.detail.productName;
-    const shoppingId = this.listShopping.id;
-    const addProduct$ = this.sandboxShoppingList.sandBoxaddProductToFavorites$( productId, priceProduct, productName)
-          .pipe(
-              tap(info => console.log("RETORNA EL PRODUCTO FAVORITO",info)),
-              tap(() => this.requestUpdate()),
-          )
-          addProduct$.subscribe();
+//METODO PARA AGREGAR A FAVORITOS 
+  addProductToFavorites(event) {
+    const product = event.detail.product;
+    this.favoriteSrv.newFavorite$.next(product);
   }
 
 

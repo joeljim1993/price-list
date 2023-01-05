@@ -52,15 +52,10 @@ export class ProductCard extends LitElement {
   }
 
   addProductToFavorites(e) {
-    console.log("ESTO LLEGA AL PADRE", e);
-    const eventoB = e.detail;
-    const productId = this.listProductDetail.id;
-    const priceProduct = this.listProductDetail.price;
-    const productName = this.listProductDetail.name;
     const options = {
-      detail: { eventoB, productId, priceProduct, productName },
+      detail: {  product: this.listProductDetail },
     };
-    this.dispatchEvent(new CustomEvent("addProductToFavorites", options));
+    this.dispatchEvent(new CustomEvent("productFavorite", options));
   }
 
   increment(e) {

@@ -15,9 +15,7 @@ class ShoppingListSandboxService {
     //2 - Si no la tengo pedirla
     //3 - filtramos esa lista con el query 
     //4 - emito un valor para filtered$ y query$
-    console.log("ESTAMOS LLAMANDO A CHANGELIST");
     return this.getListProduct$().pipe(
-      tap(info => console.log("DENTRO DEL CHANGE LIST",info)),
       map(original=> 
           this.filterList(query,original)
       ),
@@ -35,8 +33,6 @@ class ShoppingListSandboxService {
   }
 
   getListProduct$() {
-    //AQUI IRA UN CONDICIONAL DE FILTRADO
-    console.log("ESTAMOS LLAMANDO A GETLISTPRODUCT");
     if(this.kanaList){
       return of(this.kanaList)
     }
@@ -66,10 +62,6 @@ class ShoppingListSandboxService {
   //DE PRUEBA
   FilterProduct$(){
     return service.FilterProduct$();
-  }
-
-  sandBoxaddProductToFavorites$(productId, priceProduct, productName){
-    return service.addProductToFavorites$(productId, priceProduct, productName);
   }
 
   //TRAE LA LISTA DE MERCADO EN CURSO
