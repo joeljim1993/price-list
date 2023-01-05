@@ -19,6 +19,7 @@ export class AppComponent extends LitElement {
 
   render() {
     return html`
+    
      <div id="outlet"></div>
     `;
   }
