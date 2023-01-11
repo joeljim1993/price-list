@@ -22,7 +22,6 @@ export class FavoritesBrowse extends LitElement {
 
     render() {
         return html`
-            <h1>AQUI MOSTRAREMOS LOS PRODUCTOS FAVORITOS</h1>
             ${this.favoriteList.map((element) => {
               return html`
                 <card-component class='card'

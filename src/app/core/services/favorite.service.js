@@ -66,7 +66,6 @@ class FavoriteService {
     }
 
     constructor() {
-
         // Captura la accion del usuario en otros componentes si quiere almacenar o eliminar de favoritos un producto
         this.newFavorite$
             .pipe(
@@ -74,7 +73,6 @@ class FavoriteService {
                 tap(product => console.log('Producto seleccionado', product)),
             )
             .subscribe();
-
         this.initFavorites();
     }
 

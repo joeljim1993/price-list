@@ -38,13 +38,13 @@ export class IconShoppingCart extends LitElement {
   }
   render() {
     return html`
-      <div class="shopping-cart-counter">
-        <button id="btn-shopping-cart" @click=${this.goToShoppingCart}>
-          <img id="img-car"  src="#" >
-        </button>
+     
+        <a id="btn-shopping-cart" @click=${this.goToShoppingCart}>
+          <img id="img-car"  src="/src/assets/images/el_shopping-cart-sign.svg" >
+        </a>
 
         <span>${this.counter}</span>
-      </div>
+      
     `;
   }
   goToShoppingCart() {

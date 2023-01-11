@@ -37,8 +37,8 @@ export class ProductCard extends LitElement {
       <div class="card">
         <div class="card-content">
           <product-card-favorites-button
-            @addProductToFavorites=${this.addProductToFavorites}
-          ></product-card-favorites-button>
+            @addProductToFavorites=${this.addProductToFavorites}>
+          </product-card-favorites-button>
           <img class="image" src="${this.listProductDetail.images}" />
           <p>${this.listProductDetail.name}</p>
           <p>Bs. ${this.listProductDetail.price}</p>
@@ -53,7 +53,7 @@ export class ProductCard extends LitElement {
 
   addProductToFavorites(e) {
     const options = {
-      detail: {  product: this.listProductDetail },
+      detail: { product: this.listProductDetail },
     };
     this.dispatchEvent(new CustomEvent("productFavorite", options));
   }
@@ -63,8 +63,8 @@ export class ProductCard extends LitElement {
     const counterChange = e.detail.counterChangeB;
     const productName = this.listProductDetail.name;
     const price = this.listProductDetail.price;
-    const productImage= this.listProductDetail.images;
-    console.log("en decrement,img:",productImage);
+    const productImage = this.listProductDetail.images;
+    console.log("en decrement,img:", productImage);
 
     const options = {
       detail: {
@@ -72,7 +72,7 @@ export class ProductCard extends LitElement {
         productId,
         price,
         productImage,
-        productName
+        productName,
       },
     };
     this.dispatchEvent(new CustomEvent("counterChangeFromButton", options));
@@ -82,9 +82,8 @@ export class ProductCard extends LitElement {
     const productId = this.listProductDetail.id;
     const counterChange = e.detail.counterChangeB;
     const price = this.listProductDetail.price;
-    const productImage= this.listProductDetail.images;
+    const productImage = this.listProductDetail.images;
     const productName = this.listProductDetail.name;
-
 
     const options = {
       detail: {
@@ -92,7 +91,7 @@ export class ProductCard extends LitElement {
         productId,
         price,
         productImage,
-        productName
+        productName,
       },
     };
     this.dispatchEvent(new CustomEvent("counterChangeFromButton", options));

@@ -74,6 +74,15 @@ class ShoppingListSandboxService {
     return service.getShoppingListAvailable$();
   }
 
+  //LIMPIA LOS PRODUCTOS AGREGADOS EN LA LISTA DE MERCADO
+  cleanShopping(){
+    return service.cleanShopping();
+  }
+
+  //TRAER LOS PRODUCTOS AGREGADOS PARA MOSTRARLOS EN SHOPPING CART
+  getProductsAddedToShoppingList$(){
+    return service.getProductsAddedToShoppingList$();
+  }
 
 }
 

@@ -19,7 +19,7 @@ export class AppComponent extends LitElement {
 
   render() {
     return html`
-    
+     <navbar-component></navbar-component>
      <div id="outlet"></div>
     `;
   }
