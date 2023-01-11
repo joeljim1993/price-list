@@ -11,5 +11,5 @@ import { ShoppingCartList } from './src/app/features/shopping-list/shopping-cart
 import { ProductCardButton } from "./src/app/shared/components/product-cart/product-card-button.component";
 import { ProductCardFavoritesButton } from "./src/app/shared/components/product-cart/product-card-favorites-button.component";
 import { FavoritesBrowse } from "./src/app/features/favorites/favorites-browse.component";
-
+import { ShoppingCartDetail } from "./src/app/features/shopping-list/shopping-cart/shopping-cart-detail.component"
 

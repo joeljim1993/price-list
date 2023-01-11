@@ -1,11 +1,11 @@
 import { LitElement, html, css } from "lit";
 import { switchMap, tap, map } from "rxjs";
 import { ShoppingListService } from "../shopping-list-sandbox.service";
-import { service } from "../../../core/services/service";
 import { Router } from "@vaadin/router";
+
 export class ShoppingCartList extends LitElement {
   static properties = {
-    addedProducts: { type: Array },
+    list: { type: Array },
   };
 
   // hacer una funcion que elimine el producto completo
@@ -53,71 +53,65 @@ export class ShoppingCartList extends LitElement {
       background: #1ce09a;
       border-radius: 15px;
     }
-    .btn-clean-list{
-        background: #EA794C;
-        border-radius: 5px;
+    .btn-clean-list {
+      background: #ea794c;
+      border-radius: 5px;
     }
     .btn-clean-list img {
-      width:20px;
-      height:20.5px;
+      width: 20px;
+      height: 20.5px;
     }
   `;
-  
+
   constructor() {
     super();
-    this.list = service.getProductsShoppingAvailables();
-    console.log(" this.list", this.list);
-    this.currentShopping = service.getShoppingAvailables();
-    console.log("shoopping actual",  this.currentShopping);
+    this.sandboxShoppingList = ShoppingListService;
+    this.list = [];
+    const result$ = this.sandboxShoppingList.getProductsAddedToShoppingList$()
+    .pipe(
+      tap((info) => console.log("ESTO ESTA LLEGANDO",info)),
+      tap((products) => (this.list = products)),
+      tap(() => this.requestUpdate())
+    )
+    result$.subscribe();
+    console.log("ESTA ES LA LISTA",this.list);
   }
 
   render() {
     return html`
-      <section>
-        <button @click=${this.goBack} class="btn-continue-search">
-          <img src="/src/assets/images/icons8-add-list-30.png" />
-          Continuar Buscando
-        </button>
-      </section>
-      <section>
-        <button class="btn-clean-list" @click=${this.cleanList}>
-        <img src="/src/assets/images/biggarbagebin_121980.png">    
-        Limpiar Lista</button>
-        <hr />
-
-        <div>
+   
+      <div>
           ${this.list.map((product) => {
             return html`
               <shopping-cart-detail .product=${product}></shopping-cart-detail>
             `;
           })}
-        </div>
+      </div>
 
-        <hr />
-      </section>
+      <!-- TOTAL DEL CARRITO -->
       <section>
         <div class="title-cars">
-          <h3>total carrito</h3>
+          <h3>Total Carrito</h3>
         </div>
         <div class="container-img-cars">
-          <img
-            class="img-cars"
-            src="/src/assets/images/compra_carrito_icon_209798.png"
-          />
+          <img class="img-cars" src="/src/assets/images/el_shopping-cart-sign.svg"/>
         </div>
-        <h3>Total : ${this.currentShopping.total} </h3>
-        <h3>disponible :</h3>
-
-        <button class="btn-save">Guardar</button>
-        <button class="btn-share">Compartir</button>
+            <h3>Total : $</h3>
+            <h3>Disponible :</h3>
+            <button class="btn-save">Guardar</button>
+            <button class="btn-share">Compartir</button>
       </section>
+      <!--  -->
     `;
   }
-  cleanList(){
-    service.cleanShopping();
+  firstUpdated() {
+   
+    
+  }
+
+  cleanList() {
+    this.sandboxShoppingList.cleanShopping.cleanShopping();
     this.requestUpdate;
-    this.list = service.getProductsShoppingAvailables();
-    this.requestUpdate();
   }
   goBack() {
     Router.go("/browse/");

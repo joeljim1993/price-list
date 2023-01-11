@@ -1,16 +1,10 @@
 import {
   of,
   BehaviorSubject,
-  timer,
   map,
   tap,
-  mergeMap,
   takeUntil,
   Subject,
-  throwError,
-  concatMap,
-  filter,
-  switchMap,
 } from "rxjs";
 import { fromFetch } from "rxjs/fetch";
 import { ShoppingList } from "../../shared/models/shopping-list.model";
@@ -143,12 +137,11 @@ class CoreService {
   ];
 
   // esta funcion debera traer la lista(shopping) actual, param : idList
-  getProductsShoppingAvailables(){
-    let shoppingAvailables = this.shoppingAvailables;
-    let shopping = shoppingAvailables.find(item => item.id=="01");
-    let products = shopping.products;
-   
-    return products
+  getProductsAddedToShoppingList$(){
+    let shoppingList = this.shoppingAvailables;
+    let shopping = shoppingList.find(item => item.id=="01");
+    let products = [... shopping.products];
+    return of(products)
 
   }
   // trae el shopping actual param: idshopping
