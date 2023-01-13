@@ -171,8 +171,8 @@ class CoreService {
   createShoppingList$() {
     // esto va a ser introducido por el usuario o se genera automaticamente. 
     let id= "01";
-    let name= "pepito";
-    let limit ="";
+    let name= "pepito"; 
+    let limit ="2000";
     const shopping = new ShoppingList(id,name,limit);
     console.log("shopping=>",shopping);
     this.shoppingAvailables = this.shoppingAvailables.concat([shopping]);

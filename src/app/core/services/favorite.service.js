@@ -10,10 +10,9 @@ class FavoriteService {
      */
     favoriteInteractive(product) {
         const favoriteList = this.getFavorites();
-        console.log(product)
         const verifyProduct = this.verifyProduct(product.id, favoriteList);
 
-        if(!verifyProduct) return this.addFavorite(product, favoriteList);
+        if(!verifyProduct)  return this.addFavorite(product, favoriteList);
         if(verifyProduct) return this.removeFavorite(verifyProduct, favoriteList);
     }
 
@@ -23,11 +22,8 @@ class FavoriteService {
      * @param list lista de favoritos
      */
     addFavorite(product, list) {
-        const listUpdated = list;
-        const { url, type, ...restProduct } = product;
-        listUpdated.push(restProduct);
-        const newFavorite = JSON.stringify(listUpdated);
-        localStorage.setItem('Favorites', newFavorite);
+        list.push(product);
+        localStorage.setItem('Favorites',JSON.stringify(list));
         //Añadir una funcion que muestre un mensaje del producto añadido
     }
 
@@ -70,7 +66,7 @@ class FavoriteService {
         this.newFavorite$
             .pipe(
                 tap(product => this.favoriteInteractive(product)),
-                tap(product => console.log('Producto seleccionado', product)),
+                tap(product => console.log('Producto seleccionado ->favorite', product)),
             )
             .subscribe();
         this.initFavorites();
