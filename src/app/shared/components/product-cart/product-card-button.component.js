@@ -9,10 +9,8 @@ export class ProductCardButton extends LitElement {
   static styles = css`
     .addButton {
       background-color: #f4a534;
-      width: 300px;
-      height: 40.73px;
-      top: 220px;
-      left: 35px;
+      width: 80%;
+      height: 41px;
       border-radius: 10px;
       border: none;
     }

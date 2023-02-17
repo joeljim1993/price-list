@@ -5,6 +5,21 @@ import { ShoppingListService } from "../shopping-list-sandbox.service";
 import { favoriteService } from "../../../core/services/favorite.service";
 
 export class HomeBrowse extends LitElement {
+
+  static styles = css`
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .container-cards {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  `
+
   static properties = {
     listproduct: { type: Array },
   };
@@ -20,19 +35,23 @@ export class HomeBrowse extends LitElement {
   //un solo componente que se llama lista de la linea 25 a la 35
   render() {
     return html`
-      <slot></slot>
-      <searchbox-component></searchbox-component>
-      ${this.listproduct.map((element) => {
-        return html`
-          <card-component
-            .counter=${this.getCounter(element)}
-            @counterChangeFromButton=${this.productCounterChange}
-            .listProductDetail="${element}"
-            @productFavorite="${this.addProductToFavorites}"
-          >
-          </card-component>
-        `;
-      })}
+      <div class="container">
+        <slot></slot>
+        <searchbox-component></searchbox-component> 
+      </div>
+      <div class="container-cards">
+        ${this.listproduct.map((element) => {
+          return html`
+            <card-component
+              .counter=${this.getCounter(element)}
+              @counterChangeFromButton=${this.productCounterChange}
+              .listProductDetail="${element}"
+              @productFavorite="${this.addProductToFavorites}"
+            >
+            </card-component>
+          `;
+        })}
+      </div>
       <shopping-list-info-component></shopping-list-info-component>
     `;
   }
