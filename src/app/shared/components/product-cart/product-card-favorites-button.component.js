@@ -5,7 +5,6 @@ export class ProductCardFavoritesButton extends LitElement {
 
   static styles = css`
     img {
-      position: absolute;
       width: 30px;
       height: 30px;
       left: 323px;

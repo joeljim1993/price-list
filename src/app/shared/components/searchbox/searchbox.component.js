@@ -44,9 +44,7 @@ export class SearchBoxComponent extends LitElement {
 
   render() {
     return html`
-      <div class="input">
-        <input placeholder="Busca tú producto" class="search-button" />
-      </div>
+      <input placeholder="Busca tú producto" class="search-button" />
     `;
   }
 
