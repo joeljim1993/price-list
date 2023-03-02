@@ -31,6 +31,16 @@ export class ProductCard extends LitElement {
       width: 70%;
     }
 
+    @media (min-width: 571px) {
+
+      .card-description p {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      
+    }
+
     @media (max-width: 570px) {
 
       .card {
