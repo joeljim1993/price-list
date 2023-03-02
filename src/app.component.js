@@ -1,15 +1,12 @@
 import { html, css, LitElement } from "lit";
-import {Router} from '@vaadin/router';
-import { routes } from '../app.routes'
+import { Router } from '@vaadin/router';
+import { routes } from '../app.routes';
 
 export class AppComponent extends LitElement {
 
   constructor() {
     super();
   }
-  static styles = css`
-   
-  `;
 
   firstUpdated() {
     const outlet = this.renderRoot.querySelector("#outlet");
@@ -19,9 +16,15 @@ export class AppComponent extends LitElement {
 
   render() {
     return html`
-     <navbar-component></navbar-component>
-     <div id="outlet"></div>
+      <div class="app-container">
+        <navbar-component></navbar-component>
+        <div id="outlet"></div>
+      </div>
     `;
+  }
+
+  createRenderRoot() {
+    return this;
   }
 }
 

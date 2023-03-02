@@ -1,28 +1,12 @@
 import { Router } from "@vaadin/router";
 import { html, css, LitElement } from "lit";
-import {
-  of,
-  BehaviorSubject,
-  timer,
-  map,
-  tap,
-  mergeMap,
-  takeUntil,
-  Subject,
-} from "rxjs";
+import { tap } from "rxjs";
+
 import { service } from "../../../core/services/service";
+import './icon-shopping-cart.style.css';
 
 export class IconShoppingCart extends LitElement {
   static properties = {};
-
-  static styles = css`
-  
-    #img-car {
-      width: auto;
-      height: auto;
-      margin-left: 0.3px;
-    }
-  `;
 
   constructor() {
     super();
@@ -36,19 +20,27 @@ export class IconShoppingCart extends LitElement {
     );
     result$.subscribe();
   }
+
   render() {
     return html`
-     
-        <a id="btn-shopping-cart" @click=${this.goToShoppingCart}>
-          <img id="img-car"  src="/src/assets/images/el_shopping-cart-sign.svg" >
-        </a>
+      <div class="shoppint-card-container">
+        <div class="counter-car-container">
+          <span class="car-counter">${this.counter}</span>
+        </div>  
 
-        <span>${this.counter}</span>
-      
+        <a id="btn-shopping-cart" @click=${this.goToShoppingCart}>
+          <img class="img-car"  src="/src/assets/images/el_shopping-cart-sign.svg" >
+        </a>   
+      </div> 
     `;
   }
+
   goToShoppingCart() {
     Router.go('/shoppinglist/')
+  }
+
+  createRenderRoot() {
+    return this;
   }
 }
 customElements.define("shoppingcart-component", IconShoppingCart);

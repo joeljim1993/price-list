@@ -37,7 +37,6 @@ export class HomeBrowse extends LitElement {
     return html`
       <div class="container">
         <slot></slot>
-        <searchbox-component></searchbox-component> 
       </div>
       <div class="container-cards">
         ${this.listproduct.map((element) => {

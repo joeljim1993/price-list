@@ -1,27 +1,10 @@
 import { Router } from "@vaadin/router";
 import { html, css, LitElement } from "lit";
-export class NavbarComponent extends LitElement {
-  static styles = css`
-    .container {
-      width: 100%;
-      height: 137px;
-      background: #5ccda7;
-    }
-.container .nav li{
-  list-style:none;
-  
-}
- ul {
-    display: inline-flex;
-    position: absolute;
-    top: 50px;
-    left: 30%;
-} 
- .container .nav .shopping-cart-icon{
-  margin-left:100px;
- }   
 
-  `;
+// Import de las hojas de estilo para este componente
+import './navbar.style.css';
+
+export class NavbarComponent extends LitElement {
 
   constructor() {
     super();
@@ -29,20 +12,22 @@ export class NavbarComponent extends LitElement {
 
   render() {
     return html`
-    
-    <div class="container">
-        <ul class="nav">
-          <li class="shopping-cart-icon"><shoppingcart-component></shoppingcart-component></li>
-         
-        </ul>
-      <button @click=${this.goToFavorites}>Favorites</button>
-       
+      <div class="container-navbar">
+        <div class="elements-navbar">
+          <i class="material-icons" id="menu">menu</i>
+          <searchbox-component class="searchbox"></searchbox-component>
+          <shoppingcart-component class="favorites"></shoppingcart-component>
+        </div>
       </div>
     `;
   }
 
   goToFavorites(){
     Router.go('/favorites/')
+  }
+
+  createRenderRoot() {
+    return this;
   }
 
 }

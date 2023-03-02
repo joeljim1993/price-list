@@ -1,41 +1,21 @@
 import { html, css, LitElement } from "lit";
-import { Router } from "@vaadin/router";
 import {
-  fromEventPattern,
   debounceTime,
-  distinctUntilChanged,
-  filter,
   map,
-  takeUntil,
-  tap,
-  of,
-  Subject,
   fromEvent,
-  take,
-  last,
-  catchError,
   switchMap,
 } from "rxjs";
-import { service } from "../../../core/services/service";
 
 import { ShoppingListService } from "../../../features/shopping-list/shopping-list-sandbox.service";
+import './searchbox.style.css';
 
 export class SearchBoxComponent extends LitElement {
   input$ = fromEvent(document, "keyup");
 
   get input() {
     // es el equivalente a usar document pero en buenas practicas me encapsula el codigo
-    return this.renderRoot?.querySelector(".search-button") ?? null;
+    return this.renderRoot?.querySelector(".search") ?? null;
   }
-
-  static styles = css`
-    .search-button {
-      width: 300px;
-      height: 25px;
-      border-radius: 5px;
-      background: #faf9f9;
-    }
-  `;
 
   constructor() {
     super();
@@ -44,7 +24,19 @@ export class SearchBoxComponent extends LitElement {
 
   render() {
     return html`
-      <input placeholder="Busca tú producto" class="search-button" />
+      <div class="boxContainer">
+        <table class="elementsContainer">
+          <tr>
+            <td>
+              <input type="text" placeholder="Busca tu producto" class="search" />
+            </td>
+            <td>
+              <i class="material-icons">search</i>
+            </td>
+          </tr>
+        </table>
+      </div>
+
     `;
   }
 
@@ -56,6 +48,10 @@ export class SearchBoxComponent extends LitElement {
       switchMap((query) => this.sandboxShoppingList.changeList$(query))
     );
     result$.subscribe();
+  }
+
+  createRenderRoot() {
+    return this;
   }
 }
 
