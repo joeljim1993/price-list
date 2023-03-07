@@ -13,6 +13,7 @@ export class ProductCardButton extends LitElement {
       height: 41px;
       border-radius: 10px;
       border: none;
+      cursor: pointer;
     }
 
   `;

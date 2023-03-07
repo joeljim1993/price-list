@@ -15,9 +15,7 @@ export class ShoppingListInfoComponent extends LitElement {
 
   static styles = css`
     .container {
-      top: 100px;
-      position: relative;
-      float: left;
+      margin-top: 15px;
       width: 100%;
       background: #f28a61;
       height: 89px;

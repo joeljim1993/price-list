@@ -30,7 +30,7 @@ export class SearchBoxComponent extends LitElement {
             <td>
               <input type="text" placeholder="Busca tu producto" class="search" />
             </td>
-            <td>
+            <td class="icon-container">
               <i class="material-icons">search</i>
             </td>
           </tr>

@@ -26,6 +26,12 @@
     outline: none;
 }
 
+.icon-container {
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
 .material-icons {
     font-size: 30px;
     color: #5ccda7;

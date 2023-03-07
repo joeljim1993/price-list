@@ -27,6 +27,17 @@ export class ProductCard extends LitElement {
       right: 10px;
     }
 
+    .title {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .description {
+      font-size: 
+      color: black;
+      font-weight: bold;
+    }
+
     .image {
       width: 70%;
     }
@@ -106,7 +117,7 @@ export class ProductCard extends LitElement {
           
           <div class="card-description">
             <p class="title">${this.listProductDetail.name}</p>
-            <p>Precio: Bs. ${this.listProductDetail.price}</p>
+            <p class="description">Bs. ${this.listProductDetail.price}</p>
             <product-card-favorites-button class="favorite"
               @addProductToFavorites=${this.addProductToFavorites}>
             </product-card-favorites-button>

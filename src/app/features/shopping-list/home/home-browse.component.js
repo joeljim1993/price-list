@@ -17,6 +17,7 @@ export class HomeBrowse extends LitElement {
       gap: 25px;
       flex-wrap: wrap;
       justify-content: center;
+      min-height: calc(100vh - 125px - 104px);
     }
   `
 
@@ -44,8 +45,8 @@ export class HomeBrowse extends LitElement {
             <card-component
               .counter=${this.getCounter(element)}
               @counterChangeFromButton=${this.productCounterChange}
-              .listProductDetail="${element}"
-              @productFavorite="${this.addProductToFavorites}"
+              .listProductDetail=${element}
+              @productFavorite=${this.addProductToFavorites}
             >
             </card-component>
           `;
@@ -129,5 +130,9 @@ export class HomeBrowse extends LitElement {
     }
     return 0;
   }
+
+  // createRenderRoot() {
+  //   return this;
+  // }
 }
 customElements.define("home-browse", HomeBrowse);
