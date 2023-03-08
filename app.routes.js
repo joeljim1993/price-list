@@ -1,6 +1,6 @@
 
-import { routes as routes_browse } from "./src/app/features/shopping-list/shopping-list.routes.js";
-import { routes as favorite_browse } from './src/app/features/favorites/favorites.routes.js';
+import { routes as routes_browse } from "./src/app/features/shopping-cart/shopping-cart.routes";
+import { routes as favorite_browse } from './src/app/features/favorites/favorites.routes';
 
 export const routes = [
     { path: '/', component: 'home-browse' },

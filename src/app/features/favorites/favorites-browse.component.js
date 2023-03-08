@@ -21,18 +21,15 @@ export class FavoritesBrowse extends LitElement {
     }
 
     render() {
-        return html`
-            ${this.favoriteList.map((element) => {
-              return html`
-                <card-component class='card'
-                  @counterChangeFromButton=${this.productCounterChange}
-                  .listProductDetail="${element}"
-                  @productFavorite="${this.refresh}"
-                >
-                </card-component>
-              `;
-            })}
-        `;
+      return html`
+        <div class="favorite-container">
+          ${this.favoriteList.map((element) => {
+            console.log(element)
+            return html`
+            `;
+          })}
+        </div>
+      `;
     }
 }
 customElements.define('favorites-browse', FavoritesBrowse);

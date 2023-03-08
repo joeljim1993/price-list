@@ -7,7 +7,7 @@ import {
   Subject,
 } from "rxjs";
 import { fromFetch } from "rxjs/fetch";
-import { ShoppingList } from "../../shared/models/shopping-list.model";
+import { ShoppingList } from "../../features/shopping-cart/models/shopping-list.model";
 
 class CoreService {
   //CONTIENE LAS LISTAS DE MERCADO GUARDADAS PREVIAMENTE
