@@ -6,7 +6,7 @@ import {
   switchMap,
 } from "rxjs";
 
-import { ShoppingListService } from "./../../../../services/shopping-list.service";
+import { ShoppingListService } from "/src/app/core/services/shopping-list.service";
 import './searchbox.style.css';
 
 export class SearchBoxComponent extends LitElement {

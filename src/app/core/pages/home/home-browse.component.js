@@ -1,25 +1,13 @@
 import { html, css, LitElement } from "lit";
 import { switchMap, tap } from "rxjs";
 
-import { ShoppingListService } from "./../../services/shopping-list.service";
+import { ShoppingListService } from "../../services/shopping-list.service";
 import { favoriteService } from "./../../services/favorite.service";
 
-export class HomeBrowse extends LitElement {
+import { shoppingCartService } from '/src/app/features/shopping-cart/services/shopping-cart.service';
+import "./home-browse.style.css";
 
-  static styles = css`
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .container-cards {
-      display: flex;
-      gap: 25px;
-      flex-wrap: wrap;
-      justify-content: center;
-      min-height: calc(100vh - 125px - 104px);
-    }
-  `
+export class HomeBrowse extends LitElement {
 
   static properties = {
     listproduct: { type: Array },
@@ -29,11 +17,12 @@ export class HomeBrowse extends LitElement {
     super();
     this.sandboxShoppingList = ShoppingListService;
     this.favoriteSrv = favoriteService;
+    this.shoppingCartSrv = shoppingCartService;
     this.listproduct = [];
     this.listShopping = null;
     this.lastSearch = [];
   }
-  //un solo componente que se llama lista de la linea 25 a la 35
+
   render() {
     return html`
       <div class="container">
@@ -42,13 +31,13 @@ export class HomeBrowse extends LitElement {
       <div class="container-cards">
         ${this.listproduct.map((element) => {
           return html`
-            <card-component
+            <product-card
               .counter=${this.getCounter(element)}
-              @counterChangeFromButton=${this.productCounterChange}
-              .listProductDetail=${element}
+              @quantityChange=${this.productToShoppingCart}
+              .product=${element}
               @productFavorite=${this.addProductToFavorites}
             >
-            </card-component>
+            </product-card>
           `;
         })}
       </div>
@@ -95,30 +84,10 @@ export class HomeBrowse extends LitElement {
   //   );
   // shopping$.subscribe();
 
-  productCounterChange(e) {
-    const quantity = e.detail.counterChange;
-    const priceProduct = e.detail.price;
-    const productId = e.detail.productId;
-    const shoppingId = this.listShopping.id;
-    const productName = e.detail.productName;
-    const productImage = e.detail.productImage;
-    console.log("img", productImage);
-
-    const result$ = this.sandboxShoppingList
-      .productCountChange$(
-        shoppingId,
-        productId,
-        quantity,
-        priceProduct,
-        productImage,
-        productName
-      )
-      .pipe(
-        tap((shopping) => (this.listShopping = shopping)),
-        tap(() => this.requestUpdate()),
-        tap((shopping) => console.log("LLAMAMOS AL NUEVO SHOPPING", shopping))
-      );
-    result$.subscribe();
+  productToShoppingCart(event) {
+    const product = event.detail.product;
+    this.shoppingCartSrv.process(product);
+    
   }
 
   getCounter(element) {
@@ -131,8 +100,8 @@ export class HomeBrowse extends LitElement {
     return 0;
   }
 
-  // createRenderRoot() {
-  //   return this;
-  // }
+  createRenderRoot() {
+    return this;
+  }
 }
 customElements.define("home-browse", HomeBrowse);

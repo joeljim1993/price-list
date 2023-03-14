@@ -12,20 +12,13 @@ class ShoppingListSandboxService {
   kanaList = null;
 
   changeList$(query ){
-    //1 - verificar que tenga la lista kana 
-    //2 - Si no la tengo pedirla
-    //3 - filtramos esa lista con el query 
-    //4 - emito un valor para filtered$ y query$
     return this.getListProduct$().pipe(
       map(original=> 
-          this.filterList(query,original)
+          this.filterList(query, original)
       ),
       tap(filtered => {
         this._query$.next(query);
-        console.log("query desde getListProduct=>",query);
         this._filtered$.next(filtered);
-        // console.log("filtered desde getListProduct=>",filtered);
-
       })
     )
 
@@ -52,8 +45,8 @@ class ShoppingListSandboxService {
       return service.getShoppingById$(id);
   }
 
-  productCountChange$(shoppingId,productId, quantity, priceProduct,productImage,productName){
-    return service.productCountChange$(shoppingId,productId, quantity, priceProduct,productImage,productName);
+  productCountChange$(shoppingId, productId, quantity, priceProduct, productImage, productName){
+    return service.productCountChange$(shoppingId, productId, quantity, priceProduct, productImage, productName);
   }
 
   filterSearch$(){

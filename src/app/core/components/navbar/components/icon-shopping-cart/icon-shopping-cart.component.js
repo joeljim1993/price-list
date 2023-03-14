@@ -2,7 +2,7 @@ import { Router } from "@vaadin/router";
 import { html, css, LitElement } from "lit";
 import { tap } from "rxjs";
 
-import { service } from "./../../../../services/service";
+import { shoppingCartService } from '/src/app/features/shopping-cart/services/shopping-cart.service';
 import './icon-shopping-cart.style.css';
 
 export class IconShoppingCart extends LitElement {
@@ -11,13 +11,15 @@ export class IconShoppingCart extends LitElement {
   constructor() {
     super();
     this.counter = 0;
+    this.shoppingCartSrv = shoppingCartService;
   }
 
   firstUpdated() {
-    const result$ = service.shoppingCartLength$.pipe(
-      tap((info) => (this.counter = info)),
-      tap(() => this.requestUpdate())
-    );
+    const result$ = this.shoppingCartSrv.counter
+      .pipe(
+        tap(counter => this.counter = counter),
+        tap(() => this.requestUpdate()),
+      );
     result$.subscribe();
   }
 
