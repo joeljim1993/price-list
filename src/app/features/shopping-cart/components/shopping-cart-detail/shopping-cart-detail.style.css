@@ -1,0 +1,124 @@
+.shopping-cart-detail-container {
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    background: #F7F5F5;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.shopping-cart-detail-container img {
+    width: 80px;
+    margin-right: 35px;
+}
+
+.shopping-cart-description {
+    display: flex;
+    grid-area: 1 / 1 / 2 / 8;
+}
+
+.shopping-cart-description h1 {
+    font-size: 20px;
+}
+
+.shopping-cart-description h2 {
+    font-size: 15px;
+    font-weight: 400;
+}   
+
+.shopping-cart-description h3 {
+    font-size: 12px;
+    font-weight: 400;
+    color: gray;
+}
+
+.shopping-cart-description .ammounts {
+    display: flex;
+    flex-direction: column;
+}
+
+.shopping-cart-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    grid-area: 1 / 8 / 2 / 12;
+}
+
+.shopping-cart-quantity h1[target="quantity"] {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #EFE4E4;
+    width: 80px;
+    margin: 0 20px 0 20px;
+}
+
+.shopping-cart-quantity h1[target="decrement"],
+.shopping-cart-quantity h1[target="increment"] {
+    text-align: center;
+    background-color: #f4a534;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: #F7F5F5;
+    cursor: pointer;
+}
+
+.shopping-cart-icon {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: black;
+    grid-area: 1 / 12 / 2 / 13;
+}
+
+@media (max-width: 800px) {
+
+    .shopping-cart-detail-container {
+        position: relative;
+        padding: 10px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(1, 1fr);
+    }
+
+    .shopping-cart-detail-container img {
+        margin-right: 15px;
+    }
+
+    .shopping-cart-description {
+        grid-area: 1 / 1 / 2 / 3;
+    }
+
+    .shopping-cart-quantity {
+        grid-area: 2 / 1 / 3 / 3;
+    }
+
+    .shopping-cart-icon {
+        position: absolute;
+        bottom: 0;
+        right: 15px;
+    }
+
+}
+
+@media (max-width: 1000px) {
+
+    .shopping-cart-quantity h1[target="quantity"] {
+        margin: 2px;
+    }
+
+    .shopping-cart-description .ammounts {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 20px;
+    }
+}
