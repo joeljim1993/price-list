@@ -31,7 +31,9 @@ export class ShoppingCartDetail extends LitElement {
                     <h1 target="increment" @click=${this.increment}>+</h1>
                 </div>
 
-                <i class="material-icons shopping-cart-icon" @click=${this.removeProduct}>delete</i>
+                <div class="icon-container">
+                    <i class="material-icons shopping-cart-icon" @click=${this.removeProduct}>delete</i>
+                </div>
 
             </div>
         `;

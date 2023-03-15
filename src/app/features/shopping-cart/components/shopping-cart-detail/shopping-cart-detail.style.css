@@ -71,12 +71,16 @@
     cursor: pointer;
 }
 
-.shopping-cart-icon {
+.shopping-cart-detail-container .icon-container {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     color: black;
     grid-area: 1 / 12 / 2 / 13;
+}
+
+.shopping-cart-icon {
+    color: black;
 }
 
 @media (max-width: 800px) {
@@ -102,7 +106,7 @@
 
     .shopping-cart-icon {
         position: absolute;
-        bottom: 0;
+        bottom: 55px;
         right: 15px;
     }
 
