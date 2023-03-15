@@ -49,6 +49,7 @@ class ShoppingCartService {
         this.counter.next(this.products.length);
         this.list.next(this.products);
         this.calculateTotal();
+        this.localStorageSrv.save(this.products);
     }
 
     clean() {
@@ -56,6 +57,7 @@ class ShoppingCartService {
         this.ammount.next(0);
         this.counter.next(0);
         this.list.next(this.products);
+        this.localStorageSrv.save(this.products);
     }
 
     verifyDoExist(product) {
