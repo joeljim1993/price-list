@@ -1,0 +1,39 @@
+.card-product-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.addButton {
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.addButton,
+.button-container {
+    background-color: #f4a534;
+    width: 170px;
+    height: 41px;
+    border-radius: 10px;
+    border: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-container p,
+.button-container button {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.button-container button {
+    width: 50px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}

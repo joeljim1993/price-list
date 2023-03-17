@@ -1,4 +1,6 @@
 import { html, css, LitElement } from "lit";
+import { Router } from "@vaadin/router";
+// import "../../../features/favorites/favorites.routes"
 import { service } from "../../../core/services/service";
 import {
   of,
@@ -23,6 +25,9 @@ export class ShoppingListInfoComponent extends LitElement {
     label {
       color: white;
     }
+    /* .btn-favorite span {
+      background: url("") no-repeat;
+    } */
   `;
 
   constructor() {
@@ -31,19 +36,19 @@ export class ShoppingListInfoComponent extends LitElement {
     this.total = 0;
   }
 
-  firstUpdated() {
-    const result$ = service.shoppingCartLength$.pipe(
-      tap((info) => (this.list = info)),
-      tap(() => this.requestUpdate())
-    );
-    result$.subscribe();
+  // firstUpdated() {
+  //   const result$ = service.shoppingCartLength$.pipe(
+  //     tap((info) => (this.list = info)),
+  //     tap(() => this.requestUpdate())
+  //   );
+  //   result$.subscribe();
 
-    const total$ = service.shoppingListTotal$.pipe(
-      tap((info) => (this.total = info)),
-      tap(() => this.requestUpdate())
-    );
-    total$.subscribe();
-  }
+  //   const total$ = service.shoppingListTotal$.pipe(
+  //     tap((info) => (this.total = info)),
+  //     tap(() => this.requestUpdate())
+  //   );
+  //   total$.subscribe();
+  // }
 
   render() {
     const validate = this.list == 0;
@@ -51,6 +56,8 @@ export class ShoppingListInfoComponent extends LitElement {
       ${validate
         ? html`<div class="container">
             <label>MERCADO VACIO<img id="first" src="/src/assets/images/question.png" /></label>
+
+            <button class="btn-favorite" @click=${this.goFavorite} >Favoritos <span></span></button>
           </div>`
         : html`<div class="container">
             <label>Mi mercado<img src="/src/assets/images/edit-icon.png" /></label>
@@ -59,7 +66,13 @@ export class ShoppingListInfoComponent extends LitElement {
           </div>`}
     `;
   }
+  goFavorite(){
+    Router.go('/favorites/')
+  }
+
 }
+
+
 
 customElements.define(
   "shopping-list-info-component",
