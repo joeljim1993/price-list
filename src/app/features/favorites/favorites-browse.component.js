@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit';
+import { Router } from "@vaadin/router";
 
 import { favoriteService } from '../../core/services/favorite.service';
+
  
 export class FavoritesBrowse extends LitElement {
 
@@ -8,6 +10,7 @@ export class FavoritesBrowse extends LitElement {
          };
 
     constructor(){
+      
         super();
         this.favoriteSrv = favoriteService;
         this.favoriteList = this.favoriteSrv.getFavorites();
@@ -23,9 +26,11 @@ export class FavoritesBrowse extends LitElement {
     render() {
       return html`
         <div class="favorite-container">
+          <h1>mostrando lementos guardados en favoritos</h1>
           ${this.favoriteList.map((element) => {
             console.log(element)
             return html`
+            <h3>${element.name}</h3>
             `;
           })}
         </div>
