@@ -31,9 +31,13 @@ export class ShoppingCartList extends LitElement {
 
   render() {
     return html`
-      <div class='shopping-card-container'>
+      <div class="shopping-cart-header">
+        <i class="material-icons" @click=${this.goBack}>arrow_back</i>
+        <h1>Mi Carrito</h1>
+      </div>
+      <div class='shopping-cart-container'>
         
-        <div class='shopping-card-detail'>
+        <div class='shopping-cart-detail'>
           ${this.list.length > 0
             ? this.list.map(product => {
               return html`
@@ -48,7 +52,7 @@ export class ShoppingCartList extends LitElement {
           }
         </div>
 
-        <div class='shopping-card-summary'>
+        <div class='shopping-cart-summary'>
           <shopping-cart-summary></shopping-cart-summary>
         </div>
 
