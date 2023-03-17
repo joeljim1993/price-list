@@ -19,6 +19,7 @@ class ShoppingCartService {
         if(product.quantity === 0) this.removeProduct(product);
         this.counter.next(this.products.length);
         this.calculateTotal();
+        this.list.next(this.products);
         this.localStorageSrv.save(this.products);
     }
 
@@ -47,8 +48,8 @@ class ShoppingCartService {
     cleanProduct(product) {
         this.removeProduct(product);
         this.counter.next(this.products.length);
-        this.list.next(this.products);
         this.calculateTotal();
+        this.list.next(this.products);
         this.localStorageSrv.save(this.products);
     }
 
