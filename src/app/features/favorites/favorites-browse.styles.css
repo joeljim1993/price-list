@@ -1,7 +1,7 @@
 .favorite-container {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 0 20px;
 }
 
 .favorite-container .options {
@@ -10,14 +10,16 @@
     margin-bottom: 20px;
 }
 
-.favorite-container .options h1 {
+.favorite-container .options span {
     text-align: center;
     margin-left: 20px;
+    font-size: 22px;
+    font-weight: 500;
     display: flex;
     align-items: center;
 }
 
-.favorite-container .options h1::after {
+.favorite-container .options span::after {
     content: '❤️';
     color: red;
     font-size: 27px;
@@ -28,10 +30,12 @@
     border: none;
     background-color: #f4a534;
     color: #FFF;
+    font-size: 22px;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
+    user-select: none;
 
     display: grid;
     place-content: center;
@@ -41,5 +45,5 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    justify-content: center;
+    justify-content: space-around;
 }

@@ -33,7 +33,7 @@ export class ShoppingCartList extends LitElement {
     return html`
       <div class="shopping-cart-header">
         <i class="material-icons" @click=${this.goBack}>arrow_back</i>
-        <h1>Mi Carrito</h1>
+        <span>Mi Carrito</span>
       </div>
       <div class='shopping-cart-container'>
         
@@ -50,22 +50,25 @@ export class ShoppingCartList extends LitElement {
               })
             : html`<h1 class="shopping-cart-empty">No hay productos en el carrito aún.</h1>`
           }
+          ${this.list.length > 0
+            ? html`<a @click='${this.cleanList}'>Limpiar Lista</a>`
+            : html``
+          }
         </div>
 
         <div class='shopping-cart-summary'>
           <shopping-cart-summary></shopping-cart-summary>
+          ${this.list.length > 0
+            ? html`
+              <div class='shopping-cart-options'>
+                <a>Compartir</a>
+              </div>
+            `
+            : html``
+          }
         </div>
 
       </div>
-      ${this.list.length > 0
-        ? html`
-          <div class='shopping-cart-options'>
-            <a target="clean" @click='${this.cleanList}'>Limpiar</a>
-            <a target="share">Compartir</a>
-          </div>
-        `
-        : html``
-      }
     `;
   }
 

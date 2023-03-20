@@ -26,13 +26,15 @@ export class IconShoppingCart extends LitElement {
   render() {
     return html`
       <div class="shoppint-card-container">
-        <div class="counter-car-container">
-          <span class="car-counter">${this.counter}</span>
+        <div class="counter-card-container">
+          <span class="card-counter">${this.counter}</span>
         </div>  
 
-        <a id="btn-shopping-cart" @click=${this.goToShoppingCart}>
-          <img class="img-car"  src="/src/assets/images/el_shopping-cart-sign.svg" >
-        </a>   
+        <img
+          class="img-card" 
+          src="/src/assets/images/el_shopping-cart-sign.svg" 
+          @click=${this.goToShoppingCart}
+        >
       </div> 
     `;
   }

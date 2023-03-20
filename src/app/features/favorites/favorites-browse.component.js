@@ -29,7 +29,7 @@ export class FavoritesBrowse extends LitElement {
         
         <div class="options">
           <i class="material-icons" @click=${this.goBack}>arrow_back</i>
-          <h1>Mis favoritos</h1>
+          <span>Mis Favoritos</span>
         </div>
 
         <div class="products">
