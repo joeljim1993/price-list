@@ -9,6 +9,10 @@ import { NavbarComponent } from "./src/app/core/components/navbar/navbar.compone
 import { IconShoppingCart } from "./src/app/core/components/navbar/components/icon-shopping-cart/icon-shopping-cart.component";
 import { SearchBoxComponent } from "./src/app/core/components/navbar/components/searchbox/searchbox.component";
 
+// Mobile Menu
+import { MobileMenu } from "./src/app/core/components/mobile-menu/mobile-menu.component";
+import { MobileMenuShopping } from "./src/app/core/components/mobile-menu/components/mobile-menu-shopping.component";
+
 // Home
 import { HomeBrowse } from "./src/app/core/pages/home/home-browse.component";
 import { ProductCard } from "./src/app/shared/components/product-card/product-card.component";

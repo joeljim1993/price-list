@@ -1,0 +1,51 @@
+.app-container #outlet {
+    width: 100vw;
+    height: calc(100vh - 97px);
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.app-container #outlet::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.app-container #outlet::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.app-container #outlet::-webkit-scrollbar-button:increment,
+.app-container #outlet::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.app-container #outlet::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.app-container #outlet::-webkit-scrollbar-thumb {
+    background-color: #f4a534;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.app-container #outlet::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
+
+.app-container mobile-menu {
+    display: none;
+}
+
+@media (max-width: 800px) {
+
+    .app-container #outlet {
+        height: calc(100vh - 75px - 50px);
+    }
+
+    .app-container mobile-menu {
+        display: block;
+        position: fixed;
+        bottom: 0;
+    }
+    
+}

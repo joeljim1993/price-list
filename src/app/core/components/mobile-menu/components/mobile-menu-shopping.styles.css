@@ -1,0 +1,26 @@
+.shopping-icon-container {
+    display: grid;
+    place-content: center;
+    position: relative;
+}
+
+.shopping-icon-container i {
+    font-size: 30px;
+    color: #FFF;
+    user-select: none;
+    cursor: pointer;
+}
+
+.shopping-icon-container span {
+    position: absolute;
+    top: 4px;
+    right: -24px;
+    width: 25px;
+    height: 25px;
+    background: red;
+    border-radius: 50%;
+    color: #FFF;
+
+    display: grid;
+    place-items: center;
+}

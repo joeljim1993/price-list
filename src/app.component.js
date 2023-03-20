@@ -2,6 +2,8 @@ import { html, css, LitElement } from "lit";
 import { Router } from '@vaadin/router';
 import { routes } from '../app.routes';
 
+import "./app.style.css";
+
 export class AppComponent extends LitElement {
 
   constructor() {
@@ -19,6 +21,7 @@ export class AppComponent extends LitElement {
       <div class="app-container">
         <navbar-component></navbar-component>
         <div id="outlet"></div>
+        <mobile-menu></mobile-menu>
       </div>
     `;
   }
