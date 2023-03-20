@@ -29,6 +29,7 @@ import { PageNotFound } from "./src/app/features/page-not-found/page-not-found.c
 import { ShoppingCartList } from "./src/app/features/shopping-cart/shopping-cart-list.component";
 import { ShoppingCartDetail } from "./src/app/features/shopping-cart/components/shopping-cart-detail/shopping-cart-detail.component";
 import { ShoppingCartSummary } from "./src/app/features/shopping-cart/components/shopping-cart-summary/shopping-cart-summary.component";
+import { ShareComponent } from "./src/app/features/shopping-cart/pages/share.component";
 
 // Favorites
 import { FavoritesBrowse } from "./src/app/features/favorites/favorites-browse.component";
