@@ -40,7 +40,7 @@ export class IconShoppingCart extends LitElement {
   }
 
   goToShoppingCart() {
-    Router.go('/shoppinglist/')
+    Router.go('/shopping-cart/list/');
   }
 
   createRenderRoot() {

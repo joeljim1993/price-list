@@ -46,7 +46,7 @@ export class MobileMenu extends LitElement {
     }
 
     goToShoppingCart(){
-        Router.go('/shoppinglist/');
+        Router.go('/shopping-cart/list/');
     }
 
     goToList(){
