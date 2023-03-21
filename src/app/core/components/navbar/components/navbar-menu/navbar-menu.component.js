@@ -9,6 +9,7 @@ export class NavBarMenuComponent extends LitElement {
     super();
     this.menuList = [
         { title: 'Inicio', route: 'browse' },
+        { title: 'Categorias', route: 'categories' },
         { title: 'Favoritos', route: 'favorites' },
         { title: 'Carrito', route: 'shopping-cart/list' },
         { title: 'Mis Listas', route: 'noroute' },
