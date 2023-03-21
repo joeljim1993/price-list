@@ -15,14 +15,15 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    max-width: 1080px;
 }
 
 .elements-navbar .searchbox {
     flex: 1 1 auto;
 }
 
-.elements-navbar .shoppingcart {
-    margin-left: 15px;
+.elements-navbar .menu {
+    margin: 0 30px;
 }
 
 @media (max-width: 570px) {
@@ -44,7 +45,8 @@
         width: 100%;
     }
 
-    .container-navbar .shoppingcart {
+    .container-navbar .shoppingcart,
+    .container-navbar .menu {
         display: none;
     }
     

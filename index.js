@@ -8,6 +8,7 @@ import { localStorageShoppingCartService } from "./src/app/features/shopping-car
 import { NavbarComponent } from "./src/app/core/components/navbar/navbar.component";
 import { IconShoppingCart } from "./src/app/core/components/navbar/components/icon-shopping-cart/icon-shopping-cart.component";
 import { SearchBoxComponent } from "./src/app/core/components/navbar/components/searchbox/searchbox.component";
+import { NavBarMenuComponent } from "./src/app/core/components/navbar/components/navbar-menu/navbar-menu.component";
 
 // Mobile Menu
 import { MobileMenu } from "./src/app/core/components/mobile-menu/mobile-menu.component";
