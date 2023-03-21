@@ -30,6 +30,8 @@ import { ShoppingCartList } from "./src/app/features/shopping-cart/pages/list/sh
 import { ShoppingCartDetail } from "./src/app/features/shopping-cart/pages/list/components/shopping-cart-detail/shopping-cart-detail.component";
 import { ShoppingCartSummary } from "./src/app/features/shopping-cart/pages/list/components/shopping-cart-summary/shopping-cart-summary.component";
 import { ShareComponent } from "./src/app/features/shopping-cart/pages/share/share.component";
+import { ShareDetailComponent } from "./src/app/features/shopping-cart/pages/share/component/share-detail/share-detail.component";
+import { ShareSummaryComponent } from "./src/app/features/shopping-cart/pages/share/component/share-summary/share-summary.component";
 
 // Favorites
 import { FavoritesBrowse } from "./src/app/features/favorites/favorites-browse.component";
