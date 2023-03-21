@@ -1,6 +1,7 @@
 .list-product .product {
     list-style: none;
     display: flex;
+    align-items: center;
 }
 
 .list-product .product .checkbox {

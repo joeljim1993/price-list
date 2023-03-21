@@ -20,9 +20,9 @@ export class ShareDetailComponent extends LitElement {
                     <i class="material-icons check-icon">done</i>
                 </span>
                 <span class="product-text">
-                    ${this.product.name}
-                    -- Cant: ${this.product.quantity}
-                    &#215 Precio: ${this.product.price}
+                    ${this.product.quantity}
+                    &#215 ${this.product.name}
+                    Precio: ${this.product.price.toFixed(2)}
                     = ${(this.product.price * this.product.quantity).toFixed(2)} Bs.
                 </span>
             </li>

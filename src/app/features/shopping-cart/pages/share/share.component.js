@@ -15,6 +15,7 @@ export class ShareComponent extends LitElement {
     this.shoppingCartSrv = shoppingCartService;
     this.service = service;
     this.list = [];
+    this.totalList = 0;
     this.params = [];
 
     this.componentDestroyed$ = new Subject();
@@ -31,7 +32,8 @@ export class ShareComponent extends LitElement {
   }
 
   firstUpdated() {
-    console.log("Estos son mis parametros", this.params);
+    let totalList = 0;
+
     this.params.forEach(param => {
       const product = {
         ...this.service.getProduct(param.id),
@@ -39,26 +41,36 @@ export class ShareComponent extends LitElement {
         style: false,
       }
       this.list.push(product);
+      totalList += product.price * product.quantity;
     })
+
+    this.totalList = totalList;
     this.requestUpdate();
   }
 
   render() {
     return html`
-      <div class="share-header">
-        <i class="material-icons" @click=${this.goBack}>arrow_back</i>
-        <span>Lista Compartida</span>
-      </div>
-      <div class="shared-container">
-        <div class="shared-elements">
-          ${this.list.map(product => {
-            return html`
-              <share-detail 
-                .product=${product}
-              ></share-detail>
-            `
-          })}
-          <share-summary></share-summary>
+      <div class="share-component-container">
+        <div class="share-header">
+          <i class="material-icons" @click=${this.goBack}>arrow_back</i>
+          <span>Lista Compartida</span>
+        </div>
+
+        <div class="separator">
+          <share-summary ammount=${this.totalList}></share-summary>
+
+          <div class="shared-container">
+            <div class="shared-elements">
+              ${this.list.map(product => {
+                return html`
+                  <share-detail 
+                    .product=${product}
+                  ></share-detail>
+                `
+              })}
+            </div>
+          </div>
+
         </div>
       </div>
     `;

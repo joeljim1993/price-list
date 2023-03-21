@@ -10,3 +10,7 @@
 :root {
     --first-color: #5ccda7;
 }
+
+body {
+    background-color: aliceblue;
+}
