@@ -26,31 +26,27 @@ export class MobileMenu extends LitElement {
     render() {
         return html`
             <div class="mobile-menu-container">
-                <i class="material-icons" @click=${this.goToHome}>home</i>
+                <i 
+                    class="material-icons" 
+                    @click=${() => Router.go('/browse/')}
+                >home</i>
 
-                <i class="material-icons" @click=${this.goToFavorites}>favorite</i>
+                <i 
+                    class="material-icons" 
+                    @click=${() => Router.go('/favorites/')}
+                >favorite</i>
 
-                <mobile-menu-shopping counter=${this.counter} @goToShopping=${this.goToShoppingCart}></mobile-menu-shopping>
+                <mobile-menu-shopping 
+                    counter=${this.counter} 
+                    @click=${() => Router.go('/shopping-cart/list/')}
+                ></mobile-menu-shopping>
                 
-                <i class="material-icons" @click=${this.goToList}>list_alt</i>
+                <i 
+                    class="material-icons"
+                    @click=${() => Router.go('/list/')}
+                >list_alt</i>
             </div>
         `;
-    }
-
-    goToHome(){
-        Router.go('/browse/');
-    }
-
-    goToFavorites(){
-        Router.go('/favorites/');
-    }
-
-    goToShoppingCart(){
-        Router.go('/shopping-cart/list/');
-    }
-
-    goToList(){
-        Router.go('/list/');
     }
     
     createRenderRoot() {
