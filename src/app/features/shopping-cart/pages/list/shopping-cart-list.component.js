@@ -14,6 +14,7 @@ export class ShoppingCartList extends LitElement {
     super();
     this.shoppingCartSrv = shoppingCartService;
     this.list = [];
+    this.shareUrl = "";
 
     this.componentDestroyed$ = new Subject();
   }
@@ -61,7 +62,14 @@ export class ShoppingCartList extends LitElement {
           ${this.list.length > 0
             ? html`
               <div class='shopping-cart-options'>
-                <a>Compartir</a>
+                <a 
+                  @click=${this.shareList}
+                  href="https://api.whatsapp.com/send?text=www.cecomarket.com/shopping-cart/share/${this.shareUrl}"
+                  data-action="share/whatsapp/share"
+                  target="_blank"
+                >
+                  Compartir
+                </a>
               </div>
             `
             : html``
@@ -88,6 +96,12 @@ export class ShoppingCartList extends LitElement {
 
   goBack() {
     Router.go("/browse/");
+  }
+
+  shareList() {
+    const url = this.shoppingCartSrv.getShareUrl();
+    this.shareUrl = url;
+    this.requestUpdate();
   }
 
   createRenderRoot() {
