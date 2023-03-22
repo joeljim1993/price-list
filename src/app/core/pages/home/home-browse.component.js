@@ -41,7 +41,7 @@ export class HomeBrowse extends LitElement {
           `;
         })}
       </div>
-      <shopping-list-info-component></shopping-list-info-component>
+      <!-- <shopping-list-info-component></shopping-list-info-component> -->
     `;
   }
   firstUpdated() {

@@ -21,7 +21,8 @@ export class AppComponent extends LitElement {
       <div class="app-container">
         <navbar-component></navbar-component>
         <div id="outlet"></div>
-        <mobile-menu></mobile-menu>
+        <!-- <mobile-menu></mobile-menu> -->
+        <footer-component></footer-component>
       </div>
     `;
   }

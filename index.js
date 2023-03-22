@@ -36,3 +36,7 @@ import { ShareSummaryComponent } from "./src/app/features/shopping-cart/pages/sh
 
 // Favorites
 import { FavoritesBrowse } from "./src/app/features/favorites/favorites-browse.component";
+
+//footer
+
+import {FooterComponent} from "./src/app/core/components/footer/footer.component"
