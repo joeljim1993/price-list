@@ -13,9 +13,10 @@
 .button-container {
     background-color: #f4a534;
     width: 170px;
-    height: 41px;
+    height: 33px;
     border-radius: 10px;
     border: none;
+    user-select: none;
 }
 
 .button-container {
@@ -27,7 +28,7 @@
 .button-container p,
 .button-container button {
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
 }
 

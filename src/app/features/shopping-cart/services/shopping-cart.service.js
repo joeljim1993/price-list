@@ -67,6 +67,12 @@ class ShoppingCartService {
         return 0;
     }
 
+    getShareUrl() {
+        let url = '';
+        this.products.forEach(product => url += `${product.id}=${product.quantity}-`);
+        return url.slice(0, -1);
+    }
+
 }
 
 export const shoppingCartService = new ShoppingCartService();

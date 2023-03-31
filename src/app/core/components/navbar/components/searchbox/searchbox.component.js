@@ -1,4 +1,4 @@
-import { html, css, LitElement } from "lit";
+import { html, LitElement } from "lit";
 import {
   debounceTime,
   map,
@@ -13,7 +13,6 @@ export class SearchBoxComponent extends LitElement {
   input$ = fromEvent(document, "keyup");
 
   get input() {
-    // es el equivalente a usar document pero en buenas practicas me encapsula el codigo
     return this.renderRoot?.querySelector(".search") ?? null;
   }
 
@@ -44,7 +43,6 @@ export class SearchBoxComponent extends LitElement {
     const result$ = this.input$.pipe(
       debounceTime(300),
       map(() => this.input.value),
-      // tap((query) => console.log("query desde la consola ", query)),
       switchMap((query) => this.sandboxShoppingList.changeList$(query))
     );
     result$.subscribe();

@@ -277,5 +277,11 @@ class CoreService {
     }, 0);
     this.shoppingCartLength$.next(quantityProducts);
   }
+
+  // funcion sobre set estatico
+  getProduct(id) {
+    const product = this._listProduct.filter(product => product.id == id);
+    return product[0];
+}
 }
 export const service = new CoreService();

@@ -1,13 +1,17 @@
 .shoppint-card-container {
     position: relative;
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.img-car {
-    width: 45px;
+.img-card {
+    width: 40px;
 }
 
-.counter-car-container {
+.counter-card-container {
 
     position: absolute;
     top: -13px;
@@ -23,6 +27,6 @@
 
 }
 
-.car-counter {
+.card-counter {
     color: #FFF;
 }

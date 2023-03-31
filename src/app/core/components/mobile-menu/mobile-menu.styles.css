@@ -1,0 +1,17 @@
+.mobile-menu-container {
+    height: 50px;
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F28A61;
+
+    border-radius: 10px 10px 0px 0px;
+}
+
+.mobile-menu-container i {
+    font-size: 30px;
+    color: #FFF;
+    user-select: none;
+    cursor: pointer;
+}

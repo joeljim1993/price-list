@@ -14,6 +14,7 @@ export class ShoppingCartList extends LitElement {
     super();
     this.shoppingCartSrv = shoppingCartService;
     this.list = [];
+    this.shareUrl = "";
 
     this.componentDestroyed$ = new Subject();
   }
@@ -31,9 +32,13 @@ export class ShoppingCartList extends LitElement {
 
   render() {
     return html`
-      <div class='shopping-card-container'>
+      <div class="shopping-cart-header">
+        <i class="material-icons" @click=${this.goBack}>arrow_back</i>
+        <span>Mi Carrito</span>
+      </div>
+      <div class='shopping-cart-container'>
         
-        <div class='shopping-card-detail'>
+        <div class='shopping-cart-detail'>
           ${this.list.length > 0
             ? this.list.map(product => {
               return html`
@@ -46,22 +51,32 @@ export class ShoppingCartList extends LitElement {
               })
             : html`<h1 class="shopping-cart-empty">No hay productos en el carrito aún.</h1>`
           }
+          ${this.list.length > 0
+            ? html`<a @click='${this.cleanList}'>Limpiar Lista</a>`
+            : html``
+          }
         </div>
 
-        <div class='shopping-card-summary'>
+        <div class='shopping-cart-summary'>
           <shopping-cart-summary></shopping-cart-summary>
+          ${this.list.length > 0
+            ? html`
+              <div class='shopping-cart-options'>
+                <a 
+                  @click=${this.shareList}
+                  href="https://api.whatsapp.com/send?text=www.cecomarket.com/shopping-cart/share/${this.shareUrl}"
+                  data-action="share/whatsapp/share"
+                  target="_blank"
+                >
+                  Compartir
+                </a>
+              </div>
+            `
+            : html``
+          }
         </div>
 
       </div>
-      ${this.list.length > 0
-        ? html`
-          <div class='shopping-cart-options'>
-            <a target="clean" @click='${this.cleanList}'>Limpiar</a>
-            <a target="share">Compartir</a>
-          </div>
-        `
-        : html``
-      }
     `;
   }
 
@@ -81,6 +96,12 @@ export class ShoppingCartList extends LitElement {
 
   goBack() {
     Router.go("/browse/");
+  }
+
+  shareList() {
+    const url = this.shoppingCartSrv.getShareUrl();
+    this.shareUrl = url;
+    this.requestUpdate();
   }
 
   createRenderRoot() {

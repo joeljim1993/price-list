@@ -14,15 +14,15 @@ export class NavbarComponent extends LitElement {
     return html`
       <div class="container-navbar">
         <div class="elements-navbar">
-          <i class="material-icons" id="menu">menu</i>
           <searchbox-component class="searchbox"></searchbox-component>
-          <shoppingcart-component class="favorites"></shoppingcart-component>
+          <navbar-menu-component class="menu"></navbar-menu-component>
+          <shoppingcart-component class="shoppingcart"></shoppingcart-component>
         </div>
       </div>
     `;
   }
 
-  goToFavorites(){
+  goToFavorites() {
     Router.go('/favorites/')
   }
 

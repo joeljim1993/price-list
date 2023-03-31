@@ -8,6 +8,11 @@ import { localStorageShoppingCartService } from "./src/app/features/shopping-car
 import { NavbarComponent } from "./src/app/core/components/navbar/navbar.component";
 import { IconShoppingCart } from "./src/app/core/components/navbar/components/icon-shopping-cart/icon-shopping-cart.component";
 import { SearchBoxComponent } from "./src/app/core/components/navbar/components/searchbox/searchbox.component";
+import { NavBarMenuComponent } from "./src/app/core/components/navbar/components/navbar-menu/navbar-menu.component";
+
+// Mobile Menu
+import { MobileMenu } from "./src/app/core/components/mobile-menu/mobile-menu.component";
+import { MobileMenuShopping } from "./src/app/core/components/mobile-menu/components/mobile-menu-shopping.component";
 
 // Home
 import { HomeBrowse } from "./src/app/core/pages/home/home-browse.component";
@@ -22,9 +27,12 @@ import { ShoppingListInfoComponent } from "./src/app/shared/components/shopping-
 import { PageNotFound } from "./src/app/features/page-not-found/page-not-found.component";
 
 // Shopping Cart
-import { ShoppingCartList } from "./src/app/features/shopping-cart/shopping-cart-list.component";
-import { ShoppingCartDetail } from "./src/app/features/shopping-cart/components/shopping-cart-detail/shopping-cart-detail.component";
-import { ShoppingCartSummary } from "./src/app/features/shopping-cart/components/shopping-cart-summary/shopping-cart-summary.component";
+import { ShoppingCartList } from "./src/app/features/shopping-cart/pages/list/shopping-cart-list.component";
+import { ShoppingCartDetail } from "./src/app/features/shopping-cart/pages/list/components/shopping-cart-detail/shopping-cart-detail.component";
+import { ShoppingCartSummary } from "./src/app/features/shopping-cart/pages/list/components/shopping-cart-summary/shopping-cart-summary.component";
+import { ShareComponent } from "./src/app/features/shopping-cart/pages/share/share.component";
+import { ShareDetailComponent } from "./src/app/features/shopping-cart/pages/share/component/share-detail/share-detail.component";
+import { ShareSummaryComponent } from "./src/app/features/shopping-cart/pages/share/component/share-summary/share-summary.component";
 
 // Favorites
 import { FavoritesBrowse } from "./src/app/features/favorites/favorites-browse.component";

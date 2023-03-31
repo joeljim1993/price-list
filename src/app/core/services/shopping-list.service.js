@@ -1,4 +1,4 @@
-import { timer, map, of, Subject, take, tap } from "rxjs";
+import { map, of, Subject, take, tap } from "rxjs";
 import { service } from "./service"
 
 class ShoppingListSandboxService {
