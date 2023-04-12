@@ -3,7 +3,7 @@ import { AppComponent } from "./src/app.component";
 
 // Servicios
 import { localStorageShoppingCartService } from "./src/app/features/shopping-cart/services/localstorage-shopping-cart.service";
-
+import { dataService } from "./src/app/core/services/data.service";
 //Navbar
 import { NavbarComponent } from "./src/app/core/components/navbar/navbar.component";
 import { IconShoppingCart } from "./src/app/core/components/navbar/components/icon-shopping-cart/icon-shopping-cart.component";
@@ -20,8 +20,6 @@ import { ProductCard } from "./src/app/shared/components/product-card/product-ca
 import { ProductCardButton } from "./src/app/shared/components/product-card/components/product-card-button.component";
 import { ProductCardFavoritesButton } from "./src/app/shared/components/product-card/components/product-card-favorites-button.component";
 
-// Footer
-import { ShoppingListInfoComponent } from "./src/app/shared/components/shopping-list-info/shopping-list-info.component";
 
 // Page not Found
 import { PageNotFound } from "./src/app/features/page-not-found/page-not-found.component";
