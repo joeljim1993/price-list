@@ -1,4 +1,16 @@
+import {
+    of,
+    BehaviorSubject,
+    map,
+    tap,
+    takeUntil,
+    Subject,
+  } from "rxjs";
+import { fromFetch } from "rxjs/fetch";
+
+
 class DataService{
+
 
  getData() {
       const data = {
@@ -43,3 +55,4 @@ class DataService{
       data$.subscribe();
     }   
 }
+export const dataService = DataService();
