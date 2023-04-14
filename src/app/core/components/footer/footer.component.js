@@ -4,7 +4,6 @@ import "./footer.styles.css";
 export class FooterComponent extends LitElement {
   constructor() {
     super();
-    console.log("ejecutando footer ");
   }
 
   firstUpdated() {}
@@ -16,7 +15,7 @@ export class FooterComponent extends LitElement {
           <div class="box">
             <figure>
               <a href="https://cecosesola.org/">
-              <img  alt="" data-src="https://cecosesola.org/wp-content/uploads/2020/05/logo-cecosesola-blanco-1.png" class="attachment-large size-large ls-is-cached lazyloaded" src="https://cecosesola.org/wp-content/uploads/2020/05/logo-cecosesola-blanco-1.png">
+              <img   class="logo-cecosesola" src="https://cecosesola.org/wp-content/uploads/2020/05/logo-cecosesola-blanco-1.png" alt="logo de cecosesola" >
               </a>
             </figure>
           </div>

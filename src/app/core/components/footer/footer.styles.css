@@ -35,15 +35,17 @@
     padding: 35px 0px;
 }
 .footer-container .group-one .box .figure {
-    width: 100%;
+    width: 200px;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .footer-container .group-one figure img {
-    width: 220px;
-    height:110px;
+   padding: 0 0 0 5px;
+   margin-top: 10px;
+    width: 100%;
+    height:130%;
     /* border-radius: 8px; */
 }
 
