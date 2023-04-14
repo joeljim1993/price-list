@@ -8,19 +8,14 @@ export class ShoppingCartSummary extends LitElement {
 
     static properties = {
         product: { type: Object },
+        dolarValue: { type: Number },
+        ammount: { type: Number },
     };
 
     constructor(){
         super();
         this.ammount = 0;
         this.shoppingCartSrv = shoppingCartService;
-
-        this.shoppingCartSrv.ammount
-            .pipe(
-                tap(ammount => this.ammount = ammount),
-                tap(() => this.requestUpdate()),
-            )
-            .subscribe();
     }
 
     render() {
@@ -36,7 +31,7 @@ export class ShoppingCartSummary extends LitElement {
                             <h1>Total</h1>
                             <h1>Bs. ${this.ammount}</h1>
                         </div>
-                        <h1 class="ammounts_usd">$ 8.02</h1>
+                        <h1 class="ammounts_usd">$ ${this.dolarValue.toFixed(2)}</h1>
                     </div>
                 </div>
                 <div class="summary-footer">

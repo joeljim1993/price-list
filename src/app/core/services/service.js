@@ -6,7 +6,6 @@ import {
   takeUntil,
   Subject,
 } from "rxjs";
-import { fromFetch } from "rxjs/fetch";
 import { ShoppingList } from "../../features/shopping-cart/models/shopping-list.model";
 
 class CoreService {
@@ -16,125 +15,6 @@ class CoreService {
   shoppingListTotal$ = new Subject();
   filteredSearch$ = new Subject();
   shoppingCartLength$ = new Subject();
-  //SET ESTATICO DE PRUEBA PARA RECREAR LAS CARDS
-  _listProduct = [
-    {
-      id: 1,
-      name: "GALLETA MARIA PUIG",
-      images: [
-        "https://palospanasfoodmarket.com/wp-content/uploads/2018/04/galletas-maria-1.jpg",
-      ],
-      price: 10.86,
-    },
-    {
-      id: 2,
-      name: "PASTA CORTA CAPRI CODITO",
-      images: ["https://www.pastascapri.com/img/productos/imagenes/codito.png"],
-      price: 11.5,
-    },
-    {
-      id: 3,
-      name: "MAYONESA MAVESA 910gr",
-      images: [
-        "https://labatata.com.ve/1085-large_default/mayonesa-mavesa-910g.jpg",
-      ],
-      price: 36.0,
-    },
-    {
-      id: 4,
-      name: "CAFÉ FLOR DE ARAUCA",
-      images: [
-        "https://compraenavi.com/web/image/product.template/4800/image/300x300?unique=3fd0aaa",
-      ],
-      price: 20.0,
-    },
-    {
-      id: 5,
-      name: "MARGARINA MAVESA 500G",
-      images: [
-        "https://cdn.shopify.com/s/files/1/0571/3788/9442/products/mantequilla-mavesa-500g-1.png?v=1660312385",
-      ],
-      price: 19.0,
-    },
-    {
-      id: 6,
-      name: "ARROZ PRIMOR 1KG",
-      images: [
-        "https://d2j6dbq0eux0bg.cloudfront.net/images/28254021/2715085634.jpg",
-      ],
-      price: 13.10,
-    },
-    {
-      id: 7,
-      name: "HARINA PAN NORMAL",
-      images: [
-        "https://lh3.googleusercontent.com/p-K-FfFnpv0kgdVT1kNxI_lludARFkD-VpAFOimS0gbiIA9JxOP78PkQlhOnD6Q8W2cU-vvRkdLG0vdfvni86ChSo0UlXImPVYPJ2uUfAX78WSSd",
-      ],
-      price: 14.45,
-    },
-    {
-      id: 8,
-      name: "JABON EN POLVO LAS LLAVES",
-      images: [
-        "https://labatata.com.ve/2901-large_default/jabon-las-llaves-polvo-400k.jpg",
-      ],
-      price: 16.20,
-    },
-    {
-      id: 9,
-      name: "GALLETA TIP-TOP MANI",
-      images: ["https://gsi-food.com/wp-content/uploads/2017/01/gsi-tip-top-vainilla.jpg"],
-      price: 8.50,
-    },
-    {
-      id: 10,
-      name: "GALLETA CLUB SOCIAL",
-      images: ["https://lh3.googleusercontent.com/3S-IQKdJvPtnTXPL0crHXH_pcpjm7H5hdubpN2skm2gGF1yt83bpCDKmpfmPcrQ4zawBpqo-gbSmjaKt9O2gCvPIBb4xgpOxdsqoYuVnqQrcrMU"],
-      price: 16.50,
-    },
-    {
-      id: 11,
-      name: "HARINA DOÑA EMILIA",
-      images: ["https://inverloan.com/wp-content/uploads/2022/01/7592591000154-Harina-de-Maiz-Blanco-Dona-Emilia-1Kg.jpg"],
-      price: 12.50,
-    },
-    {
-      id: 12,
-      name: "PASTA ESPECIAL LARGA",
-      images: ["https://inversiones-valeria.quosmarket.com/wp-content/uploads/2021/08/10167.jpg"],
-      price: 13.50,
-    },
-    {
-      id: 13,
-      name: "VINAGRE TIQUIRE",
-      images: ["https://sambil.sigo.com.ve/images/thumbs/0004259_vinagre-tiquire-flores-1000-cc_450.jpeg"],
-      price: 9.80,
-    },
-    {
-      id: 14,
-      name: "MEGA ARO",
-      images: ["https://tucentralonline.com/Bello-Campo-43/wp-content/uploads/sites/19/2021/12/100743899.jpg"],
-      price: 19.50,
-    },
-    {
-      id: 15,
-      name: "FORORO VALLE HONDO",
-      images: ["https://cerevenca.com/wp-content/uploads/2020/07/empaque-1024x1024.png"],
-      price: 6.50,
-    },
-    {
-      id: 16,
-      name: "HUEVOS 1/2 CARTON",
-      images: ["https://superfreshmarket.com.ve/wp-content/uploads/2021/02/medio-carton-Fresh.jpg"],
-      price: 25.30,
-    },
-    {
-      id: 17,
-      name: "CARAOTAS PESADAS 1/2",
-      images: ["https://labatata.com.ve/983-large_default/caraotas-arauquita-1k.jpg"],
-      price: 8.90,
-    },
-  ];
 
   // esta funcion debera traer la lista(shopping) actual, param : idList
   getProductsAddedToShoppingList$(){

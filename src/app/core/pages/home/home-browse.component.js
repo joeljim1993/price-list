@@ -47,28 +47,13 @@ export class HomeBrowse extends LitElement {
     `;
   }
   firstUpdated() {
-    const kanaSrv$ = this.kanaSrv.getListProductFromKana$();
-    
-    //METODO QUE ME CREA LA LISTA DE MERCADO AL ENTRAR A LA APLICACION
-    const createShopping$ = this.sandboxShoppingList.createShoppingList$().pipe(
-      tap((shopping) => (this.listShopping = shopping)),
-      tap(() => this.requestUpdate())
-    );
-    createShopping$.subscribe();
-
-    //OBTIENE INICIALMENTE TODOS LOS PRODUCTOS
-    const result$ = this.sandboxShoppingList.filtered$.pipe(
-      tap((info) => (this.listproduct = info)),
-      tap(() => this.requestUpdate())
-    );
-    result$.subscribe();
-    this.sandboxShoppingList.changeList$("").subscribe();
-    //FILTRA EL O LOS PRODUCTOS TRAIDOS DESDE EL SERVICIO
-    const foundProduct$ = this.sandboxShoppingList.filterSearch$().pipe(
-      tap((info) => (this.lastSearch = info)),
-      tap(() => this.requestUpdate())
-    );
-    foundProduct$.subscribe();
+    const kanaSrv$ = this.kanaSrv.lisProduct
+      .pipe(
+        tap(response =>  this.listproduct = response),
+        tap(response => console.log(response))
+      )
+    kanaSrv$.subscribe();
+   
   }
 
   //METODO PARA AGREGAR A FAVORITOS

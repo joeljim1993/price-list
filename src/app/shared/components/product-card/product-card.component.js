@@ -33,8 +33,8 @@ export class ProductCard extends LitElement {
         </div>
           
         <div class="card-description">
-          <p class="title">${this.product.name}</p>
-          <p class="description">Bs. ${this.product.price}</p>
+          <p class="title">${this.product.name} ${this.product.presentation}</p>
+          <p class="description">Bs. ${this.product.price.toFixed(2)}</p>
           <product-card-favorites-button class="favorite"
             @addProductToFavorites=${this.addProductToFavorites}>
           </product-card-favorites-button>
