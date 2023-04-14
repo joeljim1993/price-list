@@ -3,7 +3,7 @@ import { switchMap, tap } from "rxjs";
 
 import { ShoppingListService } from "../../services/shopping-list.service";
 import { favoriteService } from "./../../services/favorite.service";
-import { dataService } from "../../services/data.service";
+import { kanaService } from "../../services/kana.service";
 import { shoppingCartService } from '/src/app/features/shopping-cart/services/shopping-cart.service';
 import "./home-browse.style.css";
 
@@ -17,7 +17,7 @@ export class HomeBrowse extends LitElement {
     super();
     
     this.sandboxShoppingList = ShoppingListService;
-    this.data = dataService;
+    this.kanaSrv = kanaService;
     this.favoriteSrv = favoriteService;
     this.shoppingCartSrv = shoppingCartService;
     this.prueba = [];
@@ -47,7 +47,7 @@ export class HomeBrowse extends LitElement {
     `;
   }
   firstUpdated() {
-    const dataService$ = this.data.getListProductFromKana$();
+    const kanaSrv$ = this.kanaSrv.getListProductFromKana$();
     
     //METODO QUE ME CREA LA LISTA DE MERCADO AL ENTRAR A LA APLICACION
     const createShopping$ = this.sandboxShoppingList.createShoppingList$().pipe(

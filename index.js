@@ -3,7 +3,7 @@ import { AppComponent } from "./src/app.component";
 
 // Servicios
 import { localStorageShoppingCartService } from "./src/app/features/shopping-cart/services/localstorage-shopping-cart.service";
-import { dataService } from "./src/app/core/services/data.service";
+import { kanaService } from "./src/app/core/services/kana.service";
 //Navbar
 import { NavbarComponent } from "./src/app/core/components/navbar/navbar.component";
 import { IconShoppingCart } from "./src/app/core/components/navbar/components/icon-shopping-cart/icon-shopping-cart.component";

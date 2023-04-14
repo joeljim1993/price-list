@@ -1,15 +1,12 @@
 import {
-    of,
-    BehaviorSubject,
     map,
     tap,
-    takeUntil,
     mergeMap,
   } from "rxjs";
 import { fromFetch } from "rxjs/fetch";
 
 
-class DataService{
+class KanaService{
  
 
     getListProductFromKana$(){
@@ -62,4 +59,4 @@ class DataService{
           );
     }
 }
-export const dataService = new  DataService();
+export const kanaService = new  KanaService();
