@@ -27,15 +27,19 @@ export class FooterComponent extends LitElement {
 
           </div>
           <div class="red-social">
+            <h1 class="red-social-title">Siguenos:</h1>
+            <div class="red-social-icons">
             <a href="https://www.facebook.com/RedCecosesola/" class="fa fa-facebook"></a>
             <a href="https://www.instagram.com/redcecosesola/" class="fa fa-instagram"></a>
             <a href="https://twitter.com/redcecosesola" class="fa fa-twitter"></a>
             <a href="https://www.youtube.com/channel/UC4Z6igtx966wHbfeumY9UwA" class="fa fa-youtube"></a>
           </div>
+            </div>
+           
         </div>
         <div class="group-two">
         <small
-          >&copy;2021 <b>cecosesola</b>-Todos los Derechos reservados
+          >&copy;2023 <b>Cecosesola </b>-Todos los Derechos reservados.
         </small>
       </div>
       </div>

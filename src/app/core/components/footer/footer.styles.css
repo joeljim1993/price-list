@@ -1,15 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@200;300;400&display=swap');
+
+/* MANERA DE ORGANIZAR EL CODIGO EN CSS
+1. posicionamiento 
+2. modelo de caja 
+3.tipografia
+4.visuales
+5.otros 
+*/
 
 * {
     margin:0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Open Sans",sans-serif;
+    
 }
+
 .footer-container{
     width: 100%;
     background-color:  #58c5ad;
     /* height: 200px; */
+    margin-top: 20px;
+    padding: 0 5px 0 5px;
     
 }
 .footer-container .group-one {
@@ -20,7 +32,7 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-gap:50px;
-    padding: 45px 0px;
+    padding: 35px 0px;
 }
 .footer-container .group-one .box .figure {
     width: 100%;
@@ -47,6 +59,7 @@
     margin-bottom: 25px;
     font-size: 20px;
     font-weight: 900;
+    font-family: "Poppins",sans-serif;
 
 }
 .footer-container .group-one .box p {
@@ -54,13 +67,21 @@
     margin-bottom: 10px;
     font-weight: 300;
 }
+/* red social  */
+
 .footer-container .group-one .red-social{
     display: flex;
-    display: row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
 
 }
+
+.footer-container .group-one .red-social .red-social-title {
+    font-size: 1.5rem;
+    font-family: "Poppins",sans-serif;
+}
+
 .footer-container .group-one .red-social a {
    
     text-decoration: none;
@@ -72,11 +93,16 @@
     background-color: #0d3320;
     text-align: center;
     transition: all 300ms ease;
+    margin-top: 40px;
+    margin-left: 6px;
 }
 .footer-container .group-one .red-social a:hover {
-    color:rgb(104, 106, 216);
+    color:#58c5ad;
 } 
 .footer-container .group-two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #0d3320;
     padding: 15px 10px;
     text-align: center;
@@ -84,8 +110,12 @@
 }
 .footer-container .group-two  small{
     font-size: 15px;
+    letter-spacing: 0.1rem;
+    font-family: "Poppins",sans-serif;
+    font-weight: 500;
 }
 @media screen and (max-width:800px){
+
     .footer-container .group-one{
         width: 90%;
         grid-template-columns: repeat(1,1fr);
