@@ -64,7 +64,7 @@ class KanaService{
                     description
                   }
                   pricePublished{
-                    costBase {
+                    priceBase {
                       amount
                     }
                   }
@@ -83,7 +83,7 @@ class KanaService{
 
           const productConstruted = {
             ...restProduct,
-            price: Number(pricePublished?.costBase.amount * this.divisa),
+            price: Number(pricePublished?.priceBase.amount * this.divisa),
           }
 
           return productConstruted;

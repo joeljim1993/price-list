@@ -20,7 +20,7 @@ export class ShoppingCartDetail extends LitElement {
                     <img src=${this.product.images[0]}>
                     <div>
                         <h2>${this.product.name}</h2>
-                        <h1>Bs. ${this.product.price}</h1>
+                        <h1>Bs. ${this.product.price.toFixed(2)}</h1>
                         <h3>$ 0.90</h3>
                     </div>
                 </div>

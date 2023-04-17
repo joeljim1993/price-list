@@ -23,7 +23,7 @@
 
 .title {
     text-align: center;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .description {
@@ -74,14 +74,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-evenly;
       width: 100%;
       padding: 5px;
     }
 
     .title {
       text-align: center;
-      font-weight: bold;
+      font-weight: 500;
     }
 
     .card-button {
