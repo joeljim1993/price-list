@@ -27,7 +27,7 @@ export class FooterComponent extends LitElement {
 
           </div>
           <div class="red-social">
-            <h1 class="red-social-title">Siguenos:</h1>
+            <h1 class="red-social-title">SIGUENOS:</h1>
             <div class="red-social-icons">
             <a href="https://www.facebook.com/RedCecosesola/" class="fa fa-facebook"></a>
             <a href="https://www.instagram.com/redcecosesola/" class="fa fa-instagram"></a>
