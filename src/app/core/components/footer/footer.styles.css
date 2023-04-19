@@ -35,8 +35,8 @@
     padding: 35px 0px;
 }
 .footer-container .group-one .box .figure {
-    width: 100%;
-    height: 100%;
+    width: 250x;
+    /* height: 110%; */
     display: flex;
     justify-content: center;
     align-items: center;
