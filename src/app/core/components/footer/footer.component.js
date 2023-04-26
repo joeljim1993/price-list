@@ -21,12 +21,13 @@ export class FooterComponent extends LitElement {
           </div>
           <div class="box">
             <h2>SOBRE NOSOTROS</h2>
-            <p>Dolore aliqua eu aliquip reprehenderit proident </p>
-            <p>Dolore aliqua eu aliquip reprehenderit proident  </p>
-
+            
+            <p> Somos Mas de 50 Organizaciones en Red </p>
+            <a href="https://cecosesola.org/">¡Visita nuestra pagina y Conocenos!   </a> 
+            <p>Contactanos : <br>cecosesolaescuela@hotmail.com </p>
           </div>
           <div class="red-social">
-            <h1 class="red-social-title">SIGUENOS:</h1>
+            <h1 class="red-social-title">Siguenos:</h1>
             <div class="red-social-icons">
             <a href="https://www.facebook.com/RedCecosesola/" class="fa fa-facebook"></a>
             <a href="https://www.instagram.com/redcecosesola/" class="fa fa-instagram"></a>
