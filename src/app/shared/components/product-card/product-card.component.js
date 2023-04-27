@@ -4,6 +4,7 @@ import { shoppingCartService } from "../../../features/shopping-cart/services/sh
 import './product-card.style.css';
 
 export class ProductCard extends LitElement {
+
   static properties = {
     product: { type: Object },
     counter: { type: Number, Reflect: true },
@@ -22,6 +23,7 @@ export class ProductCard extends LitElement {
       ...this.product,
       quantity: this.counter,
     }
+   
   }
 
   render() {
@@ -52,12 +54,16 @@ export class ProductCard extends LitElement {
     `;
   }
 
+
   addProductToFavorites(e) {
     const options = {
       detail: { product: this.product },
+      
     };
-    this.dispatchEvent(new CustomEvent("productFavorite", options));
+    this.dispatchEvent(new CustomEvent("productFavorite", options,));
+   
   }
+
 
   quantityChange(event) {
     const product = {
