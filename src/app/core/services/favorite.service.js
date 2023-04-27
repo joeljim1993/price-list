@@ -14,6 +14,7 @@ class FavoriteService {
 
         if(!verifyProduct)  return this.addFavorite(product, favoriteList);
         if(verifyProduct) return this.removeFavorite(verifyProduct, favoriteList);
+       
     }
 
     /**
@@ -43,6 +44,7 @@ class FavoriteService {
     initFavorites() {
         const favoritesAll = localStorage.getItem('Favorites');
         if(!favoritesAll) localStorage.setItem('Favorites', '[]');
+        
     }
 
     /**
@@ -66,7 +68,8 @@ class FavoriteService {
         this.newFavorite$
             .pipe(
                 tap(product => this.favoriteInteractive(product)),
-                tap(product => console.log('Producto seleccionado ->favorite', product)),
+                // tap(product => console.log('Producto seleccionado ->favorite', product)),
+                
             )
             .subscribe();
         this.initFavorites();
@@ -74,4 +77,4 @@ class FavoriteService {
 
 }
 
-export const favoriteService = new FavoriteService();
+export const favoriteService = new FavoriteService();   

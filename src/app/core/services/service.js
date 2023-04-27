@@ -156,13 +156,11 @@ class CoreService {
     let shopping = shoppingAvailables.find(item => item.id=="01");
     let products = shopping.products;
     products.length = shopping.total =  0;
-    console.log("carrito despues de vaciado",products);
     
   }
 
   // SIMULA LA TRAIDA DE LA LISTA DESDE KANA
   getListProductOfKana$() {
-    console.log("trayendo kana desde el servicio");
     const listProducOfKana = this._listProduct;
     return of(listProducOfKana);
   }
@@ -174,7 +172,6 @@ class CoreService {
     let name= "pepito"; 
     let limit ="2000";
     const shopping = new ShoppingList(id,name,limit);
-    console.log("shopping=>",shopping);
     this.shoppingAvailables = this.shoppingAvailables.concat([shopping]);
     return of(shopping);
   }

@@ -5,23 +5,17 @@ import { favoriteService } from "../../core/services/favorite.service";
 import './favorites-browse.styles.css';
 
 export class FavoritesBrowse extends LitElement {
-  static properties = {};
 
+  
   constructor() {
     super();
     this.favoriteSrv = favoriteService;
     this.favoriteList = this.favoriteSrv.getFavorites();
-    console.log("this.favoriteList",this.favoriteList);
   }
 
-  refresh(event) {
-    const product = event.detail.product;
-    this.favoriteSrv.newFavorite$.next(product);
-    this.favoriteList = this.favoriteList.filter(
-      (productFavorite) => productFavorite.id !== product.id
-    );
-    this.requestUpdate();
-  }
+
+ 
+
 
   render() {
     return html`
@@ -34,12 +28,25 @@ export class FavoritesBrowse extends LitElement {
 
         <div class="products">
           ${this.favoriteList.map((product) => {
-            return html` <product-card .product="${product}"></product-card> `;
+            return html` <product-card 
+             @productFavorite=${this.addProductToFavorites}
+            .product="${product}"></product-card> `;
           })}
         </div>
 
       </div>
     `;
+  }
+
+ 
+
+
+  addProductToFavorites(event) {
+    let product = event.detail.product;
+    this.favoriteSrv.favoriteInteractive(product);
+    let list = favoriteService.getFavorites();
+    this.favoriteList = list;
+    this.requestUpdate();
   }
 
   goBack(){
