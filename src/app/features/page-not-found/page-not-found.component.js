@@ -59,6 +59,7 @@ export class PageNotFound extends LitElement {
             width: 250px;
             cursor: pointer;
             margin-top: 70px;
+            font-weight: 600;
         }
 
         button:hover {
@@ -80,7 +81,7 @@ export class PageNotFound extends LitElement {
                     <img src='/src/assets/images/zanahoria.svg'>
                 </picture>
                 <h1>P&aacute;gina no encontrada</h1>
-                <button @click="${this.goBack}">Volver</button>
+                <button @click="${this.goBack}">Inicio</button>
             </div>
         `;
     }

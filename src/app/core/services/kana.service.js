@@ -14,7 +14,6 @@ class KanaService{
     this.dolarValue = new BehaviorSubject(1);
 
     this.divisa = 1;
-
     this.getDolarValue$().subscribe();
     this.getListProductFromKana$().subscribe();
   }
@@ -48,11 +47,11 @@ class KanaService{
    * Metodo que apunta a los productos en backend de kana
    * @returns un observable
    */
-  getListProductFromKana$(){
+  getListProductFromKana$(limit = 12){
     const query = `
       query {
         currentPriceList{
-          products{
+          products(first:${limit}){
             edges{
               node{
                 product{
