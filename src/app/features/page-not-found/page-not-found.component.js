@@ -79,8 +79,7 @@ export class PageNotFound extends LitElement {
                 <picture>
                     <img src='/src/assets/images/zanahoria.svg'>
                 </picture>
-                <h1>PAGE NOT FOUND</h1>
-                <h2>404</h2>
+                <h1>P&aacute;gina no encontrada</h1>
                 <button @click="${this.goBack}">Volver</button>
             </div>
         `;

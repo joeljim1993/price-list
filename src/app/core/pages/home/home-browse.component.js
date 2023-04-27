@@ -3,7 +3,7 @@ import { switchMap, tap } from "rxjs";
 
 import { ShoppingListService } from "../../services/shopping-list.service";
 import { favoriteService } from "./../../services/favorite.service";
-
+import { kanaService } from "../../services/kana.service";
 import { shoppingCartService } from '/src/app/features/shopping-cart/services/shopping-cart.service';
 import "./home-browse.style.css";
 
@@ -15,9 +15,12 @@ export class HomeBrowse extends LitElement {
 
   constructor() {
     super();
+    
     this.sandboxShoppingList = ShoppingListService;
+    this.kanaSrv = kanaService;
     this.favoriteSrv = favoriteService;
     this.shoppingCartSrv = shoppingCartService;
+    this.prueba = [];
     this.listproduct = [];
     this.listShopping = null;
     this.lastSearch = [];
@@ -41,30 +44,16 @@ export class HomeBrowse extends LitElement {
           `;
         })}
       </div>
-      <shopping-list-info-component></shopping-list-info-component>
     `;
   }
   firstUpdated() {
-    //METODO QUE ME CREA LA LISTA DE MERCADO AL ENTRAR A LA APLICACION
-    const createShopping$ = this.sandboxShoppingList.createShoppingList$().pipe(
-      tap((shopping) => (this.listShopping = shopping)),
-      tap(() => this.requestUpdate())
-    );
-    createShopping$.subscribe();
-
-    //OBTIENE INICIALMENTE TODOS LOS PRODUCTOS
-    const result$ = this.sandboxShoppingList.filtered$.pipe(
-      tap((info) => (this.listproduct = info)),
-      tap(() => this.requestUpdate())
-    );
-    result$.subscribe();
-    this.sandboxShoppingList.changeList$("").subscribe();
-    //FILTRA EL O LOS PRODUCTOS TRAIDOS DESDE EL SERVICIO
-    const foundProduct$ = this.sandboxShoppingList.filterSearch$().pipe(
-      tap((info) => (this.lastSearch = info)),
-      tap(() => this.requestUpdate())
-    );
-    foundProduct$.subscribe();
+    const kanaSrv$ = this.kanaSrv.lisProduct
+      .pipe(
+        tap(response =>  this.listproduct = response),
+        tap(response => console.log(response))
+      )
+    kanaSrv$.subscribe();
+   
   }
 
   //METODO PARA AGREGAR A FAVORITOS

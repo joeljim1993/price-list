@@ -3,6 +3,7 @@ import { tap, Subject, takeUntil } from "rxjs";
 import { Router } from "@vaadin/router";
 
 import { shoppingCartService } from '/src/app/features/shopping-cart/services/shopping-cart.service';
+import { kanaService } from "../../../../core/services/kana.service";
 import './shopping-cart-list.style.css';
 
 export class ShoppingCartList extends LitElement {
@@ -13,7 +14,10 @@ export class ShoppingCartList extends LitElement {
   constructor() {
     super();
     this.shoppingCartSrv = shoppingCartService;
+    this.kanaSrv = kanaService;
     this.list = [];
+    this.ammount = 0;
+    this.dolarValue = 1;
     this.shareUrl = "";
 
     this.componentDestroyed$ = new Subject();
@@ -25,6 +29,21 @@ export class ShoppingCartList extends LitElement {
         takeUntil(this.componentDestroyed$),
         tap(products => this.list = products),
         tap(list => console.log('en list', list)),
+        tap(() => this.requestUpdate()),
+      )
+      .subscribe();
+
+    this.shoppingCartSrv.ammount
+      .pipe(
+          tap(ammount => this.ammount = ammount),
+          tap(() => this.requestUpdate()),
+      )
+      .subscribe();
+
+    this.kanaSrv.dolarValue
+      .pipe(
+        takeUntil(this.componentDestroyed$),
+        tap(value => this.dolarValue = this.ammount / value),
         tap(() => this.requestUpdate()),
       )
       .subscribe();
@@ -58,7 +77,10 @@ export class ShoppingCartList extends LitElement {
         </div>
 
         <div class='shopping-cart-summary'>
-          <shopping-cart-summary></shopping-cart-summary>
+          <shopping-cart-summary 
+            dolarValue=${this.dolarValue}
+            ammount=${this.ammount}
+          ></shopping-cart-summary>
           ${this.list.length > 0
             ? html`
               <div class='shopping-cart-options'>
