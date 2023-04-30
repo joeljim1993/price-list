@@ -4,6 +4,7 @@ import {
   map,
   fromEvent,
   switchMap,
+  tap,
 } from "rxjs";
 
 import { ShoppingListService } from "/src/app/core/services/shopping-list.service";
@@ -42,7 +43,10 @@ export class SearchBoxComponent extends LitElement {
   firstUpdated() {
     const result$ = this.input$.pipe(
       debounceTime(300),
+      
       map(() => this.input.value),
+      tap(() => console.log(this.input.value)),
+      // mentirita : por que se llama sandboxShoppingList
       switchMap((query) => this.sandboxShoppingList.changeList$(query))
     );
     result$.subscribe();

@@ -9,8 +9,11 @@ import { fromFetch } from "rxjs/fetch";
 
 class KanaService{
 
+  lisProduct = new BehaviorSubject([]);
+
   constructor() {
-    this.lisProduct = new BehaviorSubject([]);
+    
+    
     this.dolarValue = new BehaviorSubject(1);
 
     this.divisa = 1;
@@ -88,6 +91,7 @@ class KanaService{
           return productConstruted;
         })),
         tap(response => this.lisProduct.next(response)),
+        tap(response => console.log("esto es lo que recibo data$",response))
       );
     return data$;
   }

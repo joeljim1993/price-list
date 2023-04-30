@@ -47,13 +47,26 @@ export class HomeBrowse extends LitElement {
     `;
   }
   firstUpdated() {
-    const kanaSrv$ = this.kanaSrv.lisProduct
-      .pipe(
-        tap(response =>  this.listproduct = response),
-        tap(response => console.log(response))
-      )
-    kanaSrv$.subscribe();
-   
+    // const kanaSrv$ = this.kanaSrv.lisProduct
+    //   .pipe(
+    //     tap(response =>  this.listproduct = response),
+    //     tap(response => console.log("response",response))
+    //   )
+    // kanaSrv$.subscribe();
+
+    const response$ = this.sandboxShoppingList.changeList$(" ").pipe(
+      tap(info => console.log("esto llega",info)),
+      
+    )
+    response$.subscribe();
+
+    const filtered$ = this.sandboxShoppingList.filtered$.pipe(
+      tap(info => console.log("esto llega en filtered",info)),
+      tap(response =>  this.listproduct = response),
+      tap(()=>this.requestUpdate()),
+      
+    )
+    filtered$.subscribe();
   }
 
   //METODO PARA AGREGAR A FAVORITOS
