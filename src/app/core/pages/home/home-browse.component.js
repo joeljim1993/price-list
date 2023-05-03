@@ -32,12 +32,12 @@ export class HomeBrowse extends LitElement {
         <slot></slot>
       </div>
       <div class="container-cards">
-        ${this.listproduct.map((element) => {
+        ${this.listproduct.map((product) => {
           return html`
             <product-card
-              .counter=${this.getCounter(element)}
+              .counter=${this.getQuantity(product)}
               @quantityChange=${this.productToShoppingCart}
-              .product=${element}
+              .product=${product}
               @productFavorite=${this.addProductToFavorites}
             >
             </product-card>
@@ -47,13 +47,19 @@ export class HomeBrowse extends LitElement {
     `;
   }
   firstUpdated() {
-    const kanaSrv$ = this.kanaSrv.lisProduct
-      .pipe(
-        tap(response =>  this.listproduct = response),
-        tap(response => console.log(response))
-      )
-    kanaSrv$.subscribe();
-   
+ 
+
+    const response$ = this.sandboxShoppingList.changeList$(" ").pipe(
+      
+    )
+    response$.subscribe();
+
+    const filtered$ = this.sandboxShoppingList.filtered$.pipe(
+      tap(response =>  this.listproduct = response),
+      tap(()=>this.requestUpdate()),
+      
+    )
+    filtered$.subscribe();
   }
 
   //METODO PARA AGREGAR A FAVORITOS
@@ -62,16 +68,7 @@ export class HomeBrowse extends LitElement {
     this.favoriteSrv.newFavorite$.next(product);
   }
 
-  // const location = this.location.params;
-  // const shoppingId = parseInt(location.shoppingId);
-  // const shopping$ = this.sandboxShoppingList
-  //   .getShoppingById$(shoppingId)
-  //   .pipe(
-  //     tap((info) => (this.listShopping = info)),
-  //     tap(() => this.requestUpdate()),
-  //     tap((info) => console.log("NOS TRAEMOS EL SHOPPING", info))
-  //   );
-  // shopping$.subscribe();
+
 
   productToShoppingCart(event) {
     const product = event.detail.product;
@@ -79,14 +76,8 @@ export class HomeBrowse extends LitElement {
     
   }
 
-  getCounter(element) {
-    const id = element.id;
-    const products = this.listShopping ? this.listShopping.products : [];
-    const product = products.find((item) => item.id == id);
-    if (product) {
-      return product.quantity;
-    }
-    return 0;
+  getQuantity(product) {
+    return this.shoppingCartSrv.verifyDoExist(product);
   }
 
   createRenderRoot() {

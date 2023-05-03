@@ -13,17 +13,7 @@ export class ProductCard extends LitElement {
   constructor() {
     super();
     this.counter = 0;
-
     this.shoppingCartSrv = shoppingCartService;
-  }
-
-  firstUpdated() {
-    this.counter = this.shoppingCartSrv.verifyDoExist(this.product);
-    this.product = {
-      ...this.product,
-      quantity: this.counter,
-    }
-   
   }
 
   render() {
@@ -58,10 +48,8 @@ export class ProductCard extends LitElement {
   addProductToFavorites(e) {
     const options = {
       detail: { product: this.product },
-      
     };
     this.dispatchEvent(new CustomEvent("productFavorite", options,));
-   
   }
 
 
