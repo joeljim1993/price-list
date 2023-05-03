@@ -91,7 +91,6 @@ class KanaService{
           return productConstruted;
         })),
         tap(response => this.lisProduct.next(response)),
-        tap(response => console.log("esto es lo que recibo data$",response))
       );
     return data$;
   }

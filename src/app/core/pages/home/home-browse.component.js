@@ -47,21 +47,14 @@ export class HomeBrowse extends LitElement {
     `;
   }
   firstUpdated() {
-    // const kanaSrv$ = this.kanaSrv.lisProduct
-    //   .pipe(
-    //     tap(response =>  this.listproduct = response),
-    //     tap(response => console.log("response",response))
-    //   )
-    // kanaSrv$.subscribe();
+ 
 
     const response$ = this.sandboxShoppingList.changeList$(" ").pipe(
-      tap(info => console.log("esto llega",info)),
       
     )
     response$.subscribe();
 
     const filtered$ = this.sandboxShoppingList.filtered$.pipe(
-      tap(info => console.log("esto llega en filtered",info)),
       tap(response =>  this.listproduct = response),
       tap(()=>this.requestUpdate()),
       
@@ -75,19 +68,9 @@ export class HomeBrowse extends LitElement {
     this.favoriteSrv.newFavorite$.next(product);
   }
 
-  // const location = this.location.params;
-  // const shoppingId = parseInt(location.shoppingId);
-  // const shopping$ = this.sandboxShoppingList
-  //   .getShoppingById$(shoppingId)
-  //   .pipe(
-  //     tap((info) => (this.listShopping = info)),
-  //     tap(() => this.requestUpdate()),
-  //     tap((info) => console.log("NOS TRAEMOS EL SHOPPING", info))
-  //   );
-  // shopping$.subscribe();
+
 
   productToShoppingCart(event) {
-    console.log("ejecutando productToShoppingCart ",event);
     const product = event.detail.product;
     this.shoppingCartSrv.process(product);
     

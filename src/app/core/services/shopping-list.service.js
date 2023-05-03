@@ -16,7 +16,6 @@ class ShoppingListSandboxService {
 
 
   changeList$(query ){
-    console.log("ejecutando changeList$,query: ",query);
     return this.getListProduct$().pipe(
       map(original=> 
           this.filterList(query, original)
@@ -30,22 +29,16 @@ class ShoppingListSandboxService {
   }
 
   filterList(query, list){
-    console.log("ejecutando filterList");
-    console.log("esto llega en filterList, query,list",query,list);
     const products = list.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
-    console.log(" products en  filterList ",products);
     return products;
   }
 
   getListProduct$() {
     if(this.kanaList){
-      console.log("kanalist", this.kanaList);
       return of(this.kanaList)
     }
-    console.log("ejecutando getListProductOfKana$ ");
     return kanaService.getListProductFromKana$()
     .pipe(
-      tap(info => console.log("esto es lo que llega en getListProductFromKana$ ",info)),
       take(1),
 
     )
@@ -53,7 +46,6 @@ class ShoppingListSandboxService {
   }
 
   getShoppingById$(id){
-    console.log("ID DE SANBOX", id);
       return service.getShoppingById$(id);
   }
 
