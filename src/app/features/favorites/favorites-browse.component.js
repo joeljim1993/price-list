@@ -11,6 +11,7 @@ export class FavoritesBrowse extends LitElement {
     super();
     this.favoriteSrv = favoriteService;
     this.favoriteList = this.favoriteSrv.getFavorites();
+    console.log(" this.favoriteList", this.favoriteList);
   }
 
 
