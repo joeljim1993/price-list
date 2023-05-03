@@ -32,12 +32,12 @@ export class HomeBrowse extends LitElement {
         <slot></slot>
       </div>
       <div class="container-cards">
-        ${this.listproduct.map((element) => {
+        ${this.listproduct.map((product) => {
           return html`
             <product-card
-              .counter=${this.getCounter(element)}
+              .counter=${this.getQuantity(product)}
               @quantityChange=${this.productToShoppingCart}
-              .product=${element}
+              .product=${product}
               @productFavorite=${this.addProductToFavorites}
             >
             </product-card>
@@ -87,19 +87,14 @@ export class HomeBrowse extends LitElement {
   // shopping$.subscribe();
 
   productToShoppingCart(event) {
+    console.log("ejecutando productToShoppingCart ",event);
     const product = event.detail.product;
     this.shoppingCartSrv.process(product);
     
   }
 
-  getCounter(element) {
-    const id = element.id;
-    const products = this.listShopping ? this.listShopping.products : [];
-    const product = products.find((item) => item.id == id);
-    if (product) {
-      return product.quantity;
-    }
-    return 0;
+  getQuantity(product) {
+    return this.shoppingCartSrv.verifyDoExist(product);
   }
 
   createRenderRoot() {

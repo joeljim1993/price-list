@@ -32,6 +32,7 @@ export class SearchBoxComponent extends LitElement {
             </td>
             <td class="icon-container">
               <i class="material-icons">search</i>
+              
             </td>
           </tr>
         </table>
