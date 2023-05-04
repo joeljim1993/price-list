@@ -54,9 +54,7 @@ class FavoriteService {
      * @returns de ser true, devuelve el producto. De ser false, devuelve undefined
     */
     verifyProduct(id, favorieList) {
-        console.log("verifyProduct,id,favorieList",id,favorieList);
         let products= favorieList.find(product => product.id === id);
-        console.log("products",products);
         return products
     }
     /**
@@ -92,7 +90,6 @@ class FavoriteService {
         this.newFavorite$
             .pipe(
                 tap(product => this.favoriteInteractive(product)),
-                // tap(product => console.log('Producto seleccionado ->favorite', product)),
                 
             )
             .subscribe();

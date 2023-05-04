@@ -3,6 +3,7 @@ import { Router } from "@vaadin/router";
 
 import { favoriteService } from "../../core/services/favorite.service";
 import './favorites-browse.styles.css';
+import {shoppingCartService} from '../shopping-cart/services/shopping-cart.service'
 
 export class FavoritesBrowse extends LitElement {
 
@@ -11,6 +12,7 @@ export class FavoritesBrowse extends LitElement {
     super();
     this.favoriteSrv = favoriteService;
     this.favoriteList = this.favoriteSrv.getFavorites();
+    this.shoppingCartSrv= shoppingCartService;
   }
 
 
@@ -31,6 +33,7 @@ export class FavoritesBrowse extends LitElement {
             return html` <product-card 
             .counter = ${this.getQuantity(product)}
              @productFavorite=${this.addProductToFavorites}
+             @quantityChange=${this.productToShoppingCart}
             .product="${product}"></product-card> `;
           })}
         </div>
@@ -39,7 +42,12 @@ export class FavoritesBrowse extends LitElement {
     `;
   }
 
- 
+ // funcion de prueba 
+ productToShoppingCart(event) {
+  const product = event.detail.product;
+  this.shoppingCartSrv.process(product);
+  
+}
 
 
   addProductToFavorites(event) {
