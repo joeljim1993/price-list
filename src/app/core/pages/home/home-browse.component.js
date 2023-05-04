@@ -15,13 +15,11 @@ export class HomeBrowse extends LitElement {
 
   constructor() {
     super();
-    
     this.sandboxShoppingList = ShoppingListService;
     this.kanaSrv = kanaService;
     this.favoriteSrv = favoriteService;
     this.shoppingCartSrv = shoppingCartService;
-    this.prueba = [];
-    this.listproduct = [];
+    this.listProductHomeBrowse = [];
     this.listShopping = null;
     this.lastSearch = [];
   }
@@ -32,8 +30,7 @@ export class HomeBrowse extends LitElement {
         <slot></slot>
       </div>
       <div class="container-cards">
-        ${this.listproduct.map((product) => {
-          product.style = this.favoriteSrv.verifyProduct(product.id)
+        ${this.listProductHomeBrowse.map((product) => {
           return html`
             <product-card
               counter=${this.getQuantity(product)}
@@ -49,19 +46,20 @@ export class HomeBrowse extends LitElement {
     `;
   }
   firstUpdated() {
- 
-
     const response$ = this.sandboxShoppingList.changeList$(" ").pipe(
       
     )
     response$.subscribe();
 
-    const filtered$ = this.sandboxShoppingList.filtered$.pipe(
-      tap(response =>  this.listproduct = response),
-      tap(()=>this.requestUpdate()),
+    const getProducts$ = this.sandboxShoppingList.paginationProducts$ //.filtered$.pipe(
+      .pipe(
+        tap(response =>  this.listProductHomeBrowse = response),
+        tap(()=>this.requestUpdate()),
+      )
       
-    )
-    filtered$.subscribe();
+    getProducts$.subscribe();
+
+
   }
 
   //METODO PARA AGREGAR A FAVORITOS
@@ -76,9 +74,8 @@ export class HomeBrowse extends LitElement {
     
   }
 
-  getFavoriteStatus(product) {
-    const status = this.favoriteSrv.verifyProduct(product.id);
-    return status;
+  increment(){
+    this.sandboxShoppingList.paginataon(this.listProductHomeBrowse.length+8);
   }
 
   getQuantity(product) {

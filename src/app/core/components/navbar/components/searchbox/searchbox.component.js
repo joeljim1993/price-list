@@ -44,11 +44,8 @@ export class SearchBoxComponent extends LitElement {
   firstUpdated() {
     const result$ = this.input$.pipe(
       debounceTime(300),
-      
       map(() => this.input.value),
-      tap(() => console.log(this.input.value)),
-      // mentirita : por que se llama sandboxShoppingList
-      switchMap((query) => this.sandboxShoppingList.changeList$(query)),
+      tap((query) => this.sandboxShoppingList.filter(query)),
       
     );
     result$.subscribe();

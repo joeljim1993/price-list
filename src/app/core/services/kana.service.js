@@ -2,23 +2,21 @@ import {
     map,
     tap,
     mergeMap,
-    BehaviorSubject
+    BehaviorSubject,
+    expand,
+    EMPTY,
+    reduce
   } from "rxjs";
 import { fromFetch } from "rxjs/fetch";
 
 
 class KanaService{
 
-  lisProduct = new BehaviorSubject([]);
-
   constructor() {
-    
-    
+    this.lisProduct = new BehaviorSubject([]);    
     this.dolarValue = new BehaviorSubject(1);
-
     this.divisa = 1;
     this.getDolarValue$().subscribe();
-    this.getListProductFromKana$().subscribe();
   }
 
   getQuery(query) {
@@ -50,11 +48,11 @@ class KanaService{
    * Metodo que apunta a los productos en backend de kana
    * @returns un observable
    */
-  getListProductFromKana$(limit = 12){
+  getListProductFromKana$(limit = 500){
     const query = `
       query {
         currentPriceList{
-          products(first:${limit}){
+          products(first: ${limit}){
             edges{
               node{
                 product{
@@ -73,12 +71,28 @@ class KanaService{
                 }
               }
             }
+            pageInfo{
+              hasNextPage
+              hasPreviousPage
+              startCursor
+              endCursor  
+            }
           }
         }
       }`
 
     const data$ = this.getQuery(query)
       .pipe(
+        //expand(response => response.data.currentPriceList.products.pageInfo.hasNextPage ? this.getQuery( 10 ,response.data.currentPriceList.products.pageInfo.endCursor) : EMPTY),
+        // reduce((acc, current) => acc.concat(current), []),
+        // expand(response => {
+        //   const graph = response.data.currentPriceList.products.pageInfo;
+        //   console.log(graph.hasNextPage)
+        //   graph.hasNextPage
+        //   ? this.getQuery(graph.endCursor)
+        //   : EMPTY
+        // }),
+        // tap(response => console.log(response)),
         map(response => response.data.currentPriceList.products.edges.map(product => {
 
           const { pricePublished, ...restProduct } = product.node.product;

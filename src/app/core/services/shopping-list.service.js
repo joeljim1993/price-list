@@ -1,7 +1,16 @@
-import { map, of, Subject, take, tap } from "rxjs";
+import { BehaviorSubject, map, of, Subject, take, tap } from "rxjs";
 import { service } from "./service"
 import {kanaService} from './kana.service'
 class ShoppingListSandboxService {
+
+  listProductSandBox = [];
+
+  paginationProducts$ = new BehaviorSubject(this.listProductSandBox);
+
+  paginataon(limit){
+    const productsPaginated = this.listProductSandBox.slice(0,limit)
+    this.paginationProducts$.next(productsPaginated);
+  }
 
 // los subject son observables pero permiten emitir valores - Roberto Matute
 // con el asObservable el solo lo transforma en observable - Roberto Matute
@@ -12,7 +21,23 @@ class ShoppingListSandboxService {
   kanaList = null;
 
 
+  getListProduct$() {
+    if(this.kanaList){
+      return of(this.kanaList)
+    }
+    return kanaService.getListProductFromKana$()
+      .pipe(
+        tap((response)=> this.listProductSandBox = response),
+        tap(()=> console.log("ESTA ES LA VARIABLE",this.listProductSandBox)),
+        tap(()=> this.paginataon(18)),
+        take(1),
+      )
+  }
 
+  filter(productName) {
+    const products = this.listProductSandBox.filter(product => product.name.toLowerCase().includes(productName.toLowerCase()));
+    this.paginationProducts$.next(products)
+  }
 
 
   changeList$(query ){
@@ -33,21 +58,8 @@ class ShoppingListSandboxService {
     return products;
   }
 
-  getListProduct$() {
-    if(this.kanaList){
-      return of(this.kanaList)
-    }
-    return kanaService.getListProductFromKana$()
-    .pipe(
-      take(1),
+  
 
-    )
-   
-  }
-
-  getShoppingById$(id){
-      return service.getShoppingById$(id);
-  }
 
   productCountChange$(shoppingId, productId, quantity, priceProduct, productImage, productName){
     return service.productCountChange$(shoppingId, productId, quantity, priceProduct, productImage, productName);
@@ -57,24 +69,8 @@ class ShoppingListSandboxService {
     return service.filteredSearch$;
   }
 
-  createShoppingList$(){
-    return service.createShoppingList$();
-  }
+ 
 
-  //DE PRUEBA
-  FilterProduct$(){
-    return service.FilterProduct$();
-  }
-
-  //TRAE LA LISTA DE MERCADO EN CURSO
-  getShoppingListAvailables$(){
-    return service.getShoppingListAvailable$();
-  }
-
-  //LIMPIA LOS PRODUCTOS AGREGADOS EN LA LISTA DE MERCADO
-  cleanShopping(){
-    return service.cleanShopping();
-  }
 
   //TRAER LOS PRODUCTOS AGREGADOS PARA MOSTRARLOS EN SHOPPING CART
   getProductsAddedToShoppingList$(){
