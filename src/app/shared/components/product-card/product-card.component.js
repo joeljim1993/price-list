@@ -1,6 +1,7 @@
 import { html, LitElement } from "lit";
 
 import { shoppingCartService } from "../../../features/shopping-cart/services/shopping-cart.service";
+import { favoriteService } from "../../../core/services/favorite.service";
 import './product-card.style.css';
 
 export class ProductCard extends LitElement {
@@ -13,17 +14,10 @@ export class ProductCard extends LitElement {
 
   constructor() {
     super();
-    this.counter = 0;
-    this.favorite = false;
+    this.favoriteSrv = favoriteService;
     this.shoppingCartSrv = shoppingCartService;
-  }
-
-  firstUpdated() {
-    this.counter = this.shoppingCartSrv.verifyDoExist(this.product);
-    this.product = {
-      ...this.product,
-      quantity: this.counter,
-    }
+    this.counter = 0;
+    this.active = false;
   }
 
   render() {
@@ -37,9 +31,10 @@ export class ProductCard extends LitElement {
         <div class="card-description">
           <p class="title">${this.product.name} ${this.product.presentation}</p>
           <p class="description">Bs. ${this.product.price.toFixed(2)}</p>
+          
           <product-card-favorites-button
             class="favorite"
-            active=${this.active}
+            .active=${this.product.style}
             @addProductToFavorites=${this.addProductToFavorites}>
           </product-card-favorites-button>
           
@@ -60,8 +55,9 @@ export class ProductCard extends LitElement {
   addProductToFavorites(e) {
     const options = {
       detail: { product: this.product },
-
     };
+    this.product.style = !this.product.style;
+    this.requestUpdate();
     this.dispatchEvent(new CustomEvent("productFavorite", options,));
   }
 

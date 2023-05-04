@@ -2,8 +2,9 @@ import { LitElement, html, css } from "lit";
 import { Router } from "@vaadin/router";
 
 import { favoriteService } from "../../core/services/favorite.service";
+import { shoppingCartService } from '../shopping-cart/services/shopping-cart.service'
+
 import './favorites-browse.styles.css';
-import {shoppingCartService} from '../shopping-cart/services/shopping-cart.service'
 
 export class FavoritesBrowse extends LitElement {
 
@@ -11,12 +12,11 @@ export class FavoritesBrowse extends LitElement {
     super();
     this.favoriteSrv = favoriteService;
     this.favoriteList = this.favoriteSrv.getFavorites();
-    this.shoppingCartSrv= shoppingCartService;
+    this.shoppingCartSrv = shoppingCartService;
   }
 
   render() {
     return html`
-
       <div class="favorite-container">
         
         <div class="options">
@@ -25,19 +25,12 @@ export class FavoritesBrowse extends LitElement {
         </div>
 
         <div class="products">
-          ${this.favoriteList.map((product) => {
-<<<<<<< src/app/features/favorites/favorites-browse.component.js
+          ${this.favoriteList.map(product => {
+            product.style = this.favoriteSrv.verifyProduct(product.id)
             return html` <product-card
-              active=${this.favoriteSrv.verifyProduct(product.id, this.favoriteList)}  
+              counter=${this.getQuantity(product)}
               @productFavorite=${this.addProductToFavorites}
               .product="${product}"></product-card> `;
-=======
-            return html` <product-card 
-            .counter = ${this.getQuantity(product)}
-             @productFavorite=${this.addProductToFavorites}
-             @quantityChange=${this.productToShoppingCart}
-            .product="${product}"></product-card> `;
->>>>>>> src/app/features/favorites/favorites-browse.component.js
           })}
         </div>
 
@@ -45,13 +38,11 @@ export class FavoritesBrowse extends LitElement {
     `;
   }
 
- // funcion de prueba 
- productToShoppingCart(event) {
-  const product = event.detail.product;
-  this.shoppingCartSrv.process(product);
-  
-}
-
+  // funcion de prueba 
+  productToShoppingCart(event) {
+    const product = event.detail.product;
+    this.shoppingCartSrv.process(product);
+  }
 
   addProductToFavorites(event) {
     let product = event.detail.product;
@@ -60,16 +51,16 @@ export class FavoritesBrowse extends LitElement {
     this.favoriteList = list;
     this.requestUpdate();
   }
+
   /**
    * verifica el producto y obtiene las cantidad
    * @param {object} product 
    * @returns {number} cantidad del producto pasado
    */
   getQuantity(product){
-    let verifiedProduct = this.favoriteSrv.verifyQuantity(product);
-    return  verifiedProduct
+    let verifiedProduct = this.shoppingCartSrv.verifyDoExist(product)
+    return verifiedProduct;
   }
-
 
   goBack(){
     Router.go("/browse/")

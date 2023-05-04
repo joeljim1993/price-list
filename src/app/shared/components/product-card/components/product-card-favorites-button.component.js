@@ -1,4 +1,4 @@
-import { html, css, LitElement } from "lit";
+import { html, LitElement } from "lit";
 
 import './product-card-favorites-button.component.css';
 export class ProductCardFavoritesButton extends LitElement {
@@ -8,7 +8,7 @@ export class ProductCardFavoritesButton extends LitElement {
 
   constructor() {
     super();
-    this.active = false
+    this.active = false;
   }
 
   render() {
