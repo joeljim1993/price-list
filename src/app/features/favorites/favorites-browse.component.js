@@ -6,19 +6,15 @@ import './favorites-browse.styles.css';
 
 export class FavoritesBrowse extends LitElement {
 
-  
   constructor() {
     super();
     this.favoriteSrv = favoriteService;
     this.favoriteList = this.favoriteSrv.getFavorites();
   }
 
-
- 
-
-
   render() {
     return html`
+
       <div class="favorite-container">
         
         <div class="options">
@@ -28,9 +24,10 @@ export class FavoritesBrowse extends LitElement {
 
         <div class="products">
           ${this.favoriteList.map((product) => {
-            return html` <product-card 
-             @productFavorite=${this.addProductToFavorites}
-            .product="${product}"></product-card> `;
+            return html` <product-card
+              active=${this.favoriteSrv.verifyProduct(product.id, this.favoriteList)}  
+              @productFavorite=${this.addProductToFavorites}
+              .product="${product}"></product-card> `;
           })}
         </div>
 
@@ -43,7 +40,7 @@ export class FavoritesBrowse extends LitElement {
 
   addProductToFavorites(event) {
     let product = event.detail.product;
-    this.favoriteSrv.favoriteInteractive(product);
+    const active = this.favoriteSrv.favoriteInteractive(product);
     let list = favoriteService.getFavorites();
     this.favoriteList = list;
     this.requestUpdate();

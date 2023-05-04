@@ -8,12 +8,13 @@ export class ProductCard extends LitElement {
   static properties = {
     product: { type: Object },
     counter: { type: Number, Reflect: true },
+    active: { type: Boolean },
   };
 
   constructor() {
     super();
     this.counter = 0;
-
+    this.favorite = false;
     this.shoppingCartSrv = shoppingCartService;
   }
 
@@ -23,7 +24,6 @@ export class ProductCard extends LitElement {
       ...this.product,
       quantity: this.counter,
     }
-   
   }
 
   render() {
@@ -37,7 +37,9 @@ export class ProductCard extends LitElement {
         <div class="card-description">
           <p class="title">${this.product.name} ${this.product.presentation}</p>
           <p class="description">Bs. ${this.product.price.toFixed(2)}</p>
-          <product-card-favorites-button class="favorite"
+          <product-card-favorites-button
+            class="favorite"
+            active=${this.active}
             @addProductToFavorites=${this.addProductToFavorites}>
           </product-card-favorites-button>
           
@@ -58,7 +60,7 @@ export class ProductCard extends LitElement {
   addProductToFavorites(e) {
     const options = {
       detail: { product: this.product },
-      
+
     };
     this.dispatchEvent(new CustomEvent("productFavorite", options,));
    
