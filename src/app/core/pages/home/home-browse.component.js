@@ -15,13 +15,11 @@ export class HomeBrowse extends LitElement {
 
   constructor() {
     super();
-    
     this.sandboxShoppingList = ShoppingListService;
     this.kanaSrv = kanaService;
     this.favoriteSrv = favoriteService;
     this.shoppingCartSrv = shoppingCartService;
-    this.prueba = [];
-    this.listproduct = [];
+    this.listProductHomeBrowse = [];
     this.listShopping = null;
     this.lastSearch = [];
   }
@@ -32,7 +30,7 @@ export class HomeBrowse extends LitElement {
         <slot></slot>
       </div>
       <div class="container-cards">
-        ${this.listproduct.map((product) => {
+        ${this.listProductHomeBrowse.map((product) => {
           return html`
             <product-card
               .counter=${this.getQuantity(product)}
@@ -44,22 +42,29 @@ export class HomeBrowse extends LitElement {
           `;
         })}
       </div>
+      <div class="container-button">
+      <button @click="${this.increment}" class="btn_loadmore">
+        <i class="material-icons">autorenew</i>
+        <span class="btn-text">Ver mas</span>
+      </button>
+      </div>
     `;
   }
   firstUpdated() {
- 
-
     const response$ = this.sandboxShoppingList.changeList$(" ").pipe(
       
     )
     response$.subscribe();
 
-    const filtered$ = this.sandboxShoppingList.filtered$.pipe(
-      tap(response =>  this.listproduct = response),
-      tap(()=>this.requestUpdate()),
+    const getProducts$ = this.sandboxShoppingList.paginationProducts$ //.filtered$.pipe(
+      .pipe(
+        tap(response =>  this.listProductHomeBrowse = response),
+        tap(()=>this.requestUpdate()),
+      )
       
-    )
-    filtered$.subscribe();
+    getProducts$.subscribe();
+
+
   }
 
   //METODO PARA AGREGAR A FAVORITOS
@@ -74,6 +79,10 @@ export class HomeBrowse extends LitElement {
     const product = event.detail.product;
     this.shoppingCartSrv.process(product);
     
+  }
+
+  increment(){
+    this.sandboxShoppingList.paginataon(this.listProductHomeBrowse.length+8);
   }
 
   getQuantity(product) {
