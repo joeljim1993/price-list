@@ -13,7 +13,7 @@ class FavoriteService {
         const verifyProduct = this.verifyProduct(product.id, favoriteList);
 
         if(!verifyProduct)  return this.addFavorite(product, favoriteList);
-        if(verifyProduct) return this.removeFavorite(verifyProduct, favoriteList);
+        if(verifyProduct) return this.removeFavorite(product, favoriteList);
        
     }
 
@@ -26,6 +26,7 @@ class FavoriteService {
         list.push(product);
         localStorage.setItem('Favorites',JSON.stringify(list));
         //Añadir una funcion que muestre un mensaje del producto añadido
+        return true;
     }
 
     /**
@@ -38,6 +39,7 @@ class FavoriteService {
         const listUpdated = JSON.stringify(removeFavorite);
         localStorage.setItem('Favorites', listUpdated);
         //Añadir una funcion que muestre un mensaje del producto eliminado
+        return false;
     }
 
     // Inicializa la lista de favoritos en el localStorage en el caso que no exista
@@ -51,8 +53,15 @@ class FavoriteService {
      * Verifica que un producto exista en la lista de productos
      * @param id string que es el id del producto
      * @param favorieList array con la lista de productos en favoritos
-     * @returns de ser true, devuelve el producto. De ser false, devuelve undefined
+     * @returns de ser true, devuelve el producto. De ser false, devuelve false
     */
+<<<<<<< src/app/core/services/favorite.service.js
+    verifyProduct(id, favoriteList) {
+        const verified = favoriteList.find(product => product.id === id);
+        console.log(verified);
+        if(verified) return true;
+        return false;
+=======
     verifyProduct(id, favorieList) {
         let products= favorieList.find(product => product.id === id);
         return products
@@ -77,6 +86,7 @@ class FavoriteService {
         const productVerified = listShoppingCart.find(productInShopping => product.id === productInShopping.id);
         if(productVerified) return productVerified.quantity;
         return 0;
+>>>>>>> src/app/core/services/favorite.service.js
     }
 
     // Obtiene la lista de productos contenido en localStorage

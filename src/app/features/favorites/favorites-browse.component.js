@@ -7,7 +7,6 @@ import {shoppingCartService} from '../shopping-cart/services/shopping-cart.servi
 
 export class FavoritesBrowse extends LitElement {
 
-  
   constructor() {
     super();
     this.favoriteSrv = favoriteService;
@@ -15,12 +14,9 @@ export class FavoritesBrowse extends LitElement {
     this.shoppingCartSrv= shoppingCartService;
   }
 
-
- 
-
-
   render() {
     return html`
+
       <div class="favorite-container">
         
         <div class="options">
@@ -30,11 +26,18 @@ export class FavoritesBrowse extends LitElement {
 
         <div class="products">
           ${this.favoriteList.map((product) => {
+<<<<<<< src/app/features/favorites/favorites-browse.component.js
+            return html` <product-card
+              active=${this.favoriteSrv.verifyProduct(product.id, this.favoriteList)}  
+              @productFavorite=${this.addProductToFavorites}
+              .product="${product}"></product-card> `;
+=======
             return html` <product-card 
             .counter = ${this.getQuantity(product)}
              @productFavorite=${this.addProductToFavorites}
              @quantityChange=${this.productToShoppingCart}
             .product="${product}"></product-card> `;
+>>>>>>> src/app/features/favorites/favorites-browse.component.js
           })}
         </div>
 
@@ -52,7 +55,7 @@ export class FavoritesBrowse extends LitElement {
 
   addProductToFavorites(event) {
     let product = event.detail.product;
-    this.favoriteSrv.favoriteInteractive(product);
+    const active = this.favoriteSrv.favoriteInteractive(product);
     let list = favoriteService.getFavorites();
     this.favoriteList = list;
     this.requestUpdate();
