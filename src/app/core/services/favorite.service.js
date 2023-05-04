@@ -13,7 +13,7 @@ class FavoriteService {
         const verifyProduct = this.verifyProduct(product.id, favoriteList);
 
         if(!verifyProduct)  return this.addFavorite(product, favoriteList);
-        if(verifyProduct) return this.removeFavorite(verifyProduct, favoriteList);
+        if(verifyProduct) return this.removeFavorite(product, favoriteList);
        
     }
 
@@ -26,6 +26,7 @@ class FavoriteService {
         list.push(product);
         localStorage.setItem('Favorites',JSON.stringify(list));
         //Añadir una funcion que muestre un mensaje del producto añadido
+        return true;
     }
 
     /**
@@ -38,6 +39,7 @@ class FavoriteService {
         const listUpdated = JSON.stringify(removeFavorite);
         localStorage.setItem('Favorites', listUpdated);
         //Añadir una funcion que muestre un mensaje del producto eliminado
+        return false;
     }
 
     // Inicializa la lista de favoritos en el localStorage en el caso que no exista
@@ -51,10 +53,13 @@ class FavoriteService {
      * Verifica que un producto exista en la lista de productos
      * @param id string que es el id del producto
      * @param favorieList array con la lista de productos en favoritos
-     * @returns de ser true, devuelve el producto. De ser false, devuelve undefined
+     * @returns de ser true, devuelve el producto. De ser false, devuelve false
     */
-    verifyProduct(id, favorieList) {
-        return favorieList.find(product => product.id === id);
+    verifyProduct(id) {
+        const favoriteList = this.getFavorites();
+        const verified = favoriteList.find(product => product.id === id);
+        if(verified) return true;
+        return false;
     }
 
     // Obtiene la lista de productos contenido en localStorage
@@ -68,8 +73,6 @@ class FavoriteService {
         this.newFavorite$
             .pipe(
                 tap(product => this.favoriteInteractive(product)),
-                // tap(product => console.log('Producto seleccionado ->favorite', product)),
-                
             )
             .subscribe();
         this.initFavorites();

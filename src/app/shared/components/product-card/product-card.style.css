@@ -35,6 +35,22 @@
     width: 70%;
 }
 
+/* Estilos del boton de favoritos */
+.favorite-button {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  right: 15px;
+  top: 3px;
+  color: #d6d1d1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.favorite-button.active {
+  color: red;
+}
+
 @media (min-width: 571px) {
 
     .card-description p {

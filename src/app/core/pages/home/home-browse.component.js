@@ -33,7 +33,7 @@ export class HomeBrowse extends LitElement {
         ${this.listProductHomeBrowse.map((product) => {
           return html`
             <product-card
-              .counter=${this.getQuantity(product)}
+              counter=${this.getQuantity(product)}
               @quantityChange=${this.productToShoppingCart}
               .product=${product}
               @productFavorite=${this.addProductToFavorites}
@@ -42,12 +42,7 @@ export class HomeBrowse extends LitElement {
           `;
         })}
       </div>
-      <div class="container-button">
-      <button @click="${this.increment}" class="btn_loadmore">
-        <i class="material-icons">autorenew</i>
-        <span class="btn-text">Ver mas</span>
-      </button>
-      </div>
+      <footer-component></footer-component>
     `;
   }
   firstUpdated() {
@@ -73,8 +68,6 @@ export class HomeBrowse extends LitElement {
     this.favoriteSrv.newFavorite$.next(product);
   }
 
-
-
   productToShoppingCart(event) {
     const product = event.detail.product;
     this.shoppingCartSrv.process(product);
@@ -86,7 +79,8 @@ export class HomeBrowse extends LitElement {
   }
 
   getQuantity(product) {
-    return this.shoppingCartSrv.verifyDoExist(product);
+    let existsProduct = this.shoppingCartSrv.verifyDoExist(product);
+    return existsProduct;
   }
 
   createRenderRoot() {

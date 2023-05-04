@@ -1,41 +1,33 @@
-import { html, css, LitElement } from "lit";
+import { html, LitElement } from "lit";
 
+import './product-card-favorites-button.component.css';
 export class ProductCardFavoritesButton extends LitElement {
-  static properties = {};
-
-  static styles = css`
-    img {
-      width: 20px;
-      height: 20px;
-      left: 323px;
-      top: 10px;
-      text-decoration: none;
-    }
-  `;
+  static properties = {
+    active: { type: Boolean },
+  };
 
   constructor() {
     super();
-    this.favoriteEnable = true;
+    this.active = false;
   }
 
   render() {
     return html`
-      <a class="enable" @click=${this.addProductToFavorites} href="#">
-        <img src="/src/assets/images/favorite.png"/>
-      </a>
+      <i 
+        class='favorite-button material-icons ${this.active ? 'active' : ''}'
+        @click=${this.addProductToFavorites}
+      >favorite
+      </i>
     `;
   }
 
-  addProductToFavorites(e) {
-    const evento = this.favoriteEnable;
-    const options = {
-      detail: evento,
-    };
-    this.dispatchEvent(new CustomEvent("addProductToFavorites", options));
+  addProductToFavorites() {
+    this.dispatchEvent(new CustomEvent("addProductToFavorites"));
+  }
+
+  createRenderRoot() {
+    return this;
   }
 }
 
-customElements.define(
-  "product-card-favorites-button",
-  ProductCardFavoritesButton
-);
+customElements.define('product-card-favorites-button', ProductCardFavoritesButton);

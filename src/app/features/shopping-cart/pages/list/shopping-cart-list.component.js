@@ -28,7 +28,7 @@ export class ShoppingCartList extends LitElement {
       .pipe(
         takeUntil(this.componentDestroyed$),
         tap(products => this.list = products),
-        tap(list => console.log('en list', list)),
+        tap(list => console.log('en list shopping cart lis', list)),
         tap(() => this.requestUpdate()),
       )
       .subscribe();
@@ -99,6 +99,7 @@ export class ShoppingCartList extends LitElement {
         </div>
 
       </div>
+      <footer-component></footer-component>
     `;
   }
 

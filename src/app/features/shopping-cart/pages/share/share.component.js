@@ -73,6 +73,7 @@ export class ShareComponent extends LitElement {
 
         </div>
       </div>
+      <footer-component></footer-component>
     `;
   }
 
