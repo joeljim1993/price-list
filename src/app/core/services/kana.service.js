@@ -50,7 +50,7 @@ class KanaService{
    * Metodo que apunta a los productos en backend de kana
    * @returns un observable
    */
-  getListProductFromKana$(limit = 12){
+  getListProductFromKana$(limit = 70){
     const query = `
       query {
         currentPriceList{
