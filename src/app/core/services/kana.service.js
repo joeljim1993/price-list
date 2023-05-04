@@ -9,8 +9,11 @@ import { fromFetch } from "rxjs/fetch";
 
 class KanaService{
 
+  lisProduct = new BehaviorSubject([]);
+
   constructor() {
-    this.lisProduct = new BehaviorSubject([]);
+    
+    
     this.dolarValue = new BehaviorSubject(1);
 
     this.divisa = 1;

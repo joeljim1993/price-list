@@ -1,6 +1,6 @@
 import { map, of, Subject, take, tap } from "rxjs";
 import { service } from "./service"
-
+import {kanaService} from './kana.service'
 class ShoppingListSandboxService {
 
 // los subject son observables pero permiten emitir valores - Roberto Matute
@@ -10,6 +10,10 @@ class ShoppingListSandboxService {
   _query$ = new Subject();
   query$ = this._query$.asObservable();
   kanaList = null;
+
+
+
+
 
   changeList$(query ){
     return this.getListProduct$().pipe(
@@ -25,23 +29,23 @@ class ShoppingListSandboxService {
   }
 
   filterList(query, list){
-    const products = list.filter(product => product.name.toLowerCase().includes(query.toLowerCase()))
+    const products = list.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
     return products;
   }
 
   getListProduct$() {
     if(this.kanaList){
-      console.log("kanalist", this.kanaList);
       return of(this.kanaList)
     }
-    return service.getListProductOfKana$()
+    return kanaService.getListProductFromKana$()
     .pipe(
       take(1),
+
     )
+   
   }
 
   getShoppingById$(id){
-    console.log("ID DE SANBOX", id);
       return service.getShoppingById$(id);
   }
 

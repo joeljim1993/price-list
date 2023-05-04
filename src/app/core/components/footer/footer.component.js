@@ -8,6 +8,9 @@ export class FooterComponent extends LitElement {
 
   firstUpdated() {}
 
+
+
+
   render() {
     return html`
       <div class="footer-container ">

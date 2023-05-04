@@ -63,7 +63,6 @@ export class ProductCard extends LitElement {
 
     };
     this.dispatchEvent(new CustomEvent("productFavorite", options,));
-   
   }
 
 
