@@ -33,9 +33,10 @@ export class HomeBrowse extends LitElement {
       </div>
       <div class="container-cards">
         ${this.listproduct.map((product) => {
+          product.style = this.favoriteSrv.verifyProduct(product.id)
           return html`
             <product-card
-              .counter=${this.getQuantity(product)}
+              counter=${this.getQuantity(product)}
               @quantityChange=${this.productToShoppingCart}
               .product=${product}
               @productFavorite=${this.addProductToFavorites}
@@ -44,6 +45,7 @@ export class HomeBrowse extends LitElement {
           `;
         })}
       </div>
+      <footer-component></footer-component>
     `;
   }
   firstUpdated() {
@@ -68,17 +70,20 @@ export class HomeBrowse extends LitElement {
     this.favoriteSrv.newFavorite$.next(product);
   }
 
-
-
   productToShoppingCart(event) {
     const product = event.detail.product;
     this.shoppingCartSrv.process(product);
     
   }
 
+  getFavoriteStatus(product) {
+    const status = this.favoriteSrv.verifyProduct(product.id);
+    return status;
+  }
+
   getQuantity(product) {
     let existsProduct = this.shoppingCartSrv.verifyDoExist(product);
-    return existsProduct
+    return existsProduct;
   }
 
   createRenderRoot() {

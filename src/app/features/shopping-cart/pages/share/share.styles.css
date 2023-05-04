@@ -1,5 +1,6 @@
 .share-component-container {
     padding: 0 10px;
+    min-height: calc(100vh - 70px - 341px);
 }
 
 .shared-container {
