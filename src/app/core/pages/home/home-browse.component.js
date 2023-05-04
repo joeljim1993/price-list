@@ -45,6 +45,7 @@ export class HomeBrowse extends LitElement {
           `;
         })}
       </div>
+      <footer-component></footer-component>
     `;
   }
   firstUpdated() {

@@ -35,6 +35,7 @@ export class FavoritesBrowse extends LitElement {
         </div>
 
       </div>
+      <footer-component></footer-component>
     `;
   }
 
