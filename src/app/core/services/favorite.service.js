@@ -54,7 +54,29 @@ class FavoriteService {
      * @returns de ser true, devuelve el producto. De ser false, devuelve undefined
     */
     verifyProduct(id, favorieList) {
-        return favorieList.find(product => product.id === id);
+        let products= favorieList.find(product => product.id === id);
+        return products
+    }
+    /**
+     * trae los productos de shooping-cart desde localStorage
+     * @returns {array} 
+     */
+    getShoppingCart() {
+        const shoppingCart = localStorage.getItem('ShoppingCart');
+        return JSON.parse(shoppingCart);
+    }
+
+    /**
+     * verifica si el favorito se encuentra en list-shopping
+     * @param {object} product producto
+     * @returns {number} cantidad del product
+     */
+
+    verifyQuantity(product) {
+        let listShoppingCart = this.getShoppingCart();
+        const productVerified = listShoppingCart.find(productInShopping => product.id === productInShopping.id);
+        if(productVerified) return productVerified.quantity;
+        return 0;
     }
 
     // Obtiene la lista de productos contenido en localStorage
@@ -68,7 +90,6 @@ class FavoriteService {
         this.newFavorite$
             .pipe(
                 tap(product => this.favoriteInteractive(product)),
-                // tap(product => console.log('Producto seleccionado ->favorite', product)),
                 
             )
             .subscribe();

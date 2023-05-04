@@ -77,7 +77,8 @@ export class HomeBrowse extends LitElement {
   }
 
   getQuantity(product) {
-    return this.shoppingCartSrv.verifyDoExist(product);
+    let existsProduct = this.shoppingCartSrv.verifyDoExist(product);
+    return existsProduct
   }
 
   createRenderRoot() {
