@@ -54,7 +54,31 @@ class FavoriteService {
      * @returns de ser true, devuelve el producto. De ser false, devuelve undefined
     */
     verifyProduct(id, favorieList) {
-        return favorieList.find(product => product.id === id);
+        console.log("verifyProduct,id,favorieList",id,favorieList);
+        let products= favorieList.find(product => product.id === id);
+        console.log("products",products);
+        return products
+    }
+    /**
+     * trae los productos de shooping-cart desde localStorage
+     * @returns {array} 
+     */
+    getShoppingCart() {
+        const shoppingCart = localStorage.getItem('ShoppingCart');
+        return JSON.parse(shoppingCart);
+    }
+
+    /**
+     * verifica si el favorito se encuentra en list-shopping
+     * @param {object} product producto
+     * @returns {number} cantidad del product
+     */
+
+    verifyQuantity(product) {
+        let listShoppingCart = this.getShoppingCart();
+        const productVerified = listShoppingCart.find(productInShopping => product.id === productInShopping.id);
+        if(productVerified) return productVerified.quantity;
+        return 0;
     }
 
     // Obtiene la lista de productos contenido en localStorage

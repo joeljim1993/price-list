@@ -77,11 +77,7 @@ export class HomeBrowse extends LitElement {
   }
 
   getQuantity(product) {
-    console.log("product, getQuantity",product);
-    
-    //TODO: cambiar 
     let existsProduct = this.shoppingCartSrv.verifyDoExist(product);
-    console.log("existsProduct",existsProduct);
     return existsProduct
   }
 

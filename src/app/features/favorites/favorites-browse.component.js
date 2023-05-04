@@ -11,7 +11,6 @@ export class FavoritesBrowse extends LitElement {
     super();
     this.favoriteSrv = favoriteService;
     this.favoriteList = this.favoriteSrv.getFavorites();
-    console.log(" this.favoriteList", this.favoriteList);
   }
 
 
@@ -30,6 +29,7 @@ export class FavoritesBrowse extends LitElement {
         <div class="products">
           ${this.favoriteList.map((product) => {
             return html` <product-card 
+            .counter = ${this.getQuantity(product)}
              @productFavorite=${this.addProductToFavorites}
             .product="${product}"></product-card> `;
           })}
@@ -49,6 +49,16 @@ export class FavoritesBrowse extends LitElement {
     this.favoriteList = list;
     this.requestUpdate();
   }
+  /**
+   * verifica el producto y obtiene las cantidad
+   * @param {object} product 
+   * @returns {number} cantidad del producto pasado
+   */
+  getQuantity(product){
+    let verifiedProduct = this.favoriteSrv.verifyQuantity(product);
+    return  verifiedProduct
+  }
+
 
   goBack(){
     Router.go("/browse/")
