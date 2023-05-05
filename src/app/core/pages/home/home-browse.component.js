@@ -42,6 +42,11 @@ export class HomeBrowse extends LitElement {
           `;
         })}
       </div>
+      <div class="container-button">
+        <button @click="${this.increment}">
+        <i>
+        </i></button>
+      </div>
       <footer-component></footer-component>
     `;
   }
