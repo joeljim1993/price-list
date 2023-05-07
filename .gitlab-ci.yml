@@ -1,11 +1,6 @@
-image: busybox
-
-pages:
-  stage: deploy
-  script:
-    - echo "The site will be deployed to $CI_PAGES_URL"
-  artifacts:
-    paths:
-      - public
-  only:
-  - develop
+# The Docker image that will be used to build your app
+image: "node: lts"
+# Functions that should be executed before the build script is run
+before_script:
+  - npm i
+  - npm run build
