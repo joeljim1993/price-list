@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 
 // Import de las hojas de estilo para este componente
-import './loader.style.css';
+import './loader.styles.css';
 
 export class LoaderComponent extends LitElement {
 
@@ -11,7 +11,9 @@ export class LoaderComponent extends LitElement {
 
   render() {
     return html`
-      <div class="container-loader"></div>
+      <div class='container-loader'>
+        <div class='loader'></div>
+      </div>
     `;
   }
 
