@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit";
-import { tap, Subject, takeUntil } from "rxjs";
+import { tap, Subject, takeUntil, mergeMap, takeWhile } from "rxjs";
 import { Router } from "@vaadin/router";
 
 import { shoppingCartService } from '/src/app/features/shopping-cart/services/shopping-cart.service';
@@ -15,9 +15,11 @@ export class ShoppingCartList extends LitElement {
     super();
     this.shoppingCartSrv = shoppingCartService;
     this.kanaSrv = kanaService;
+
     this.list = [];
     this.ammount = 0;
-    this.dolarValue = 1;
+    this.dolarValue = 0;
+    this.divisaValue = 0;
     this.shareUrl = "";
 
     this.componentDestroyed$ = new Subject();
@@ -28,22 +30,11 @@ export class ShoppingCartList extends LitElement {
       .pipe(
         takeUntil(this.componentDestroyed$),
         tap(products => this.list = products),
-        tap(list => console.log('en list shopping cart lis', list)),
-        tap(() => this.requestUpdate()),
-      )
-      .subscribe();
-
-    this.shoppingCartSrv.ammount
-      .pipe(
-          tap(ammount => this.ammount = ammount),
-          tap(() => this.requestUpdate()),
-      )
-      .subscribe();
-
-    this.kanaSrv.dolarValue
-      .pipe(
-        takeUntil(this.componentDestroyed$),
-        tap(value => this.dolarValue = this.ammount / value),
+        mergeMap(() => this.shoppingCartSrv.ammount),
+        tap(ammount => this.ammount = ammount),
+        mergeMap(() => this.kanaSrv.dolarValue),
+        tap(value => this.divisaValue = value),
+        tap(value => (value > 1) ? this.calculatePricesToUSD(value) : ''),
         tap(() => this.requestUpdate()),
       )
       .subscribe();
@@ -62,7 +53,8 @@ export class ShoppingCartList extends LitElement {
             ? this.list.map(product => {
               return html`
                 <shopping-cart-detail 
-                  .product=${product} 
+                  .product=${product}
+                  divisaValue=${this.divisaValue}
                   @removeProduct=${this.removeProduct}
                   @quantityChange=${this.productToShoppingCart}
                 >
@@ -103,6 +95,11 @@ export class ShoppingCartList extends LitElement {
     `;
   }
 
+  calculatePricesToUSD() {
+    this.dolarValue = this.ammount / this.divisaValue;
+    // this.list.forEach(product => product.priceUsd = product.price / this.divisaValue);
+  }
+
   removeProduct(event) {
     const product = event.detail;
     this.shoppingCartSrv.cleanProduct(product);
@@ -118,7 +115,7 @@ export class ShoppingCartList extends LitElement {
   }
 
   goBack() {
-    Router.go("/browse/");
+    Router.go('/browse/');
   }
 
   shareList() {

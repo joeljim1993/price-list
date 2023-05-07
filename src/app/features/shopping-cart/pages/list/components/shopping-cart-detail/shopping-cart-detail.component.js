@@ -6,6 +6,7 @@ export class ShoppingCartDetail extends LitElement {
 
     static properties = {
         product: { type: Object },
+        divisaValue: { type: Number },
     };
 
     constructor(){
@@ -21,7 +22,11 @@ export class ShoppingCartDetail extends LitElement {
                     <div>
                         <h2>${this.product.name}</h2>
                         <h1>Bs. ${this.product.price.toFixed(2)}</h1>
-                        <h3>$ 0.90</h3>
+                        <h3>$ ${
+                            (this.divisaValue > 1)
+                            ? (this.product.price / this.divisaValue).toFixed(2)
+                            : '0.00'
+                        }</h3>
                     </div>
                 </div>
 
