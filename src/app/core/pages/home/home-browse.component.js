@@ -1,27 +1,21 @@
-import { html, css, LitElement } from "lit";
-import { switchMap, tap } from "rxjs";
+import { html, LitElement } from "lit";
+import { tap } from "rxjs";
 
-import { ShoppingListService } from "../../services/shopping-list.service";
+import { productsMediator } from "../../services/productsMediator.service";
 import { favoriteService } from "./../../services/favorite.service";
-import { kanaService } from "../../services/kana.service";
 import { shoppingCartService } from '/src/app/features/shopping-cart/services/shopping-cart.service';
+
 import "./home-browse.style.css";
 
 export class HomeBrowse extends LitElement {
 
-  static properties = {
-    listproduct: { type: Array },
-  };
-
   constructor() {
     super();
-    this.sandboxShoppingList = ShoppingListService;
-    this.kanaSrv = kanaService;
+    this.productsMediator = productsMediator;
     this.favoriteSrv = favoriteService;
     this.shoppingCartSrv = shoppingCartService;
-    this.listProductHomeBrowse = [];
-    this.listShopping = null;
-    this.lastSearch = [];
+
+    this.listProduct = [];
   }
 
   render() {
@@ -30,7 +24,8 @@ export class HomeBrowse extends LitElement {
         <slot></slot>
       </div>
       <div class="container-cards">
-        ${this.listProductHomeBrowse.map((product) => {
+        ${this.listProduct.map((product) => {
+          product.style = this.favoriteSrv.verifyProduct(product.id)
           return html`
             <product-card
               counter=${this.getQuantity(product)}
@@ -43,28 +38,19 @@ export class HomeBrowse extends LitElement {
         })}
       </div>
       <div class="container-button">
-        <button @click="${this.increment}">
-        <i>
-        </i></button>
+        <button @click="${this.incrementProducts}"></button>
       </div>
       <footer-component></footer-component>
     `;
   }
   firstUpdated() {
-    const response$ = this.sandboxShoppingList.changeList$(" ").pipe(
-      
-    )
-    response$.subscribe();
-
-    const getProducts$ = this.sandboxShoppingList.paginationProducts$ //.filtered$.pipe(
+    const getProducts$ = this.productsMediator.paginationProducts$
       .pipe(
-        tap(response =>  this.listProductHomeBrowse = response),
-        tap(()=>this.requestUpdate()),
+        tap(response =>  this.listProduct = response),
+        tap(() => this.requestUpdate()),
       )
       
     getProducts$.subscribe();
-
-
   }
 
   //METODO PARA AGREGAR A FAVORITOS
@@ -76,11 +62,10 @@ export class HomeBrowse extends LitElement {
   productToShoppingCart(event) {
     const product = event.detail.product;
     this.shoppingCartSrv.process(product);
-    
   }
 
-  increment(){
-    this.sandboxShoppingList.paginataon(this.listProductHomeBrowse.length+8);
+  incrementProducts(){
+    this.productsMediator.pagination(this.listProduct.length+8);
   }
 
   getQuantity(product) {
