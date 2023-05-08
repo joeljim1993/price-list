@@ -33,3 +33,7 @@
 .container-button button .btn-text{
     margin-left: 7px;
 }
+
+footer-component {
+    width: 100vw;
+}

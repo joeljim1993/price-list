@@ -29,6 +29,7 @@ export class FavoritesBrowse extends LitElement {
             product.style = this.favoriteSrv.verifyProduct(product.id)
             return html` <product-card
               counter=${this.getQuantity(product)}
+              @quantityChange=${this.productToShoppingCart}
               @productFavorite=${this.addProductToFavorites}
               .product="${product}"></product-card> `;
           })}
