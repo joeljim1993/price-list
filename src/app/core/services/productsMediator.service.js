@@ -1,4 +1,4 @@
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, tap, of } from 'rxjs';
 
 import { kanaService } from './kana.service';
 

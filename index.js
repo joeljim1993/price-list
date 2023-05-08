@@ -19,6 +19,8 @@ import { ProductCard } from "./src/app/shared/components/product-card/product-ca
 import { ProductCardButton } from "./src/app/shared/components/product-card/components/product-card-button.component";
 import { ProductCardFavoritesButton } from "./src/app/shared/components/product-card/components/product-card-favorites-button.component";
 
+// View filtered
+import { ViewFilteredComponent } from "./src/app/core/pages/view-filtered/view-filtered.component";
 
 // Page not Found
 import { PageNotFound } from "./src/app/features/page-not-found/page-not-found.component";

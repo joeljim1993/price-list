@@ -1,0 +1,23 @@
+.container-cards-filtered {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-around;
+}
+
+.container-cards-filtered .message {
+    padding: 20px;
+    text-align: center;
+}
+
+footer-component {
+    width: 100vw;
+}
+
+.content {
+    height: calc(100vh - 85px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
