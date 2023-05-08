@@ -25,6 +25,11 @@ class ProductsMediator {
     this.paginationProducts$.next(productsPaginated);
   }
 
+  getProductById(id) {
+    const product = this.listProduct.filter(product => product.id === id);
+    return product[0];
+  }
+
   filterForName(productName) {
     const products = this.listProduct.filter(product => product.name.toLowerCase().includes(productName.toLowerCase()));
     return products;
