@@ -7,6 +7,7 @@ export const routes = [
     { path: '/browse/', component: 'home-browse' },
     { path: '/shopping-cart/', children: routes_shoppingCart, }, // component: 'shopping-cart-list' },
     { path: '/favorites/',  children: routes_favorite, component: 'favorites-browse' },
+    { path: '/categories/:name',  component: 'categories-browse' },
     { path: '/page-not-found/', component: 'page-not-found' },
     { path: '(.*)', redirect: '/page-not-found/' },
   ]
