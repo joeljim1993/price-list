@@ -31,8 +31,18 @@
     font-weight: bold;
 }
 
+.card-image {
+  min-height: 153px;
+  max-height: 153px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .image {
     width: 70%;
+    max-height: 147px;
+    object-fit:contain;
 }
 
 /* Estilos del boton de favoritos */
