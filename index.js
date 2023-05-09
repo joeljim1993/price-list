@@ -19,6 +19,8 @@ import { ProductCard } from "./src/app/shared/components/product-card/product-ca
 import { ProductCardButton } from "./src/app/shared/components/product-card/components/product-card-button.component";
 import { ProductCardFavoritesButton } from "./src/app/shared/components/product-card/components/product-card-favorites-button.component";
 
+// View filtered
+import { ViewFilteredComponent } from "./src/app/core/pages/view-filtered/view-filtered.component";
 
 // Page not Found
 import { PageNotFound } from "./src/app/features/page-not-found/page-not-found.component";
@@ -33,12 +35,6 @@ import { ShareSummaryComponent } from "./src/app/features/shopping-cart/pages/sh
 
 // Favorites
 import { FavoritesBrowse } from "./src/app/features/favorites/favorites-browse.component";
-
-// Categories
-import { CategoriesBrowse } from "./src/app/features/categories/categories-browse.component";
-import { CategoriesListComponent } from "./src/app/features/categories/components/categories-list.component";
-import { SelectCategories } from "./src/app/core/components/navbar/components/select-categories/select-categories.component";
-import { CategoryComponent } from "./src/app/core/components/navbar/components/select-categories/components/category.component";
 
 //footer
 import { FooterComponent } from "./src/app/core/components/footer/footer.component"

@@ -1,25 +1,41 @@
-import { html, LitElement } from "lit";
+import { html, LitElement } from 'lit';
+import { Router } from '@vaadin/router';
 import {
   debounceTime,
   map,
-  fromEvent,
-  switchMap,
   tap,
+  Subject,
 } from "rxjs";
 
-import { ShoppingListService } from "/src/app/core/services/shopping-list.service";
 import './searchbox.style.css';
 
 export class SearchBoxComponent extends LitElement {
-  input$ = fromEvent(document, "keyup");
-
+  
   get input() {
-    return this.renderRoot?.querySelector(".search") ?? null;
+    return this.renderRoot?.querySelector('.search') ?? null;
   }
 
   constructor() {
     super();
-    this.sandboxShoppingList = ShoppingListService;
+
+    this.filter$ = new Subject('')
+      .pipe(
+        debounceTime(300),
+        map(() => this.input.value),
+        tap(query => (query.length > 0) ? this.redirectFilter(query) : this.redirectHome()),
+      )
+    this.filter$.subscribe();
+  }
+
+  firstUpdated() {
+    const pathname = window.location.pathname;
+    const route = pathname.substring(1,7);
+    if(route === 'filter') {
+      const param = pathname
+        .replace('/filter/', '')
+        .replace(/%20/g, ' ');
+      this.input.value = param;
+    }
   }
 
   render() {
@@ -28,11 +44,17 @@ export class SearchBoxComponent extends LitElement {
         <table class="elementsContainer">
           <tr>
             <td>
-              <input type="text" placeholder="Busca tu producto" class="search" />
+              <input 
+                type="text" 
+                placeholder="Busca tu producto" 
+                class="search" 
+                @keyup=${this.filterForKeyup}/>
             </td>
             <td class="icon-container">
-              <i class="material-icons">search</i>
-              
+              <i
+                class="material-icons" 
+                @click=${this.filterForClick}
+              >search</i>
             </td>
           </tr>
         </table>
@@ -41,14 +63,21 @@ export class SearchBoxComponent extends LitElement {
     `;
   }
 
-  firstUpdated() {
-    const result$ = this.input$.pipe(
-      debounceTime(300),
-      map(() => this.input.value),
-      tap((query) => this.sandboxShoppingList.filter(query)),
-      
-    );
-    result$.subscribe();
+  filterForKeyup() {
+    this.filter$.next('');
+  }
+
+  filterForClick() {
+    const input = this.input.value;
+    (input.length) ? this.redirectFilter(input) : this.redirectHome();
+  }
+
+  redirectFilter(query) {
+    Router.go(`/filter/${query}`);
+  }
+
+  redirectHome() {
+    Router.go(`/browse/`);
   }
 
   createRenderRoot() {
