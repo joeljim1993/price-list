@@ -1,0 +1,19 @@
+.category-container .option {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 16px;
+  border-radius: 8px;
+  color: #000;
+  font-weight: 300;
+  user-select: none;
+  cursor: pointer;
+}
+
+.category-container .option:hover {
+  background-color: #F2F2F2;
+}
+
+.category-container .option i {
+  margin-right: 15px;
+}

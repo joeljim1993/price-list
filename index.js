@@ -37,6 +37,8 @@ import { FavoritesBrowse } from "./src/app/features/favorites/favorites-browse.c
 // Categories
 import { CategoriesBrowse } from "./src/app/features/categories/categories-browse.component";
 import { CategoriesListComponent } from "./src/app/features/categories/components/categories-list.component";
+import { SelectCategories } from "./src/app/core/components/navbar/components/select-categories/select-categories.component";
+import { CategoryComponent } from "./src/app/core/components/navbar/components/select-categories/components/category.component";
 
 //footer
 import { FooterComponent } from "./src/app/core/components/footer/footer.component"
