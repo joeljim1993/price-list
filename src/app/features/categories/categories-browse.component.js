@@ -40,8 +40,10 @@ export class CategoriesBrowse extends LitElement {
             ${this.productList.length > 0
               ? html`
                 ${this.productList.map((product) => {
+                  product.style = this.favoriteSrv.verifyProduct(product.id);
                   return html`
                     <product-card
+                      counter=${this.getQuantity(product)}
                       .product="${product}"
                       @quantityChange=${this.productToShoppingCart}
                       @productFavorite=${this.addProductToFavorites}
@@ -65,6 +67,11 @@ export class CategoriesBrowse extends LitElement {
   addProductToFavorites(event) {
     const product = event.detail.product;
     this.favoriteSrv.newFavorite$.next(product);
+  }
+
+  getQuantity(product) {
+    let existsProduct = this.shoppingCartSrv.verifyDoExist(product);
+    return existsProduct;
   }
 
   createRenderRoot() {
