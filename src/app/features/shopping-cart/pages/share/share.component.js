@@ -1,8 +1,7 @@
 import { LitElement, html } from "lit";
-import { tap, Subject, takeUntil } from "rxjs";
+import { Subject, tap, filter } from "rxjs";
 
-import { service } from '/src/app/core/services/service';
-import { shoppingCartService } from '/src/app/features/shopping-cart/services/shopping-cart.service';
+import { productsMediator } from '/src/app/core/services/productsMediator.service'
 import './share.styles.css';
 
 export class ShareComponent extends LitElement {
@@ -12,13 +11,23 @@ export class ShareComponent extends LitElement {
 
   constructor() {
     super();
-    this.shoppingCartSrv = shoppingCartService;
-    this.service = service;
+    this.productsMediator = productsMediator;
     this.list = [];
     this.totalList = 0;
     this.params = [];
+    this.loader = false;
 
     this.componentDestroyed$ = new Subject();
+
+    const getProducts$ = this.productsMediator.paginationProducts$
+      .pipe(
+        filter(response => response.length > 0),
+        tap(() => this.getProductsList()),
+        tap(() => this.loader = !this.loader),
+        tap(() => this.requestUpdate()),
+      )
+    getProducts$.subscribe();
+
   }
 
   async onBeforeEnter(location) {
@@ -31,12 +40,12 @@ export class ShareComponent extends LitElement {
     });
   }
 
-  firstUpdated() {
+  getProductsList() {
     let totalList = 0;
 
     this.params.forEach(param => {
       const product = {
-        ...this.service.getProduct(param.id),
+        ...this.productsMediator.getProductById(param.id),
         quantity: param.quantity,
         style: false,
       }
@@ -45,7 +54,6 @@ export class ShareComponent extends LitElement {
     })
 
     this.totalList = totalList;
-    this.requestUpdate();
   }
 
   render() {
@@ -56,22 +64,27 @@ export class ShareComponent extends LitElement {
           <span>Lista Compartida</span>
         </div>
 
-        <div class="separator">
-          <share-summary ammount=${this.totalList}></share-summary>
+        ${
+          (this.loader)
+          ? html`
+            <div class="separator">
+              <share-summary ammount=${this.totalList}></share-summary>
 
-          <div class="shared-container">
-            <div class="shared-elements">
-              ${this.list.map(product => {
-                return html`
-                  <share-detail 
-                    .product=${product}
-                  ></share-detail>
-                `
-              })}
-            </div>
-          </div>
+              <div class="shared-container">
+                <div class="shared-elements">
+                  ${this.list.map(product => {
+                    return html`
+                      <share-detail 
+                        .product=${product}
+                      ></share-detail>
+                    `
+                  })}
+                </div>
+              </div>
 
-        </div>
+            </div>`
+          : html`<loader-component></loader-component>`
+        }
       </div>
       <footer-component></footer-component>
     `;

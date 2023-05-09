@@ -1,0 +1,33 @@
+.categories-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.categories-container .products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-around;
+}
+
+.categories-body {
+  display: flex;
+  gap: 10px;
+}
+
+.categories-body categories-list {
+  min-width: 230px;
+}
+
+.categories-body .products {
+  flex: 1 1 auto;
+}
+
+@media (max-width: 800px) {
+
+  .categories-body categories-list {
+    display: none;
+  }
+
+}
