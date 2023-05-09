@@ -78,7 +78,7 @@ export class ShoppingCartList extends LitElement {
               <div class='shopping-cart-options'>
                 <a 
                   @click=${this.shareList}
-                  href="https://api.whatsapp.com/send?text=www.cecomarket.com/shopping-cart/share/${this.shareUrl}"
+                  href="https://api.whatsapp.com/send?text=www.ceco-market.web.app/shopping-cart/share/${this.shareUrl}"
                   data-action="share/whatsapp/share"
                   target="_blank"
                 >
