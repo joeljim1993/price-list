@@ -17,7 +17,7 @@ export class NavbarComponent extends LitElement {
           <searchbox-component class="searchbox"></searchbox-component>
           <navbar-menu-component class="menu"></navbar-menu-component>
           <shoppingcart-component class="shoppingcart"></shoppingcart-component>
-          <select-categories></select-categories>
+          <select-categories class='categories'></select-categories>
         </div>
       </div>
     `;

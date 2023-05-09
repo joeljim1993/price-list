@@ -67,7 +67,7 @@ export class SelectCategories extends LitElement {
 
   categoryAction(e) {
     const category = e.detail;
-    Router.go(`/categorias/${category.route}/`);
+    Router.go(`/categories/${category.route}/`);
   }
 
   leaveCategorieBrowse() {
