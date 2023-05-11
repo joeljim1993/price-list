@@ -8,6 +8,8 @@ import { NavbarComponent } from "./src/app/core/components/navbar/navbar.compone
 import { IconShoppingCart } from "./src/app/core/components/navbar/components/icon-shopping-cart/icon-shopping-cart.component";
 import { SearchBoxComponent } from "./src/app/core/components/navbar/components/searchbox/searchbox.component";
 import { NavBarMenuComponent } from "./src/app/core/components/navbar/components/navbar-menu/navbar-menu.component";
+import { SelectCategories } from "/src/app/core/components/navbar/components/select-categories/select-categories.component";
+import { CategoryComponent } from "/src/app/core/components/navbar/components/select-categories/components/category.component";
 
 // Mobile Menu
 import { MobileMenu } from "./src/app/core/components/mobile-menu/mobile-menu.component";
@@ -35,6 +37,10 @@ import { ShareSummaryComponent } from "./src/app/features/shopping-cart/pages/sh
 
 // Favorites
 import { FavoritesBrowse } from "./src/app/features/favorites/favorites-browse.component";
+
+// Categories
+import { CategoriesBrowse } from "./src/app/features/categories/categories-browse.component";
+import { CategoriesListComponent } from "./src/app/features/categories/components/categories-list.component";
 
 //footer
 import { FooterComponent } from "./src/app/core/components/footer/footer.component"
