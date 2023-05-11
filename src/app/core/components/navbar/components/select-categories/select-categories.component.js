@@ -18,6 +18,7 @@ export class SelectCategories extends LitElement {
   }
 
   firstUpdated() {
+    
     this.categoriesSrv.currentPosition
       .pipe(
         tap(data => {
