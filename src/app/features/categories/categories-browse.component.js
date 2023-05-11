@@ -16,6 +16,7 @@ export class CategoriesBrowse extends LitElement {
     this.shoppingCartSrv = shoppingCartService;
     this.favoriteSrv = favoriteService;
 
+    this.productList = [];
     this.categoriesList = categoriesList;
   }
 

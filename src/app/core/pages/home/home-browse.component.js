@@ -1,5 +1,5 @@
 import { html, LitElement } from "lit";
-import { tap } from "rxjs";
+import { debounceTime, filter, tap } from "rxjs";
 
 import { productsMediator } from "../../services/productsMediator.service";
 import { favoriteService } from "./../../services/favorite.service";
@@ -16,29 +16,46 @@ export class HomeBrowse extends LitElement {
     this.shoppingCartSrv = shoppingCartService;
 
     this.listProduct = [];
+    this.limit = 0;
+    this.loader = false;
   }
 
   render() {
     return html`
-      <div class="container">
-        <slot></slot>
-      </div>
-      <div class="container-cards">
-        ${this.listProduct.map((product) => {
-          product.style = this.favoriteSrv.verifyProduct(product.id)
-          return html`
-            <product-card
-              counter=${this.getQuantity(product)}
-              @quantityChange=${this.productToShoppingCart}
-              .product=${product}
-              @productFavorite=${this.addProductToFavorites}
+      <div class="container-home">
+      ${
+        (this.loader)
+        ? html`
+          <div class="container-cards">
+            ${this.listProduct.map((product) => {
+              product.style = this.favoriteSrv.verifyProduct(product.id)
+              return html`
+                <product-card
+                  counter=${this.getQuantity(product)}
+                  @quantityChange=${this.productToShoppingCart}
+                  .product=${product}
+                  @productFavorite=${this.addProductToFavorites}
+                >
+                </product-card>
+              `;
+            })}
+          </div>`
+        : html`<loader-component></loader-component>`
+      }
+      
+      ${
+        (this.loader && this.listProduct.length < this.limit)
+        ? html`
+          <div class="container-button">
+            <button
+              class="${this.activeButton ? 'active' : ''}"
+              @click="${this.incrementProducts}"
             >
-            </product-card>
-          `;
-        })}
-      </div>
-      <div class="container-button">
-        <button @click="${this.incrementProducts}"></button>
+              Ver más
+            </button>
+          </div>`
+        : html``
+      }
       </div>
       <footer-component></footer-component>
     `;
@@ -46,7 +63,11 @@ export class HomeBrowse extends LitElement {
   firstUpdated() {
     const getProducts$ = this.productsMediator.paginationProducts$
       .pipe(
+        filter(response => response.length > 0),
+        debounceTime(200),
         tap(response =>  this.listProduct = response),
+        tap(() => this.limit = this.productsMediator.limit),
+        tap(() => this.loader = true),
         tap(() => this.requestUpdate()),
       )
       

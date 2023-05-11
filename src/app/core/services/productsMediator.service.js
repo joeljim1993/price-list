@@ -9,10 +9,12 @@ class ProductsMediator {
     this.kanaSrv = kanaService;
     
     this.listProduct = [];
+    this.limit = 0;
     this.paginationProducts$ = new BehaviorSubject(this.listProduct);
 
     this.kanaSrv.listProduct.pipe(
         tap(response => this.listProduct = response),
+        tap(() => this.limit = this.listProduct.length),
         tap(() => this.pagination(18)),
         tap(() => console.log('Traer lo de kana', this.listProduct))
       )
