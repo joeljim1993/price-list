@@ -41,10 +41,7 @@ export class MobileMenu extends LitElement {
                     @click=${() => Router.go('/shopping-cart/list/')}
                 ></mobile-menu-shopping>
                 
-                <i 
-                    class="material-icons"
-                    @click=${() => Router.go('/list/')}
-                >list_alt</i>
+                <!--   -->
             </div>
         `;
     }

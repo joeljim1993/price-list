@@ -45,7 +45,7 @@
 @media (max-width: 800px) {
 
   .container-navbar {
-    height: 92px;
+    height: 60px; /* 92px cuando aparece el select-categories en el navbar*/
     padding: 10px 20px;
   }
 

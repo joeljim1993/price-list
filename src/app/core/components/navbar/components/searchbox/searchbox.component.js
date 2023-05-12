@@ -11,6 +11,8 @@ import './searchbox.style.css';
 
 export class SearchBoxComponent extends LitElement {
   
+  showIconClear= false;
+
   get input() {
     return this.renderRoot?.querySelector('.search') ?? null;
   }
@@ -22,6 +24,7 @@ export class SearchBoxComponent extends LitElement {
       .pipe(
         debounceTime(300),
         map(() => this.input.value),
+        tap(input => this.verifyInput(input)),
         tap(query => (query.length > 0) ? this.redirectFilter(query) : this.redirectHome()),
       )
     this.filter$.subscribe();
@@ -29,15 +32,15 @@ export class SearchBoxComponent extends LitElement {
 
   firstUpdated() {
     const pathname = window.location.pathname;
-    console.log("serachbox-->pathname: ",pathname);
+    // console.log("serachbox-->pathname: ",pathname);
     const route = pathname.substring(1,7);
-    console.log("searchbox--> route ",route);
+    // console.log("searchbox--> route ",route);
     if(route === 'filter') {
       const param = pathname
         .replace('/filter/', '')
         .replace(/%20/g, ' ');
       this.input.value = param;
-      console.log("searchbox->param ",param);
+      // console.log("searchbox->param ",param);
     }
   }
 
@@ -55,11 +58,27 @@ export class SearchBoxComponent extends LitElement {
             </td>
             <td></td>
             <td class="icon-container">
-              <i
+              <!-- <i
                 class="material-icons" 
                 @click=${this.filterForClick}
-              >search</i>
-             
+              >search</i> -->
+              ${
+                this.showIconClear
+                ? html `
+                 <i 
+               class="material-icons"
+               class="icon-clear"
+               @click=${this.clearInput}
+               >
+               cancel
+               </i>
+                `
+                : ""
+              }
+
+
+
+              
             </td>
             <td>
              
@@ -67,15 +86,27 @@ export class SearchBoxComponent extends LitElement {
             </td>
           </tr>
         </table>
-        <button @click=${this.clearInput}>XXX</button>
 
       </div>
 
     `;
   }
 
+  verifyInput(input){
+    let inputValue = input;
+    if( inputValue != "" ){
+      this.showIconClear= true;
+      this.requestUpdate();
+    }
+    if(inputValue == ""){
+      this.showIconClear= false;
+      this.requestUpdate();
+    }
+  }
+
   clearInput(){
      this.input.value = "";
+    this.verifyInput("");
     this.redirectHome();
     this.requestUpdate;
   
