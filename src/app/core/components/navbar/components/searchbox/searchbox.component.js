@@ -32,15 +32,12 @@ export class SearchBoxComponent extends LitElement {
 
   firstUpdated() {
     const pathname = window.location.pathname;
-    // console.log("serachbox-->pathname: ",pathname);
     const route = pathname.substring(1,7);
-    // console.log("searchbox--> route ",route);
     if(route === 'filter') {
       const param = pathname
         .replace('/filter/', '')
         .replace(/%20/g, ' ');
       this.input.value = param;
-      // console.log("searchbox->param ",param);
     }
   }
 
@@ -93,12 +90,11 @@ export class SearchBoxComponent extends LitElement {
   }
 
   verifyInput(input){
-    let inputValue = input;
-    if( inputValue != "" ){
+    if(input != "" ){
       this.showIconClear= true;
       this.requestUpdate();
     }
-    if(inputValue == ""){
+    if(input == ""){
       this.showIconClear= false;
       this.requestUpdate();
     }
