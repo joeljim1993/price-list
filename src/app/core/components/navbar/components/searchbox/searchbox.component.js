@@ -29,12 +29,15 @@ export class SearchBoxComponent extends LitElement {
 
   firstUpdated() {
     const pathname = window.location.pathname;
+    console.log("serachbox-->pathname: ",pathname);
     const route = pathname.substring(1,7);
+    console.log("searchbox--> route ",route);
     if(route === 'filter') {
       const param = pathname
         .replace('/filter/', '')
         .replace(/%20/g, ' ');
       this.input.value = param;
+      console.log("searchbox->param ",param);
     }
   }
 
@@ -50,17 +53,33 @@ export class SearchBoxComponent extends LitElement {
                 class="search" 
                 @keyup=${this.filterForKeyup}/>
             </td>
+            <td></td>
             <td class="icon-container">
               <i
                 class="material-icons" 
                 @click=${this.filterForClick}
               >search</i>
+             
+            </td>
+            <td>
+             
+
             </td>
           </tr>
         </table>
+        <button @click=${this.clearInput}>XXX</button>
+
       </div>
 
     `;
+  }
+
+  clearInput(){
+     this.input.value = "";
+    this.redirectHome();
+    this.requestUpdate;
+  
+   
   }
 
   filterForKeyup() {
