@@ -11,6 +11,8 @@ import './searchbox.style.css';
 
 export class SearchBoxComponent extends LitElement {
   
+  showIconClear= false;
+
   get input() {
     return this.renderRoot?.querySelector('.search') ?? null;
   }
@@ -22,6 +24,7 @@ export class SearchBoxComponent extends LitElement {
       .pipe(
         debounceTime(300),
         map(() => this.input.value),
+        tap(input => this.verifyInput(input)),
         tap(query => (query.length > 0) ? this.redirectFilter(query) : this.redirectHome()),
       )
     this.filter$.subscribe();
@@ -50,17 +53,60 @@ export class SearchBoxComponent extends LitElement {
                 class="search" 
                 @keyup=${this.filterForKeyup}/>
             </td>
+            <td></td>
             <td class="icon-container">
-              <i
+              <!-- <i
                 class="material-icons" 
                 @click=${this.filterForClick}
-              >search</i>
+              >search</i> -->
+              ${
+                this.showIconClear
+                ? html `
+                 <i 
+               class="material-icons"
+               class="icon-clear"
+               @click=${this.clearInput}
+               >
+               cancel
+               </i>
+                `
+                : ""
+              }
+
+
+
+              
+            </td>
+            <td>
+             
+
             </td>
           </tr>
         </table>
+
       </div>
 
     `;
+  }
+
+  verifyInput(input){
+    if(input != "" ){
+      this.showIconClear= true;
+      this.requestUpdate();
+    }
+    if(input == ""){
+      this.showIconClear= false;
+      this.requestUpdate();
+    }
+  }
+
+  clearInput(){
+     this.input.value = "";
+    this.verifyInput("");
+    this.redirectHome();
+    this.requestUpdate;
+  
+   
   }
 
   filterForKeyup() {
