@@ -55,10 +55,7 @@ export class SearchBoxComponent extends LitElement {
             </td>
             <td></td>
             <td class="icon-container">
-              <!-- <i
-                class="material-icons" 
-                @click=${this.filterForClick}
-              >search</i> -->
+            
               ${
                 this.showIconClear
                 ? html `
@@ -70,7 +67,13 @@ export class SearchBoxComponent extends LitElement {
                cancel
                </i>
                 `
-                : ""
+                : html`
+                  <i
+                class="material-icons" 
+                @click=${this.filterForClick}
+              >search</i>
+                
+                `
               }
 
 
