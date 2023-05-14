@@ -10,7 +10,7 @@
 5.otros 
 */
 
-
+/* container */
 .footer-container{
     width: 100%;
     /* height: 320px; */
@@ -18,16 +18,19 @@
     padding: 0 5px 0 5px;
     background-color:  #58c5ad;
 }
+
+/* cpntainer grupo uno */
 .footer-container .group-one {
     width: 100%;
     max-width: 1200px;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    grid-gap:30px;
-    padding: 15px 10px;
+    grid-gap:7px;
+    padding: 20px 5px 5px 5px;
 }
 
+/* imagen cecosesola */
 #box-img {
     display: flex;
     flex-direction: column;
@@ -53,20 +56,37 @@
     justify-content: center;
     align-items: center;
 }
-.footer-container .group-one .box h2 {
+/* .footer-container .group-one .box h2 {
     margin-bottom: 25px;
     font-size: 20px;
     font-weight: 900;
     font-family: "Poppins",sans-serif;
     color: #0d3320;
 
-}
+} */
 .footer-container .group-one .box p {
+    /* text-align: justify; */
     margin-bottom: 10px;
-    font-weight: 300;
+    font-weight: 600;
     color: #0d3320;
-
 }
+.footer-container .group-one .box .link-page-cecosesola {
+  
+    /* color: #0d3320; */
+    text-decoration: none;
+}
+ #link-page-cecosesola-text {
+    text-align: center;
+    font-weight: 600;
+    color: #ff4800;
+    -webkit-text-stroke: 0.1px hsl(0, 0%, 6%);
+}
+#link-page-cecosesola-text:hover{
+    color:   #f3a100;
+    -webkit-text-stroke: 0.6px #0c0c0c;
+    font-weight: 800;
+}
+
 /* red social  */
 
 .footer-container .group-one .red-social{
@@ -165,7 +185,7 @@
         justify-content: center;
     }
     
-.footer-container .group-one .red-social a {
+#social-icons {
     width: 55px;
     height: 50px;
     margin-top: 15px;
@@ -211,7 +231,7 @@
     color: #fff;
 }
 
-#form :hover {
+#form:hover {
      text-decoration: solid underline purple 4px
 }
 

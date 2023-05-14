@@ -35,7 +35,8 @@ export class FooterComponent extends LitElement {
               class="link-page-cecosesola"
               href="https://cecosesola.org/"
               target="_blank"
-              >¡Visita nuestra pagina y Conocenos!
+              >
+              <p id="link-page-cecosesola-text">¡Visita nuestra pagina y Conocenos!</p>
             </a>
           </div>
 
@@ -76,15 +77,9 @@ export class FooterComponent extends LitElement {
                 >app_registration</i>
             </figure>
             </div>
-           
-            
           </div>
-          <div class="form">
-            
-            </div>
-            
-          
         </div>
+
         <div class="group-two">
           <small
             >&copy;2023 <b>Cecosesola </b>-Todos los Derechos reservados.
