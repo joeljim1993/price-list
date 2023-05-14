@@ -78,27 +78,41 @@
 }
 
 .footer-container .group-one .red-social .red-social-title {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-family: "Poppins",sans-serif;
 }
 
-.footer-container .group-one .red-social a {
+#social-icons{
     width: 55px;
-    height: 50px;
-    margin-top: 40px;
-    margin-left: 6px;
-    line-height: 45px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    line-height: 40px;
     text-align: center;
     background-color: #0d3320;
     color: #fff;
-    border-radius: 12px;
+    border-radius: 14px;
     text-decoration: none;
     transition: all 300ms ease;
     text-decoration: none;
 }
-.footer-container .group-one .red-social a:hover {
+#social-icons:hover {
     color:#58c5ad;
 } 
+#form {
+    
+    text-align: center;
+    text-decoration: none;
+}
+#icon-form{
+    color: #fff;
+}
+
+#form :hover {
+     text-decoration: solid underline purple 4px
+}
+
 
 /* derechos */
 .footer-container .group-two {
@@ -116,6 +130,8 @@
     font-family: "Poppins",sans-serif;
     font-weight: 500;
 }
+
+
 @media screen and (max-width:800px){
 
     .footer-container .group-one{
@@ -131,26 +147,18 @@
         /* text-align: justify; */
         justify-content: center;
     }
-    .footer-container .group-one .box .title-info-cecosesola {
-        margin-bottom: 15px;
-        font-size: 1.2rem;
-        font-weight: 800;
-        font-family: "Poppins",sans-serif;
-        color: #0d3320;
-        align-items: center;
-        display: flex;
-        justify-content: center;
-    }
+    
     .footer-container .group-one .box .text-info-cecosesola {
-        margin-bottom: 5px;
+        margin-top: 7px;
+        margin-bottom: 10px;
         font-weight: 450;
         color: #0d3320;
     }
 
     .footer-container .group-one .red-social .red-social-title {
-        font-size: 1.2rem;
+        font-size: 0.93rem;
         font-family: "Poppins",sans-serif;
-        font-weight: 800;
+        font-weight: 600;
         display: flex;
         color: #0d3320;
         align-items: center;
@@ -179,6 +187,32 @@
     font-size: 1.1rem;
     text-decoration: none;
     font-weight: 500;
+}
+
+#social-icons{
+    width: 50px;
+    height: 42px;
+    margin-top: 6px;
+    margin-left: 6px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #0d3320;
+    color: #fff;
+    border-radius: 15px;
+    text-decoration: none;
+    transition: all 300ms ease;
+    text-decoration: none;
+}
+#form {
+    text-align: center;
+    text-decoration: none;
+}
+#icon-form{
+    color: #fff;
+}
+
+#form :hover {
+     text-decoration: solid underline purple 4px
 }
 
 
