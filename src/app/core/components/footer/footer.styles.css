@@ -2,13 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@200;300;400&display=swap');
 
 
-/* MANERA DE ORGANIZAR EL CODIGO EN CSS
-1. posicionamiento 
-2. modelo de caja 
-3.tipografia
-4.visuales
-5.otros 
-*/
+
 
 /* container */
 .footer-container{
@@ -56,35 +50,30 @@
     justify-content: center;
     align-items: center;
 }
-/* .footer-container .group-one .box h2 {
-    margin-bottom: 25px;
-    font-size: 20px;
-    font-weight: 900;
-    font-family: "Poppins",sans-serif;
-    color: #0d3320;
 
-} */
 .footer-container .group-one .box p {
-    /* text-align: justify; */
+    /* text-align:; */
     margin-bottom: 10px;
     font-weight: 600;
     color: #0d3320;
+    width: 100%;
 }
 .footer-container .group-one .box .link-page-cecosesola {
   
-    /* color: #0d3320; */
     text-decoration: none;
 }
  #link-page-cecosesola-text {
     text-align: center;
     font-weight: 600;
-    color: #ff4800;
+    color: hsla(17, 87%, 53%, 0.979);
+    font-weight: 600;
     -webkit-text-stroke: 0.1px hsl(0, 0%, 6%);
 }
 #link-page-cecosesola-text:hover{
     color:   #f3a100;
-    -webkit-text-stroke: 0.6px #0c0c0c;
+    -webkit-text-stroke: 0.35px #0c0c0c;
     font-weight: 800;
+    font-size: 1.1rem;
 }
 
 /* red social  */
@@ -101,7 +90,12 @@
     font-size: 1rem;
     font-family: "Poppins",sans-serif;
 }
-
+.footer-container .group-one .red-social .red-social-icons--container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #social-icons{
     width: 55px;
     height: 40px;
@@ -125,13 +119,54 @@
     text-align: center;
     text-decoration: none;
 }
-#icon-form{
-    color: #fff;
+ 
+/* form */
+#text-form{
+    font-size: 1rem;
+    font-family: "Poppins",sans-serif;
+    color:  #0d3320;
+    font-weight: 700;
 }
 
-#form :hover {
-     text-decoration: solid underline purple 4px
+
+/* botom ir  */
+
+#btn-form--container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+.pulse:hover,
+.pulse:focus {
+  -webkit-animation: pulse 1s;
+          animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+.pulse {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    --color: #ef6eae;
+    --hover: #ef8f6e;
+     border-radius: 45%;
+     height: 38px;
+     width: 45px;
+     border: none;
+     
+  }
+
 
 
 /* derechos */
@@ -231,9 +266,9 @@
     color: #fff;
 }
 
-#form:hover {
+/* #form:hover {
      text-decoration: solid underline purple 4px
-}
+} */
 
 
 }
