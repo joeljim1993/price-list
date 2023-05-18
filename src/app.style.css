@@ -10,7 +10,7 @@
 }
 
 .app-container #outlet::-webkit-scrollbar:vertical {
-    width:10px;
+    width: 10px;
 }
 
 .app-container #outlet::-webkit-scrollbar-button:increment,
